@@ -4,7 +4,6 @@ package acme.entities.roles;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 import acme.framework.entities.UserRole;
 import lombok.Getter;
@@ -21,12 +20,10 @@ public class Worker extends UserRole {
 
 	// Attributes -------------------------------------------------------------
 
-	@NotNull
 	@NotBlank
 	@Column(length = 1024)
 	private String				qualificationRecord;
 
-	@NotNull
 	@NotBlank
 	@Column(length = 1024)
 	private String				skillRecord;
