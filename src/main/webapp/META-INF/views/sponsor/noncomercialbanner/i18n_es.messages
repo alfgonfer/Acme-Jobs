@@ -1,0 +1,9 @@
+sponsor.noncomercialbanner.list.label.slogan = Eslogan
+sponsor.noncomercialbanner.list.label.jingle = Jingle
+
+sponsor.noncomercialbanner.form.label.urlPicture = Url de imagen:
+sponsor.noncomercialbanner.form.label.slogan = Eslogan:
+sponsor.noncomercialbanner.form.label.urlTarget = Url del anuncio:
+sponsor.noncomercialbanner.form.label.jingle = Jingle:
+
+sponsor.noncomercialbanner.form.label.button.return = Volver

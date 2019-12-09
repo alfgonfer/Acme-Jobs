@@ -1,0 +1,9 @@
+sponsor.comercialbanner.list.label.slogan = Eslogan
+sponsor.comercialbanner.list.label.creditCard = Tarjeta de credito
+
+sponsor.comercialbanner.form.label.urlPicture = Url de imagen:
+sponsor.comercialbanner.form.label.slogan = Eslogan:
+sponsor.comercialbanner.form.label.urlTarget = Url del anuncio:
+sponsor.comercialbanner.form.label.creditCard = Tarjeta de credito:
+
+sponsor.comercialbanner.form.label.button.return = Volver

@@ -1,0 +1,12 @@
+worker.auditrecord.list.label.status = Estado
+worker.auditrecord.list.label.moment = Momento
+worker.auditrecord.list.label.title = Titulo
+
+
+worker.auditrecord.form.label.title = Titulo:
+worker.auditrecord.form.label.status = Estado:
+worker.auditrecord.form.label.moment = Momento:
+worker.auditrecord.form.label.body = Cuerpo:
+worker.auditrecord.form.label.button.return = Volver
+
+

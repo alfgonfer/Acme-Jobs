@@ -1,0 +1,17 @@
+worker.application.list.label.job = Job
+worker.application.list.label.status = Status
+worker.application.list.label.moment = Moment
+worker.application.list.label.reference = Reference
+
+
+worker.application.form.label.job = Job:
+worker.application.form.label.worker = Worker:
+worker.application.form.label.status = Status:
+worker.application.form.label.skills = Skills:
+worker.application.form.label.qualifications = Qualifications:
+worker.application.form.label.moment = Moment:
+worker.application.form.label.reference = Reference:
+
+worker.application.form.label.button.return = Return
+
+

@@ -1,0 +1,16 @@
+authenticated.message.list.label.moment = Moment
+authenticated.message.list.label.title = Title
+
+
+
+authenticated.message.form.label.threadTitle = Title of the thread of the message:
+authenticated.message.form.label.threadId = Id of the thread of the message:
+authenticated.message.form.label.title = Title:
+authenticated.message.form.label.moment = Moment:
+authenticated.message.form.label.tags = Tags:
+authenticated.message.form.label.body = Body:
+authenticated.messagethread.form.label.listMessage = Click here to see the list of messages of the thread
+authenticated.message.form.label.button.return = Return
+
+
+

@@ -1,0 +1,12 @@
+auditor.auditrecord.list.label.status = Status
+auditor.auditrecord.list.label.moment = Moment
+auditor.auditrecord.list.label.title = Title
+
+
+auditor.auditrecord.form.label.title = Title:
+auditor.auditrecord.form.label.status = Status:
+auditor.auditrecord.form.label.moment = Moment:
+auditor.auditrecord.form.label.body = Body:
+auditor.auditrecord.form.label.button.return = Return
+
+
