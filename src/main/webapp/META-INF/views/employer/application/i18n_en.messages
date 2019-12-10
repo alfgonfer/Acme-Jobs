@@ -12,6 +12,8 @@ employer.application.form.label.qualifications = Qualifications:
 employer.application.form.label.moment = Moment:
 employer.application.form.label.reference = Reference:
 
+employer.application.form.button.update = Update
+
 employer.application.form.label.button.return = Return
 
 
