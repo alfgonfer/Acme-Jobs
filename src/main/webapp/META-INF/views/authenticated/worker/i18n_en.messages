@@ -1,6 +1,3 @@
-authenticated.worker.worker.form.title.create= Become an worker
-authenticated.worker.worker.form.title.update= Update worker data
-
 authenticated.worker.form.label.qualificationRecord = Qualifications:
 authenticated.worker.form.label.skillRecord = Skills:
 

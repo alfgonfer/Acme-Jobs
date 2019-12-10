@@ -1,6 +1,3 @@
-authenticated.employer.employer.form.title.create= Convertirse en empleado
-authenticated.employer.employer.form.title.update= Actualizar la información de empleado 
-
 authenticated.employer.form.label.company = Compañía:
 authenticated.employer.form.label.sector = Sector:
 

@@ -1,6 +1,3 @@
-authenticated.worker.worker.form.title.create= Convertirse en trabajador
-authenticated.worker.worker.form.title.update= Actualizar la información de trabajador 
-
 authenticated.worker.form.label.qualificationRecord = Cualificaciones:
 authenticated.worker.form.label.skillRecord = Habilidades:
 

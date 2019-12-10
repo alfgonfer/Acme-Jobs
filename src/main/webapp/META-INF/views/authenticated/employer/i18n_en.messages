@@ -1,6 +1,3 @@
-authenticated.employer.employer.form.title.create= Become an employer
-authenticated.employer.employer.form.title.update= Update employer data
-
 authenticated.employer.form.label.company = Company:
 authenticated.employer.form.label.sector = Sector:
 
