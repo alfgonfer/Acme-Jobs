@@ -135,7 +135,7 @@ public class EmployerJobUpdateService implements AbstractUpdateService<Employer,
 
 		if (hasReference) {
 
-			isDuplicated = this.repository.findOneJobByReference(entity.getReference()) != null;
+			isDuplicated = this.repository.findOneJobByReference(entity.getReference()) == null;
 			errors.state(request, isDuplicated, "reference", "employer.job.error.must-be-not-duplicated-reference");
 		}
 
