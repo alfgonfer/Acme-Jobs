@@ -1,11 +1,11 @@
 
-package acme.features.employer.descriptor;
+package acme.features.employer.duty;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.entities.configuration.Configuration;
-import acme.entities.descriptor.Descriptor;
+import acme.entities.duties.Duty;
 import acme.entities.roles.Employer;
 import acme.features.utiles.Spamfilter;
 import acme.framework.components.Errors;
@@ -15,21 +15,21 @@ import acme.framework.entities.Principal;
 import acme.framework.services.AbstractUpdateService;
 
 @Service
-public class EmployerDescriptorUpdateService implements AbstractUpdateService<Employer, Descriptor> {
+public class EmployerDutyUpdateService implements AbstractUpdateService<Employer, Duty> {
 
 	// Internal State --------------------------------------------------------------------------------------
 
 	@Autowired
-	private EmployerDescriptorRepository repository;
+	private EmployerDutyRepository repository;
 
-	// AbstractUpdateService<Employer, Descriptor> interface -----------------------------------------------
+	// AbstractUpdateService<Employer, Duty> interface -----------------------------------------------
 
 
 	@Override
-	public boolean authorise(final Request<Descriptor> request) {
+	public boolean authorise(final Request<Duty> request) {
 		assert request != null;
 
-		Descriptor descriptor;
+		Duty Duty;
 		Principal principal;
 		int idPrincipal, id;
 		boolean res;
@@ -37,25 +37,25 @@ public class EmployerDescriptorUpdateService implements AbstractUpdateService<Em
 		principal = request.getPrincipal();
 		idPrincipal = principal.getAccountId();
 		id = request.getModel().getInteger("id");
-		descriptor = this.repository.findOneById(id);
+		Duty = this.repository.findDutyById(id);
 
-		res = idPrincipal == descriptor.getJob().getEmployer().getUserAccount().getId();
+		res = idPrincipal == Duty.getDescriptor().getJob().getEmployer().getUserAccount().getId();
 
 		return res;
 	}
 
 	@Override
-	public void bind(final Request<Descriptor> request, final Descriptor entity, final Errors errors) {
+	public void bind(final Request<Duty> request, final Duty entity, final Errors errors) {
 		assert request != null;
 		assert entity != null;
 		assert errors != null;
 
-		request.bind(entity, errors, "job");
+		request.bind(entity, errors, "descriptor");
 
 	}
 
 	@Override
-	public void unbind(final Request<Descriptor> request, final Descriptor entity, final Model model) {
+	public void unbind(final Request<Duty> request, final Duty entity, final Model model) {
 		assert request != null;
 		assert entity != null;
 		assert model != null;
@@ -65,20 +65,20 @@ public class EmployerDescriptorUpdateService implements AbstractUpdateService<Em
 	}
 
 	@Override
-	public Descriptor findOne(final Request<Descriptor> request) {
+	public Duty findOne(final Request<Duty> request) {
 		assert request != null;
 
-		Descriptor result;
+		Duty result;
 		int id;
 
 		id = request.getModel().getInteger("id");
-		result = this.repository.findOneById(id);
+		result = this.repository.findDutyById(id);
 
 		return result;
 	}
 
 	@Override
-	public void validate(final Request<Descriptor> request, final Descriptor entity, final Errors errors) {
+	public void validate(final Request<Duty> request, final Duty entity, final Errors errors) {
 		assert request != null;
 		assert entity != null;
 		assert errors != null;
@@ -89,7 +89,7 @@ public class EmployerDescriptorUpdateService implements AbstractUpdateService<Em
 		boolean hasDescription, isNotSpam;
 
 		hasDescription = entity.getDescription() != null;
-		errors.state(request, hasDescription, "description", "employer.descriptor.error.must-have-description");
+		errors.state(request, hasDescription, "description", "authenticated.duty.error.must-have-description");
 
 		if (hasDescription) {
 
@@ -98,13 +98,13 @@ public class EmployerDescriptorUpdateService implements AbstractUpdateService<Em
 			spamThreshold = configuration.getSpamThreshold();
 
 			isNotSpam = Spamfilter.spamThreshold(entity.getDescription(), spamWords, spamThreshold);
-			errors.state(request, !isNotSpam, "description", "employer.descriptor.error.must-not-be-spam");
+			errors.state(request, !isNotSpam, "description", "authenticated.duty.error.must-not-be-spam");
 		}
 
 	}
 
 	@Override
-	public void update(final Request<Descriptor> request, final Descriptor entity) {
+	public void update(final Request<Duty> request, final Duty entity) {
 		assert request != null;
 		assert entity != null;
 
