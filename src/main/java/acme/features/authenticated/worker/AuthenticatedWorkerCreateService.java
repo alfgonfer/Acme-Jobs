@@ -4,7 +4,6 @@ package acme.features.authenticated.worker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import acme.entities.roles.Employer;
 import acme.entities.roles.Worker;
 import acme.framework.components.Errors;
 import acme.framework.components.HttpMethod;
@@ -91,7 +90,8 @@ public class AuthenticatedWorkerCreateService implements AbstractCreateService<A
 
 	}
 
-	public void onSucess(final Request<Employer> request, final Response<Employer> response) {
+	@Override
+	public void onSuccess(final Request<Worker> request, final Response<Worker> response) {
 		assert request != null;
 		assert response != null;
 
