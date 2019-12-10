@@ -1,17 +1,17 @@
-authenticated.job.list.label.reference = Referencia
-authenticated.job.list.label.deadline = Fecha límite
-authenticated.job.list.label.title = Título
+employer.job.list.label.reference = Referencia
+employer.job.list.label.deadline = Fecha límite
+employer.job.list.label.title = Título
 
 
 
-authenticated.job.form.label.reference = Referencia(intente ajustarse al siguiente patrón: ej.:EMP1-JOB3):
-authenticated.job.form.label.title = Título:
-authenticated.job.form.label.deadline = Fecha límite:
-authenticated.job.form.label.salary = Salario:
-authenticated.job.form.label.moreInfo = Más información:
-authenticated.job.form.label.duties = Pinche aqui para ver el descriptor
-authenticated.job.form.label.auditRecords = Pinche aqui para ver el registro de auditorías del trabajo
-authenticated.job.form.label.button.return = Volver
+employer.job.form.label.reference = Referencia(intente ajustarse al siguiente patrón: ej.:EMP1-JOB3):
+employer.job.form.label.title = Título:
+employer.job.form.label.deadline = Fecha límite:
+employer.job.form.label.salary = Salario:
+employer.job.form.label.moreInfo = Más información:
+employer.job.form.label.duties = Pinche aqui para ver el descriptor
+employer.job.form.label.auditRecords = Pinche aqui para ver el registro de auditorías del trabajo
+employer.job.form.label.button.return = Volver
 
 
 

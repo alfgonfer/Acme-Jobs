@@ -4,18 +4,19 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <acme:form>
-	<acme:form-textarea code="authenticated.job.form.label.reference" path="reference"/>
-	<acme:form-textbox code="authenticated.job.form.label.title" path="title"/>
-	<acme:form-moment code="authenticated.job.form.label.deadline" path="deadline"/>
-	<acme:form-money code="authenticated.job.form.label.salary" path="salary"/>
-	<acme:form-money code="authenticated.job.form.label.moreInfo" path="moreInfo"/>
+	
+	<acme:form-textarea code="employer.job.form.label.reference" path="reference"/>
+	<acme:form-textbox code="employer.job.form.label.title" path="title"/>
+	<acme:form-moment code="employer.job.form.label.deadline" path="deadline"/>
+	<acme:form-money code="employer.job.form.label.salary" path="salary"/>
+	<acme:form-money code="employer.job.form.label.moreInfo" path="moreInfo"/>
 	<jstl:set var="idJob" value="${id}"/>
 	<jstl:set var="jobId" value="${id}"/>
-	<h4><acme:menu-suboption code="authenticated.job.form.label.duties" action="/employer/descriptor/show?jobId=${jobId}"/></h4>
-  	<h4><acme:menu-suboption code="authenticated.job.form.label.auditRecords" action="/employer/auditrecord/list_mine?id=${idJob}"/></h4>
+	<h4><acme:menu-suboption code="employer.job.form.label.duties" action="/employer/descriptor/show?jobId=${jobId}"/></h4>
+  	<h4><acme:menu-suboption code="employer.job.form.label.auditRecords" action="/employer/auditrecord/list_mine?id=${idJob}"/></h4>
 	
 
 
-
-	<acme:form-return code="authenticated.job.form.label.button.return"/>
+	<acme:form-submit test="${command == 'update'}" code="employer.job.form.button.update" action="/employer/job/update"/>
+	<acme:form-return code="employer.job.form.label.button.return"/>
 </acme:form>
