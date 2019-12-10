@@ -13,6 +13,7 @@
 	<jstl:set var="jobId" value="${id}"/>
 	<h4><acme:menu-suboption code="authenticated.job.form.label.duties" action="/worker/descriptor/show?jobId=${jobId}"/></h4>
   	<h4><acme:menu-suboption code="authenticated.job.form.label.auditRecords" action="/worker/auditrecord/list_mine?id=${idJob}"/></h4>
+  	<h4><acme:menu-suboption code="worker.job.form.label.application" action="/worker/application/create?jobId=${jobId}"/> </h4>
 	
 
 
