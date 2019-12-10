@@ -11,7 +11,15 @@ employer.job.form.label.salary = Salario:
 employer.job.form.label.moreInfo = Más información:
 employer.job.form.label.duties = Pinche aqui para ver el descriptor
 employer.job.form.label.auditRecords = Pinche aqui para ver el registro de auditorías del trabajo
+employer.job.form.button.update = Actualizar
 employer.job.form.label.button.return = Volver
 
-
+employer.job.error.must-have-title = El trabajo debe de tener un título
+employer.job.error.must-not-have-spam = El título del trabajo no debe de ser spam
+employer.job.error.must-have-salary = El trabajo debe de tener un sueldo
+employer.job.error.must-have-salary = La moneda del sueldo debe de ser el Euro(€)
+employer.job.error.must-have-deadline = El trabajo debe de tener una fecha límite
+employer.job.error.must-be-future = La fecha límite debe de ser una fecha futura
+employer.job.error.must-have-reference = El trabajo debe de tener una referencia
+employer.job.error.must-be-not-duplicated-reference = La referencia del trabajo no debe de estar duplicada
 

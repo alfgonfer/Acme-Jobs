@@ -55,18 +55,6 @@ public class Job extends DomainEntity {
 
 	private boolean				finalMode;
 
-	/*
-	 * @Transient
-	 * public String getDescriptorDescription() {
-	 * return this.descriptor.getDescription();
-	 * }
-	 * 
-	 * @Transient
-	 * public String getDescriptorId() {
-	 * return String.valueOf(this.descriptor.getId());
-	 * }
-	 */
-
 	//	Relationships -------------------------------------------------------------------------
 
 	@NotNull
@@ -75,14 +63,13 @@ public class Job extends DomainEntity {
 
 	private Employer			employer;
 
-
 	@Valid
 	@ManyToOne(optional = false)
-	private Auditor		auditor;
+	private Auditor				auditor;
 
 	/*
 	 * @NotNull
-	 * 
+	 *
 	 * @OneToOne(optional = false)
 	 * private Descriptor descriptor;
 	 */
