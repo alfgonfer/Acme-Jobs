@@ -3,7 +3,7 @@ package acme.features.utiles;
 
 public class Spamfilter {
 
-	public static Boolean spamThrehold(final String text, final String spamWordString, final Double spamThresholdLimit) {
+	public static Boolean spamThreshold(final String text, final String spamWordString, final Double spamThresholdLimit) {
 		Boolean res = false;
 		Double textThreshold = 0.0;
 		String[] textWords = text.split(" ");
