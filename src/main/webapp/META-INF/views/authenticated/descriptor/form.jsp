@@ -5,7 +5,7 @@
 
 <acme:form>
 
-	<acme:form-textarea code="authenticated.duty.form.label.jobTitle" path="jobTitle"/>
+	<acme:form-textbox code="authenticated.duty.form.label.jobTitle" path="jobTitle"/>
 	<acme:form-integer code="authenticated.duty.form.label.jobId" path="jobId"/>
 	
 	<acme:form-textarea code="authenticated.descriptor.form.label.description" path="description"/>
