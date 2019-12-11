@@ -154,7 +154,10 @@ public class EmployerJobCreateService implements AbstractCreateService<Employer,
 		Descriptor descriptor;
 		String description;
 
-		this.repository.save(entity);
+		this.repository.save(entity); //Guarda el trabajo para que al ponerlo en el descriptor, 
+										//exista el job previamente, sí no se hace así provocará un fallo
+										//con las propiedades transient de descriptor
+
 		description = request.getModel().getString("description");
 		descriptor = new Descriptor();
 
