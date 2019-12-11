@@ -13,6 +13,7 @@ employer.job.form.label.duties = Click here to see the descriptor
 employer.job.form.label.auditRecords = Click here to see the list of audit records of the job
 employer.job.form.button.update = Update
 employer.job.form.label.button.return = Return
+employer.job.form.button.delete=Delete
 
 employer.job.error.must-have-title = The Job must have a title
 employer.job.error.must-not-have-spam = The title of the job must not be spam

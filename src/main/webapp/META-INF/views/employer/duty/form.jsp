@@ -12,7 +12,9 @@
 	<acme:form-textarea code="authenticated.duty.form.label.description" path="description"/>
 	
 
-      <acme:form-submit test="${command == 'show'}" code="authenticated.duty.form.button.update" action="/employer/duty/update"/>
-	<acme:form-submit test="${command == 'update'}" code="authenticated.duty.form.button.update" action="/employer/duty/update"/>
+    <acme:form-submit test="${command == 'show'}" code="authenticated.duty.form.button.update" action="/employer/duty/update"/>
+	<acme:form-submit test ="${command == 'update'}" code="authenticated.duty.form.button.update" action="/employer/duty/update"/>
+	<acme:form-submit test ="${command == 'show'}" code="authenticated.duty.form.button.delete" action="/employer/duty/delete"/>
+	<acme:form-submit test ="${command == 'delete'}" code="authenticated.duty.form.button.delete" action="/employer/duty/delete"/>
 	<acme:form-return code="authenticated.job.form.label.button.return"/>
 </acme:form>

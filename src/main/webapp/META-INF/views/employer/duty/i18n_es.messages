@@ -10,7 +10,7 @@ authenticated.duty.form.label.percentage = Porcentaje:
 authenticated.duty.form.label.description = Descripción:
 authenticated.duty.form.label.button.return = Volver
 authenticated.duty.form.button.update = Actualizar
-
+authenticated.duty.form.button.delete = Borrar
 
 authenticated.duty.error.must-not-be-spam = The description must not be spam.
 authenticated.duty.error.must-have-description= Duty must have a description.
