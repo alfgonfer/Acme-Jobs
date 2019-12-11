@@ -16,6 +16,7 @@ import acme.framework.components.Errors;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
 import acme.framework.datatypes.Money;
+import acme.framework.entities.Principal;
 import acme.framework.services.AbstractCreateService;
 
 @Service
@@ -60,9 +61,7 @@ public class EmployerJobCreateService implements AbstractCreateService<Employer,
 	public Job instantiate(final Request<Job> request) {
 		assert request != null;
 
-		Job result;
-
-		result = new Job();
+		 Job result = new Job();
 
 		return result;
 	}
@@ -144,12 +143,21 @@ public class EmployerJobCreateService implements AbstractCreateService<Employer,
 
 		Descriptor descriptor;
 		String description;
+		Employer employer;
+		Principal principal;
+		int employerId;
+
+		principal = request.getPrincipal();
+		employerId = principal.getActiveRoleId();
+		employer = this.repository.findOneEmployerById(employerId);
 
 		descriptor = new Descriptor();
 		description = request.getModel().getString("description");
 
 		descriptor.setDescription(description);
 		descriptor.setJob(entity);
+
+		entity.setEmployer(employer);
 
 		this.repository.save(descriptor);
 		this.repository.save(entity);
