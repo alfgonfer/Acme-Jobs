@@ -59,8 +59,8 @@ public class EmployerApplicationUpdateService implements AbstractUpdateService<E
 		assert errors != null;
 
 		boolean isJustificated;
-		if (request.getModel().getString("status").equals("rejected")) {
-			isJustificated = !request.getModel().getString("justification").isBlank();
+		if (entity.getStatus().equals("rejected")) {
+			isJustificated = !entity.getJustification().isBlank();
 			errors.state(request, isJustificated, "status", "employer.request.error.must-justificated");
 		}
 	}
