@@ -12,5 +12,6 @@ authenticated.job.form.label.moreInfo = Más información:
 authenticated.job.form.label.duties = Pinche aqui para ver el descriptor
 authenticated.job.form.label.auditRecords = Pinche aqui para ver el registro de auditorías del trabajo
 authenticated.job.form.label.button.return = Volver
+worker.job.form.label.application = Pinche aquí para solicitar este trabajo
 
 
