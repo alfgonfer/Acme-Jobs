@@ -9,4 +9,8 @@ auditor.auditrecord.form.label.moment = Moment:
 auditor.auditrecord.form.label.body = Body:
 auditor.auditrecord.form.label.button.return = Return
 
+auditor.auditrecord.form.label.jref= Reference of the job
+auditor.auditrecord.form.button.create= Create
+auditor.auditrecord.form.checkbox.status= Is final mode:
+auditor.auditrecord.error.must-accept= Must check this box.
 

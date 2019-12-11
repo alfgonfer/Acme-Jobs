@@ -9,4 +9,8 @@ auditor.auditrecord.form.label.moment = Momento:
 auditor.auditrecord.form.label.body = Cuerpo:
 auditor.auditrecord.form.label.button.return = Volver
 
+auditor.auditrecord.form.label.jref= Referencia de un trabajo
+auditor.auditrecord.form.button.create= Crear
+auditor.auditrecord.form.checkbox.status= Es modo final:
+auditor.auditrecord.error.must-accept= Debes marcar la casilla.
 
