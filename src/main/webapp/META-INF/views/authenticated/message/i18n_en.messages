@@ -9,7 +9,13 @@ authenticated.message.form.label.title = Title:
 authenticated.message.form.label.moment = Moment:
 authenticated.message.form.label.tags = Tags:
 authenticated.message.form.label.body = Body:
-authenticated.messagethread.form.label.listMessage = Click here to see the list of messages of the thread
+authenticated.message.form.checkbox.agree = I understand it
+
+
+authenticated.message.error.must-accept = You must accept the condition, which says that you can't delete or update the message
+authenticated.message.form.button.create= Create
+authenticated.message.form.label.mttitle= Title of the thread:
+
 authenticated.message.form.label.button.return = Return
 
 

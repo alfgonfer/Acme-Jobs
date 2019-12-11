@@ -42,6 +42,7 @@
 			<acme:menu-separator/>
 			<acme:menu-suboption code="master.menu.authenticated.job.list" action="/authenticated/job/list"/>
 			<acme:menu-suboption code="master.menu.authenticated.messagethread.list" action="/authenticated/messagethread/list_mine"/>
+			<acme:menu-suboption code="master.menu.authenticated.message.create" action="/authenticated/message/create"/>
 		</acme:menu-option>
 
 		<acme:menu-option code="master.menu.administrator" access="hasRole('Administrator')">
