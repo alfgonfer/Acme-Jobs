@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.entities.configuration.Configuration;
+import acme.entities.descriptor.Descriptor;
 import acme.entities.jobs.Job;
 import acme.entities.roles.Employer;
 import acme.features.utiles.ConfigurationRepository;
@@ -15,41 +16,25 @@ import acme.framework.components.Errors;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
 import acme.framework.datatypes.Money;
-import acme.framework.entities.Principal;
-import acme.framework.services.AbstractUpdateService;
+import acme.framework.services.AbstractCreateService;
 
 @Service
-public class EmployerJobUpdateService implements AbstractUpdateService<Employer, Job> {
+public class EmployerJobCreateService implements AbstractCreateService<Employer, Job> {
 
-	// Internal State --------------------------------------------------------------------------
+	// Internal state ------------------------------------------------------------------------
 
 	@Autowired
 	private EmployerJobRepository	repository;
 
 	@Autowired
-	private ConfigurationRepository	confRepository;
-
-	// AbstractUpdateService<Employer, Job> interface -----------------------------------------------------
+	private ConfigurationRepository	repositoryConfiguration;
 
 
+	// AbstractCreateService<Employer, Job> interface ----------------------------------------
 	@Override
-
 	public boolean authorise(final Request<Job> request) {
 		assert request != null;
-
-		Principal principal;
-		int principalId, id;
-		Job job;
-		boolean res;
-
-		principal = request.getPrincipal();
-		principalId = principal.getAccountId();
-		id = request.getModel().getInteger("id");
-		job = this.repository.findOneJobById(id);
-
-		res = principalId == job.getEmployer().getUserAccount().getId();
-
-		return res;
+		return true;
 	}
 
 	@Override
@@ -58,7 +43,7 @@ public class EmployerJobUpdateService implements AbstractUpdateService<Employer,
 		assert entity != null;
 		assert errors != null;
 
-		request.bind(entity, errors);
+		request.bind(entity, errors, "description");
 
 	}
 
@@ -67,19 +52,17 @@ public class EmployerJobUpdateService implements AbstractUpdateService<Employer,
 		assert request != null;
 		assert entity != null;
 		assert model != null;
-
 		request.unbind(entity, model, "reference", "title", "deadline", "salary", "moreInfo");
 
 	}
 
 	@Override
-	public Job findOne(final Request<Job> request) {
+	public Job instantiate(final Request<Job> request) {
 		assert request != null;
-		int id;
+
 		Job result;
 
-		id = request.getModel().getInteger("id");
-		result = this.repository.findOneJobById(id);
+		result = new Job();
 
 		return result;
 	}
@@ -90,10 +73,11 @@ public class EmployerJobUpdateService implements AbstractUpdateService<Employer,
 		assert entity != null;
 		assert errors != null;
 
-		boolean hasTitle, hasSpamTitle;
+		boolean hasTitle, hasSpamTitle, hasDescriptor, hasSpamDescriptor, hasReference, isDuplicated;
 		boolean hasSalary, isEuro, hasDeadline, isFuture;
 
-		Configuration configuration = this.confRepository.findConfiguration();
+		String descripcion = request.getModel().getString("description").trim();
+		Configuration configuration = this.repositoryConfiguration.findConfiguration();
 		String spamWords = configuration.getSpamWords();
 		Double spamThreshold = configuration.getSpamThreshold();
 		Date now = new Date(System.currentTimeMillis() - 1);
@@ -104,7 +88,7 @@ public class EmployerJobUpdateService implements AbstractUpdateService<Employer,
 
 		if (hasTitle) {
 			hasSpamTitle = Spamfilter.spamThreshold(entity.getTitle(), spamWords, spamThreshold);
-			errors.state(request, !hasSpamTitle, "title", "employer.job.error.must-not-have-spam");
+			errors.state(request, !hasSpamTitle, "title", "employer.job.error.must-not-have-spam-title");
 		}
 
 		// Validation salary ----------------------------------------------------------------------------------------------------------
@@ -132,13 +116,42 @@ public class EmployerJobUpdateService implements AbstractUpdateService<Employer,
 
 		}
 
+		// Validation descriptor --------------------------------------------------------------------------------------------------------
+
+		hasDescriptor = descripcion != null && descripcion != "";
+		errors.state(request, hasDescriptor, "description", "employer.job.error.must-have-descriptor");
+		if (hasDescriptor) {
+			hasSpamDescriptor = Spamfilter.spamThreshold(descripcion, spamWords, spamThreshold);
+			errors.state(request, !hasSpamDescriptor, "description", "employer.job.error.must-not-have-spam-descriptor");
+		}
+
+		// Validation reference ----------------------------------------------------------------------------------------------------------
+		hasReference = entity.getReference() != null;
+		errors.state(request, hasReference, "reference", "employer.job.error.must-have-reference");
+
+		if (hasReference) {
+
+			isDuplicated = this.repository.findOneJobByReference(entity.getReference()) == null;
+			errors.state(request, isDuplicated, "reference", "employer.job.error.must-be-not-duplicated-reference");
+		}
+
 	}
 
 	@Override
-	public void update(final Request<Job> request, final Job entity) {
+	public void create(final Request<Job> request, final Job entity) {
 		assert request != null;
 		assert entity != null;
 
+		Descriptor descriptor;
+		String description;
+
+		descriptor = new Descriptor();
+		description = request.getModel().getString("description");
+
+		descriptor.setDescription(description);
+		descriptor.setJob(entity);
+
+		this.repository.save(descriptor);
 		this.repository.save(entity);
 
 	}
