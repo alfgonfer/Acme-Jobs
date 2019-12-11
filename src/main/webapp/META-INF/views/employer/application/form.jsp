@@ -9,6 +9,7 @@
 	<acme:form-textbox code="employer.application.form.label.qualifications" path="qualifications"/>
 	<acme:form-moment code="employer.application.form.label.moment" path="moment"/>
 	<acme:form-textarea code="employer.application.form.label.reference" path="reference"/>
+	<acme:form-textarea code="employer.application.form.label.justification" path="justification"/>
 	
 	<acme:form-submit test ="${command == 'show'}" code="employer.application.form.button.update" action="/employer/application/update"/>
 	<acme:form-submit test ="${command == 'update'}" code="employer.application.form.button.update" action="/employer/application/update"/>

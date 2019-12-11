@@ -37,7 +37,7 @@ public class EmployerApplicationUpdateService implements AbstractUpdateService<E
 		assert request != null;
 		assert entity != null;
 		assert model != null;
-		request.unbind(entity, model, "status");
+		request.unbind(entity, model, "status", "justification");
 	}
 
 	@Override
@@ -57,6 +57,12 @@ public class EmployerApplicationUpdateService implements AbstractUpdateService<E
 		assert request != null;
 		assert entity != null;
 		assert errors != null;
+
+		boolean isJustificated;
+		if (request.getModel().getString("status").equals("rejected")) {
+			isJustificated = !request.getModel().getString("justification").isBlank();
+			errors.state(request, isJustificated, "status", "employer.request.error.must-justificated");
+		}
 	}
 
 	@Override
