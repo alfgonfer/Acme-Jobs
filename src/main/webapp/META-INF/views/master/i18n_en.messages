@@ -92,7 +92,7 @@ master.menu.provider.requestCreate = Create a request
 master.menu.auditor = Auditor
 master.menu.auditor.list = List of his/her jobs
 master.menu.notauditor.list = List of not his/her jobs
-
+master.menu.auditrecord.create = Create an audit record
 
 # master.menu.consumer ##########################################################
 
