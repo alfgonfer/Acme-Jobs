@@ -4,10 +4,10 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <acme:form>
-
-	<acme:form-textarea code="authenticated.duty.form.label.jobTitle" path="jobTitle"/>
+    <jstl:if test="${command == 'show'}">
+	<acme:form-textbox code="authenticated.duty.form.label.jobTitle" path="jobTitle"/>
 	<acme:form-integer code="authenticated.duty.form.label.jobId" path="jobId"/>
-	
+	</jstl:if>
 	<acme:form-textarea code="authenticated.descriptor.form.label.description" path="description"/>
 	<jstl:set var="id" value="${id}"/>
 	<h4><acme:menu-suboption code="authenticated.descriptor.form.label.duties" action="/authenticated/duty/list?id=${id}"/></h4>

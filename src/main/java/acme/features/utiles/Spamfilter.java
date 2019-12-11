@@ -31,7 +31,6 @@ public class Spamfilter {
 		for (String i : spamWords) {
 			if (word.contains(i)) {
 				res = true;
-				return res;
 			}
 		}
 		return res;

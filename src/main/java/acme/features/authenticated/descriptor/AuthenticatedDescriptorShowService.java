@@ -29,7 +29,7 @@ public class AuthenticatedDescriptorShowService implements AbstractShowService<A
 		assert entity != null;
 		assert model != null;
 
-		request.unbind(entity, model, "description", "job.title", "jobTitle", "jobId");
+		request.unbind(entity, model, "description", "jobTitle", "jobId");
 
 	}
 
