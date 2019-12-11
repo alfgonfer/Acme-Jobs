@@ -4,7 +4,7 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <acme:form>
-	<acme:form-textarea code="worker.application.form.label.reference" path="reference"/>
+	<acme:form-textbox code="worker.application.form.label.reference" path="reference"/>
 	<jstl:if test="${command != 'create'}">
 	<acme:form-moment code="consumer.offers.form.label.moment" path="moment"/>
 	<acme:form-textbox code="consumer.application.form.label.satus" path="status"/>
