@@ -20,5 +20,5 @@ public interface AuditorAuditrecordRepository extends AbstractRepository {
 	Collection<Auditrecord> findManyByJobId(int jobId);
 
 	@Query("select j from Job j where j.reference = ?1")
-	Job findJobByTitle(String id);
+	Job findJobByRef(String id);
 }

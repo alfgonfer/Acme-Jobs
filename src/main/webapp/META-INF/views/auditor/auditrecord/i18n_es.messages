@@ -13,4 +13,5 @@ auditor.auditrecord.form.label.jref= Referencia de un trabajo
 auditor.auditrecord.form.button.create= Crear
 auditor.auditrecord.form.checkbox.status= Es modo final:
 auditor.auditrecord.error.must-accept= Debes marcar la casilla.
+auditor.auditrecord.error.must-exists= El trabajo debe existir.
 

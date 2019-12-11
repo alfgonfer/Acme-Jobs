@@ -65,6 +65,11 @@ public class AuditorAuditrecordCreateService implements AbstractCreateService<Au
 		assert entity != null;
 		assert errors != null;
 
+		String job = request.getModel().getString("jref");
+
+		boolean isJob = this.repository.findJobByRef(job) != null;
+		errors.state(request, isJob, "job", "auditor.auditrecord.error.must-exists");
+
 		boolean isDraft = request.getModel().getString("status") != "" && request.getModel().getString("status") != null;
 		errors.state(request, isDraft, "status", "auditor.auditrecord.error.must-accept");
 
@@ -78,11 +83,11 @@ public class AuditorAuditrecordCreateService implements AbstractCreateService<Au
 		entity.setMoment(moment);
 
 		String job = request.getModel().getString("jref");
-		entity.setJob(this.repository.findJobByTitle(job));
+		entity.setJob(this.repository.findJobByRef(job));
 		if (request.getModel().getString("status") != "" && request.getModel().getString("status") != null) {
-			entity.setStatus(false);
-		} else {
 			entity.setStatus(true);
+		} else {
+			entity.setStatus(false);
 		}
 
 		this.repository.save(entity);
