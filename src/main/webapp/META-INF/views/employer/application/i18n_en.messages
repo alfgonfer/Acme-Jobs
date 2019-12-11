@@ -11,6 +11,10 @@ employer.application.form.label.skills = Skills:
 employer.application.form.label.qualifications = Qualifications:
 employer.application.form.label.moment = Moment:
 employer.application.form.label.reference = Reference:
+employer.application.form.label.justification = Justification:
+
+
+employer.application.form.button.update = Update
 
 employer.application.form.label.button.return = Return
 

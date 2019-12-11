@@ -1,16 +1,26 @@
-authenticated.job.list.label.reference = Reference
-authenticated.job.list.label.deadline = Dead-Line
-authenticated.job.list.label.title = Title
+employer.job.list.label.reference = Reference
+employer.job.list.label.deadline = Dead-Line
+employer.job.list.label.title = Title
 
 
 
-authenticated.job.form.label.reference = Reference (try to fix this pattern: e.g:EMP1-JOB3)::
-authenticated.job.form.label.title = Title:
-authenticated.job.form.label.deadline = Dead-Line:
-authenticated.job.form.label.salary = Salary:
-authenticated.job.form.label.moreInfo = More info:
-authenticated.job.form.label.duties = Click here to see the descriptor
-authenticated.job.form.label.auditRecords = Click here to see the list of audit records of the job
-authenticated.job.form.label.button.return = Return
+employer.job.form.label.reference = Reference (try to fix this pattern: e.g:EMP1-JOB3):
+employer.job.form.label.title = Title:
+employer.job.form.label.deadline = Dead-Line:
+employer.job.form.label.salary = Salary:
+employer.job.form.label.moreInfo = More info:
+employer.job.form.label.duties = Click here to see the descriptor
+employer.job.form.label.auditRecords = Click here to see the list of audit records of the job
+employer.job.form.button.update = Update
+employer.job.form.label.button.return = Return
+
+employer.job.error.must-have-title = The Job must have a title
+employer.job.error.must-not-have-spam = The title of the job must not be spam
+employer.job.error.must-have-salary = The job must have a salary
+employer.job.error.must-have-salary = The currency of the salary must be Euro(€)
+employer.job.error.must-have-deadline = The job must have a deadline
+employer.job.error.must-be-future = The deadline must be a future date
+employer.job.error.must-have-reference = The job must have a reference
+employer.job.error.must-be-not-duplicated-reference = The job can not have a duplicated reference
 
 
