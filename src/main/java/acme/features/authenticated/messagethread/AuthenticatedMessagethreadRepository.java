@@ -24,3 +24,5 @@ public interface AuthenticatedMessagethreadRepository extends AbstractRepository
 
 }
 //select ua, mt from UserAccount ua join ua.messagethread mt group by mt;
+//select m from Messagethread m where m.title='Hilo de mensajes 1' and exists (select messagethread from UserAccount us
+//where ua.id='44');
