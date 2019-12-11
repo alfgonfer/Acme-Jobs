@@ -67,11 +67,4 @@ public class Job extends DomainEntity {
 	@ManyToOne(optional = false)
 	private Auditor				auditor;
 
-	/*
-	 * @NotNull
-	 *
-	 * @OneToOne(optional = false)
-	 * private Descriptor descriptor;
-	 */
-
 }
