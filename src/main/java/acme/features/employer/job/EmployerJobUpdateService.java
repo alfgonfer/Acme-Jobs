@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import acme.entities.configuration.Configuration;
 import acme.entities.jobs.Job;
 import acme.entities.roles.Employer;
+import acme.features.utiles.ConfigurationRepository;
 import acme.features.utiles.Spamfilter;
 import acme.framework.components.Errors;
 import acme.framework.components.Model;
@@ -23,7 +24,10 @@ public class EmployerJobUpdateService implements AbstractUpdateService<Employer,
 	// Internal State --------------------------------------------------------------------------
 
 	@Autowired
-	private EmployerJobRepository repository;
+	private EmployerJobRepository	repository;
+
+	@Autowired
+	private ConfigurationRepository	confRepository;
 
 	// AbstractUpdateService<Employer, Job> interface -----------------------------------------------------
 
@@ -89,7 +93,7 @@ public class EmployerJobUpdateService implements AbstractUpdateService<Employer,
 		boolean hasTitle, hasSpamTitle;
 		boolean hasSalary, isEuro, hasDeadline, isFuture, hasReference, isDuplicated;
 
-		Configuration configuration = this.repository.findConfiguration();
+		Configuration configuration = this.confRepository.findConfiguration();
 		String spamWords = configuration.getSpamWords();
 		Double spamThreshold = configuration.getSpamThreshold();
 		Date now = new Date(System.currentTimeMillis() - 1);
@@ -126,17 +130,6 @@ public class EmployerJobUpdateService implements AbstractUpdateService<Employer,
 			isFuture = entity.getDeadline().after(now);
 			errors.state(request, isFuture, "deadline", "employer.job.error.must-be-future");
 
-		}
-
-		// Validation reference ----------------------------------------------------------------------------------------------------------
-
-		hasReference = entity.getReference() != null;
-		errors.state(request, hasReference, "reference", "employer.job.error.must-have-reference");
-
-		if (hasReference) {
-
-			isDuplicated = this.repository.findOneJobByReference(entity.getReference()) == null;
-			errors.state(request, isDuplicated, "reference", "employer.job.error.must-be-not-duplicated-reference");
 		}
 
 	}

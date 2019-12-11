@@ -5,7 +5,7 @@
 
 <acme:form>
 	
-	<acme:form-textarea code="employer.job.form.label.reference" path="reference"/>
+	<acme:form-textarea code="employer.job.form.label.reference" path="reference" readonly="true"/>
 	<acme:form-textbox code="employer.job.form.label.title" path="title"/>
 	<acme:form-moment code="employer.job.form.label.deadline" path="deadline"/>
 	<acme:form-money code="employer.job.form.label.salary" path="salary"/>
