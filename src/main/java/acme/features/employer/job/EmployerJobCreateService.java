@@ -61,7 +61,17 @@ public class EmployerJobCreateService implements AbstractCreateService<Employer,
 	public Job instantiate(final Request<Job> request) {
 		assert request != null;
 
-		 Job result = new Job();
+		Employer employer;
+		Principal principal;
+		int employerId;
+
+		Job result = new Job();
+
+		principal = request.getPrincipal();
+		employerId = principal.getActiveRoleId();
+		employer = this.repository.findOneEmployerById(employerId);
+
+		result.setEmployer(employer);
 
 		return result;
 	}
@@ -143,24 +153,15 @@ public class EmployerJobCreateService implements AbstractCreateService<Employer,
 
 		Descriptor descriptor;
 		String description;
-		Employer employer;
-		Principal principal;
-		int employerId;
 
-		principal = request.getPrincipal();
-		employerId = principal.getActiveRoleId();
-		employer = this.repository.findOneEmployerById(employerId);
-
-		descriptor = new Descriptor();
+		this.repository.save(entity);
 		description = request.getModel().getString("description");
+		descriptor = new Descriptor();
 
-		descriptor.setDescription(description);
 		descriptor.setJob(entity);
-
-		entity.setEmployer(employer);
+		descriptor.setDescription(description);
 
 		this.repository.save(descriptor);
-		this.repository.save(entity);
 
 	}
 
