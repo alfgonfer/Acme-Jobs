@@ -9,6 +9,7 @@
 	<acme:form-textarea code="employer.application.form.label.qualifications" path="qualifications" readonly="true"/>
 	<acme:form-moment code="employer.application.form.label.moment" path="moment" readonly="true"/>
 	<acme:form-textbox code="employer.application.form.label.reference" path="reference" readonly="true"/>
+	<acme:form-textbox code="employer.application.form.label.statement" path="statement" readonly="true"/>
 	
 	<h3><acme:message code="employer.application.form.label.message"/></h3>
 	<acme:form-select code="employer.application.form.label.status" path="status">
@@ -18,7 +19,9 @@
 	</acme:form-select>
 	<acme:form-textarea code="employer.application.form.label.justification" path="justification"/>
 	<acme:form-submit test ="${command == 'show'}" code="employer.application.form.button.update" action="/employer/application/update"/>
+	<jstl:set var="pending" value="pending"/>
+	<jstl:if test="${status == 'pending'}">
 	<acme:form-submit test ="${command == 'update'}" code="employer.application.form.button.update" action="/employer/application/update"/>
-
+	</jstl:if>
 	<acme:form-return code="employer.application.form.label.button.return"/>
 </acme:form>

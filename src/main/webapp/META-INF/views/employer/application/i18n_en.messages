@@ -15,6 +15,7 @@ employer.application.form.label.qualifications = Qualifications:
 employer.application.form.label.moment = Moment:
 employer.application.form.label.reference = Reference:
 employer.application.form.label.justification = Justification:
+employer.application.form.label.statement = Statement:
 
 employer.application.form.label.message = Change status of application:
 

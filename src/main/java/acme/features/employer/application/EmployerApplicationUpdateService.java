@@ -1,3 +1,4 @@
+
 package acme.features.employer.application;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import acme.entities.roles.Employer;
 import acme.framework.components.Errors;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
+import acme.framework.entities.Principal;
 import acme.framework.services.AbstractUpdateService;
 
 @Service
@@ -20,7 +22,19 @@ public class EmployerApplicationUpdateService implements AbstractUpdateService<E
 	@Override
 	public boolean authorise(final Request<Application> request) {
 		assert request != null;
-		return true;
+		boolean result;
+		int applicationId;
+		Application application;
+		Employer employer;
+		Principal principal;
+
+		applicationId = request.getModel().getInteger("id");
+		application = this.repository.findOneById(applicationId);
+		employer = application.getJob().getEmployer();
+		principal = request.getPrincipal();
+		result = employer.getId() == principal.getActiveRoleId();
+		result = result && application.getStatus().equals("pending");
+		return result;
 	}
 
 	@Override
@@ -46,7 +60,7 @@ public class EmployerApplicationUpdateService implements AbstractUpdateService<E
 		Application result;
 
 		id = request.getModel().getInteger("id");
-		result = this.repository.findOneJobById(id);
+		result = this.repository.findOneById(id);
 
 		return result;
 	}
