@@ -89,7 +89,7 @@ public class EmployerDutyUpdateService implements AbstractUpdateService<Employer
 		boolean hasDescription, isNotSpam;
 
 		hasDescription = entity.getDescription() != null;
-		errors.state(request, hasDescription, "description", "authenticated.duty.error.must-have-description");
+		errors.state(request, hasDescription, "description", "employer.duty.error.must-have-description");
 
 		if (hasDescription) {
 
@@ -98,7 +98,7 @@ public class EmployerDutyUpdateService implements AbstractUpdateService<Employer
 			spamThreshold = configuration.getSpamThreshold();
 
 			isNotSpam = Spamfilter.spamThreshold(entity.getDescription(), spamWords, spamThreshold);
-			errors.state(request, !isNotSpam, "description", "authenticated.duty.error.must-not-be-spam");
+			errors.state(request, !isNotSpam, "description", "employer.duty.error.must-not-be-spam");
 		}
 
 	}

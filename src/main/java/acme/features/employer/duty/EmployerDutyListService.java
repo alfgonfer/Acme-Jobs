@@ -36,7 +36,7 @@ public class EmployerDutyListService implements AbstractListService<Employer, Du
 		assert request != null;
 		Collection<Duty> result;
 
-		result = this.repository.findManyByDescriptorId(request.getModel().getInteger("id"));
+		result = this.repository.findManyByDescriptorId(request.getModel().getInteger("idDescriptor"));
 		return result;
 	}
 
