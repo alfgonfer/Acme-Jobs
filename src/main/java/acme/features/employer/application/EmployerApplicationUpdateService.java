@@ -1,4 +1,3 @@
-
 package acme.features.employer.application;
 
 import org.springframework.beans.factory.annotation.Autowired;

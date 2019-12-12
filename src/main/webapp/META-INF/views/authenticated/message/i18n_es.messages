@@ -1,13 +1,18 @@
-authenticated.messagethread.list.label.moment = Momento
-authenticated.messagethread.list.label.title = Título
+authenticated.message.list.label.moment = Momento
+authenticated.message.list.label.title = Título
 
 
 authenticated.message.form.label.threadTitle = Título del hilo al que pertenece el mensaje:
 authenticated.message.form.label.threadId = Id del hilo al que pertenece el mensaje:
-authenticated.messagethread.form.label.title = Título:
-authenticated.messagethread.form.label.moment = Momento:
-authenticated.messagethread.form.label.tags = Etiquetas:
-authenticated.messagethread.form.label.body = Cuerpo:
-authenticated.messagethread.form.label.listMessage = Pinche aquí para ver la lista de mensajes del hilo
-authenticated.messagethread.form.label.button.return = Volver
+authenticated.message.form.label.title = Título:
+authenticated.message.form.label.moment = Momento:
+authenticated.message.form.label.tags = Etiquetas:
+authenticated.message.form.label.body = Cuerpo:
+authenticated.message.form.checkbox.agree = Lo entiendo
+
+authenticated.message.error.must-accept = Debes aceptar la condición de no poder borrar ni editar los mensajes creados
+authenticated.message.form.button.create= Crear
+authenticated.message.form.label.mttitle= Titulo del hilo:
+
+authenticated.message.form.label.button.return = Volver
 

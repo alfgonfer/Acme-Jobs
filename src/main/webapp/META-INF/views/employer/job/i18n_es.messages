@@ -15,6 +15,7 @@ employer.job.form.label.auditRecords = Pinche aqui para ver el registro de audit
 employer.job.form.button.update = Actualizar
 employer.job.form.button.create = Crear
 employer.job.form.label.button.return = Volver
+employer.job.form.button.delete= Borrar
 
 employer.job.error.must-have-title = El trabajo debe de tener un título
 employer.job.error.must-not-have-spam-title = El título del trabajo no debe de ser spam
