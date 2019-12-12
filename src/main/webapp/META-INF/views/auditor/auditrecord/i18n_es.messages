@@ -15,4 +15,9 @@ auditor.auditrecord.form.checkbox.status= Es modo final:
 auditor.auditrecord.error.must-accept= Debes marcar la casilla.
 auditor.auditrecord.error.must-exists= El trabajo debe existir.
 
+auditor.auditrecord.form.button.update = Actualizar
+
+auditor.auditrecord.form.label.finalMode.true= verdad
+auditor.auditrecord.form.label.finalMode= Es modo final:
+
 auditor.auditrecord.list.button.addAudit= Crear un registro de auditoría

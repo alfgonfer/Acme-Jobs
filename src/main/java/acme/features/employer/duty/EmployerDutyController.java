@@ -29,7 +29,7 @@ public class EmployerDutyController extends AbstractController<Employer, Duty> {
 	private EmployerDutyDeleteService	deleteService;
 
 	@Autowired
-	EmployerDutyCreateService		createService;
+	private EmployerDutyCreateService	createService;
 
 
 	@PostConstruct
