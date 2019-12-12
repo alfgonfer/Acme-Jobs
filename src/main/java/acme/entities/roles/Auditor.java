@@ -23,4 +23,7 @@ public class Auditor extends UserRole {
 	@Column(length = 1024)
 	private String				respStatement;
 
+	//@OneToMany
+	//private Job					job;
+
 }

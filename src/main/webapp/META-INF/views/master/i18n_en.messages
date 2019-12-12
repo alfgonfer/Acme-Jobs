@@ -106,6 +106,7 @@ master.menu.consumer.OfferCreate = Create an offer
 
 master.menu.employer = Employer
 master.menu.employer.jobList = List of my jobs
+master.menu.employer.jobCreate = Create a new job
 master.menu.employer.applicationList = List of applications to my jobs
 
 # master.menu.worker ##########################################################

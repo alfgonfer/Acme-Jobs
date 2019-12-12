@@ -64,7 +64,7 @@ public class Job extends DomainEntity {
 	private Employer			employer;
 
 	@Valid
-	@ManyToOne(optional = false)
+	@ManyToOne
 	private Auditor				auditor;
 
 }

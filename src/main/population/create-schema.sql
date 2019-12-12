@@ -194,7 +194,7 @@
         `salary_amount` double precision,
         `salary_currency` varchar(255),
         `title` varchar(255),
-        `auditor_id` integer not null,
+        `auditor_id` integer,
         `employer_id` integer not null,
         primary key (`id`)
     ) engine=InnoDB;
