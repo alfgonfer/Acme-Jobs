@@ -1,4 +1,3 @@
-
 package acme.features.employer.application;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +59,7 @@ public class EmployerApplicationUpdateService implements AbstractUpdateService<E
 
 		boolean isJustificated;
 		if (request.getModel().getString("status").equals("rejected")) {
-			isJustificated = !request.getModel().getString("justification").equals("");
+			isJustificated = !request.getModel().getString("justification").trim().equals("");
 			errors.state(request, isJustificated, "status", "employer.request.error.must-justificated");
 		}
 	}

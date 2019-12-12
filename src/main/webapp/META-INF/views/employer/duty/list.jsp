@@ -16,8 +16,11 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <acme:list>
-	<acme:list-column code="authenticated.duty.list.label.title" path="title" width="30%"/>		
-	<acme:list-column code="authenticated.duty.list.label.percentage" path="percentage" width="10%"/>	
-	<acme:list-column code="authenticated.duty.list.label.description" path="description" width="60%"/>	
+	<acme:list-column code="employer.duty.list.label.title" path="title" width="30%"/>		
+	<acme:list-column code="employer.duty.list.label.percentage" path="percentage" width="10%"/>	
+	<acme:list-column code="employer.duty.list.label.description" path="description" width="60%"/>	
 	
 </acme:list>
+<jstl:set var="paramIdDescriptor" value="${param.idDescriptor}"/>
+
+<h4><acme:menu-suboption code="employer.duty.list.button.addDuty" action="/employer/duty/create?idDescriptor=${paramIdDescriptor}"/></h4>

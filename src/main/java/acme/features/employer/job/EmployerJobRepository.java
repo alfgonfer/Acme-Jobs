@@ -32,6 +32,7 @@ public interface EmployerJobRepository extends AbstractRepository {
 	@Query("select j from Job j where j.employer.id = ?1")
 	Collection<Job> findManyByEmployerId(int employerId);
 
+
 	@Query("select ar from Auditrecord ar where ar.job.id=?1")
 	Collection<Auditrecord> findManyAuditrecordByJobId(int id);
 
@@ -40,5 +41,7 @@ public interface EmployerJobRepository extends AbstractRepository {
 
 	@Query("select a from Configuration a where a.id=6")
 	Configuration findConfiguration();
+	//@Query("select a from Configuration a where a.id=6")
+	//Configuration findConfiguration();
 
 }
