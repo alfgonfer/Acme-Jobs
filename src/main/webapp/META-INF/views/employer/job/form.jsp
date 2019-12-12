@@ -10,7 +10,7 @@
 	<jstl:set var="read" value="false"/>
 	</jstl:if>
 	
-	<acme:form-textarea code="employer.job.form.label.reference" path="reference" readonly="${read}"/>
+	<acme:form-textbox code="employer.job.form.label.reference" path="reference" readonly="${read}"/>
 	<acme:form-textbox code="employer.job.form.label.title" path="title"/>
 	
 	<jstl:if test="${command == 'create'}">

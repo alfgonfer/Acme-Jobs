@@ -4,10 +4,10 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <acme:form>
-	<acme:form-textarea code="authenticated.duty.form.label.jobTitle" path="jobTitle"/>
+	<acme:form-textbox code="authenticated.duty.form.label.jobTitle" path="jobTitle"/>
 	<acme:form-integer code="authenticated.duty.form.label.jobId" path="jobId"/>
 	
-	<acme:form-textarea code="authenticated.duty.form.label.title" path="title"/>
+	<acme:form-textbox code="authenticated.duty.form.label.title" path="title"/>
 	<acme:form-textbox code="authenticated.duty.form.label.percentage" path="percentage"/>
 	<acme:form-textarea code="authenticated.duty.form.label.description" path="description"/>
 	

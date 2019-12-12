@@ -5,10 +5,10 @@
 
 <acme:form>
 	<h3><acme:message code="employer.application.form.label.message.info"/></h3>
-	<acme:form-textbox code="employer.application.form.label.skills" path="skills" readonly="true"/>
-	<acme:form-textbox code="employer.application.form.label.qualifications" path="qualifications" readonly="true"/>
+	<acme:form-textarea code="employer.application.form.label.skills" path="skills" readonly="true"/>
+	<acme:form-textarea code="employer.application.form.label.qualifications" path="qualifications" readonly="true"/>
 	<acme:form-moment code="employer.application.form.label.moment" path="moment" readonly="true"/>
-	<acme:form-textarea code="employer.application.form.label.reference" path="reference" readonly="true"/>
+	<acme:form-textbox code="employer.application.form.label.reference" path="reference" readonly="true"/>
 	
 	<h3><acme:message code="employer.application.form.label.message"/></h3>
 	<acme:form-select code="employer.application.form.label.status" path="status">

@@ -24,8 +24,18 @@ public class WorkerApplicationCreateService implements AbstractCreateService<Wor
 
 	@Override
 	public boolean authorise(final Request<Application> request) {
+
 		assert request != null;
-		return true;
+
+		boolean result;
+		int jobId;
+		Job job;
+
+		jobId = request.getModel().getInteger("jobId");
+		job = this.repository.findJobById(jobId);
+		result = job.isFinalMode();
+
+		return result;
 	}
 
 	@Override
