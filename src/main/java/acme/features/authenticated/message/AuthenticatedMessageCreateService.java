@@ -58,6 +58,13 @@ public class AuthenticatedMessageCreateService implements AbstractCreateService<
 		Message result;
 
 		result = new Message();
+
+		Date moment;
+
+		moment = new Date(System.currentTimeMillis() - 1);
+		result.setMoment(moment);
+		int messageThread = request.getModel().getInteger("id");
+		result.setMessageThread(this.repository.findMTById(messageThread));
 		return result;
 	}
 
@@ -67,14 +74,12 @@ public class AuthenticatedMessageCreateService implements AbstractCreateService<
 		assert entity != null;
 		assert errors != null;
 
-		String messageThread = request.getModel().getString("mttitle");
+		int messageThread = request.getModel().getInteger("id");
 		Messagethread mt = this.repository.findMTById(messageThread);
 		Collection<Messagethread> mts = this.repository.findManybyUser(request.getPrincipal().getAccountId());
 		if (!mts.contains(mt)) {
 			errors.state(request, mts.contains(mt), "messageThread", "authenticated.message.error.must-be-yours");
-
 		}
-
 		boolean isAccepted = request.getModel().getString("accept") != "" && request.getModel().getString("accept") != null;
 		errors.state(request, isAccepted, "accept", "authenticated.message.error.must-accept");
 
@@ -86,9 +91,6 @@ public class AuthenticatedMessageCreateService implements AbstractCreateService<
 
 		moment = new Date(System.currentTimeMillis() - 1);
 		entity.setMoment(moment);
-
-		String messageThread = request.getModel().getString("mttitle");
-		entity.setMessageThread(this.repository.findMTById(messageThread));
 
 		this.repository.save(entity);
 

@@ -6,16 +6,21 @@ import org.springframework.stereotype.Service;
 
 import acme.entities.auditrecord.Auditrecord;
 import acme.entities.roles.Auditor;
+import acme.framework.components.Errors;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
 import acme.framework.entities.Principal;
-import acme.framework.services.AbstractShowService;
+import acme.framework.services.AbstractUpdateService;
 
 @Service
-public class AuditorAuditrecordShowService implements AbstractShowService<Auditor, Auditrecord> {
+public class AuditorAuditUpdateService implements AbstractUpdateService<Auditor, Auditrecord> {
+
+	// Internal State --------------------------------------------------------------------------------------
 
 	@Autowired
-	AuditorAuditrecordRepository repository;
+	private AuditorAuditrecordRepository repository;
+
+	// AbstractUpdateService<Auditor, Auditrecord> interface -----------------------------------------------
 
 
 	@Override
@@ -37,12 +42,23 @@ public class AuditorAuditrecordShowService implements AbstractShowService<Audito
 	}
 
 	@Override
+	public void bind(final Request<Auditrecord> request, final Auditrecord entity, final Errors errors) {
+		assert request != null;
+		assert entity != null;
+		assert errors != null;
+
+		request.bind(entity, errors, "moment", "job");
+
+	}
+
+	@Override
 	public void unbind(final Request<Auditrecord> request, final Auditrecord entity, final Model model) {
 		assert request != null;
 		assert entity != null;
 		assert model != null;
 
-		request.unbind(entity, model, "title", "isFinalMode", "moment", "body");
+		request.unbind(entity, model, "title", "isFinalMode", "body");
+
 	}
 
 	@Override
@@ -54,7 +70,30 @@ public class AuditorAuditrecordShowService implements AbstractShowService<Audito
 
 		id = request.getModel().getInteger("id");
 		result = this.repository.findOneAuditrecordById(id);
+
 		return result;
+	}
+
+	@Override
+	public void validate(final Request<Auditrecord> request, final Auditrecord entity, final Errors errors) {
+		assert request != null;
+		assert entity != null;
+		assert errors != null;
+		boolean p = request.getModel().getBoolean("isFinalMode");
+		if (!p) {
+			errors.state(request, !p, "isFinalMode", "auditor.auditrecord.error.must-accept");
+
+		}
+
+	}
+
+	@Override
+	public void update(final Request<Auditrecord> request, final Auditrecord entity) {
+		assert request != null;
+		assert entity != null;
+
+		this.repository.save(entity);
+
 	}
 
 }

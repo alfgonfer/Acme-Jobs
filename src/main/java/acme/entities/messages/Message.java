@@ -10,6 +10,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import acme.entities.messagethreads.Messagethread;
 import acme.framework.entities.DomainEntity;
@@ -26,7 +27,7 @@ public class Message extends DomainEntity {
 	@NotBlank
 	private String				title;
 
-	//@NotNull
+	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date				moment;
 
@@ -39,7 +40,7 @@ public class Message extends DomainEntity {
 
 	//Relationships
 
-	//@NotNull
+	@NotNull
 	@ManyToOne
 	private Messagethread		messageThread;
 

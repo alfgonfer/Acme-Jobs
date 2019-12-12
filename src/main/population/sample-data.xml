@@ -482,7 +482,7 @@
 		<property name="userAccount" ref="worker2UserAccount" />
 	</bean>
 	<!-- Audit -->
-	
+
 	<bean id="Auditor1UserAccount" class="acme.framework.entities.UserAccount">
 		<property name="username" value="auditor1"/>
 		<property name="password" value="auditor1"/>
@@ -491,17 +491,20 @@
 			<bean class="acme.datatypes.UserIdentity">
 			<property name="name" value="Auditor"/>
 			<property name="surname" value="One"/>
-			<property name="email" value="audit1@acme.com"/>
+			<property name="email" value="auditor1@acme.com"/>
 			</bean>
 		</property>
 		<property name="roles">
 			<list>
+
 				<ref bean="auditor1Auditor"/>
+
 				<ref bean="auditor1Authenticated"/>
 			</list>
 		</property>
 	</bean>
 	<bean name="auditor1Authenticated" class="acme.framework.entities.Authenticated">
+
 		<property name="userAccount" ref="Auditor1UserAccount" />
 	</bean>
 	
@@ -513,6 +516,7 @@
 	</bean>
 	
 		<bean id="Auditor2UserAccount" class="acme.framework.entities.UserAccount">
+
 		<property name="username" value="auditor2"/>
 		<property name="password" value="auditor2"/>
 		<property name="enabled" value="true"/>
@@ -525,13 +529,16 @@
 		</property>
 		<property name="roles">
 			<list>
+
 				<ref bean="auditor2Auditor"/>
+
 				<ref bean="auditor2Authenticated"/>
 			</list>
 		</property>
 	</bean>
 	
 	<bean name="auditor2Authenticated" class="acme.framework.entities.Authenticated">
+
 		<property name="userAccount" ref="Auditor2UserAccount" />
 	</bean>
 	
@@ -539,6 +546,7 @@
 			<property name="firm" value="Example Company2"/>
 			<property name="respStatement" value="Example of responsibility statement"/>
 			<property name="userAccount" ref="Auditor2UserAccount"/>
+
 	</bean>
 	
 	
@@ -554,6 +562,7 @@
 		<property name="finalMode" value="false"/>
 		<property name="employer" ref="employer1Employer"/>
 		<property name="auditor" ref="auditor1Auditor"/>
+
 	</bean>
 	
 	<bean id="job2" class="acme.entities.jobs.Job">
@@ -565,6 +574,7 @@
 		<property name="finalMode" value="true"/>
 		<property name="employer" ref="employer2Employer"/>
 		<property name="auditor" ref="auditor1Auditor"/>
+
 	</bean>
 	
 	<bean id="job3" class="acme.entities.jobs.Job">
@@ -576,6 +586,7 @@
 		<property name="finalMode" value="true"/>
 		<property name="employer" ref="employer1Employer"/>
 		<property name="auditor" ref="auditor1Auditor"/>
+
 	</bean>
 	
 	<bean id="job4" class="acme.entities.jobs.Job">
@@ -587,6 +598,7 @@
 		<property name="finalMode" value="true"/>
 		<property name="employer" ref="employer2Employer"/>
 		<property name="auditor" ref="auditor2Auditor"/>
+
 	</bean>
 	
 	<bean id="job5" class="acme.entities.jobs.Job">
@@ -598,6 +610,7 @@
 		<property name="finalMode" value="true"/>
 		<property name="employer" ref="employer1Employer"/>
 		<property name="auditor" ref="auditor2Auditor"/>
+
 	</bean>
 		
 			
@@ -726,28 +739,28 @@
     	<!-- Audit records -->
 	<bean id="auditrecord1" class="acme.entities.auditrecord.Auditrecord">
 		<property name="title" value="Audit record 1"/>
-		<property name="status" value="true"/>
+		<property name="isFinalMode" value="true"/>
 		<property name="moment" value="2019/11/27 17:00"/>
 		<property name="body" value="Example of audit record"/>
 		<property name="job" ref="job3"/>
 	</bean>
 	<bean id="auditrecord2" class="acme.entities.auditrecord.Auditrecord">
 		<property name="title" value="Audit record 2"/>
-		<property name="status" value="false"/>
+		<property name="isFinalMode" value="false"/>
 		<property name="moment" value="2018/12/10 17:00"/>
 		<property name="body" value="Example of audit record"/>
 		<property name="job" ref="job4"/>
 	</bean>
 	<bean id="auditrecord3" class="acme.entities.auditrecord.Auditrecord">
 		<property name="title" value="Audit record 3"/>
-		<property name="status" value="true"/>
+		<property name="isFinalMode" value="true"/>
 		<property name="moment" value="2019/11/29 17:00"/>
 		<property name="body" value="Example of audit record"/>
 		<property name="job" ref="job2"/>
 	</bean>
 	<bean id="auditrecord4" class="acme.entities.auditrecord.Auditrecord">
 		<property name="title" value="Audit record 4"/>
-		<property name="status" value="false"/>
+		<property name="isFinalMode" value="false"/>
 		<property name="moment" value="2018/11/30 19:00"/>
 		<property name="body" value="Example of audit record"/>
 		<property name="job" ref="job3"/>
@@ -755,7 +768,7 @@
 	
 	<bean id="auditrecord5" class="acme.entities.auditrecord.Auditrecord">
 		<property name="title" value="Audit record 5"/>
-		<property name="status" value="false"/>
+		<property name="isFinalMode" value="false"/>
 		<property name="moment" value="2018/11/30 19:00"/>
 		<property name="body" value="Example of audit record 5"/>
 		<property name="job" ref="job1"/>
@@ -763,7 +776,7 @@
 	 
 	<bean id="auditrecord6" class="acme.entities.auditrecord.Auditrecord">
 		<property name="title" value="Audit record 6"/>
-		<property name="status" value="false"/>
+		<property name="isFinalMode" value="false"/>
 		<property name="moment" value="2018/11/30 19:00"/>
 		<property name="body" value="Example of audit record 6"/>
 		<property name="job" ref="job1"/>

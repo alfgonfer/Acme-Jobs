@@ -47,7 +47,7 @@ public class AuditorAuditrecordCreateService implements AbstractCreateService<Au
 		assert entity != null;
 		assert model != null;
 
-		request.unbind(entity, model, "title", "status", "body");
+		request.unbind(entity, model, "title", "isFinalMode", "body");
 
 	}
 
@@ -56,6 +56,15 @@ public class AuditorAuditrecordCreateService implements AbstractCreateService<Au
 		Auditrecord result;
 
 		result = new Auditrecord();
+
+		Date moment;
+
+		moment = new Date(System.currentTimeMillis() - 1);
+		result.setMoment(moment);
+
+		int job = request.getModel().getInteger("idJob");
+		result.setJob(this.repository.findJobByRef(job));
+		result.setIsFinalMode(false);
 		return result;
 	}
 
@@ -65,13 +74,10 @@ public class AuditorAuditrecordCreateService implements AbstractCreateService<Au
 		assert entity != null;
 		assert errors != null;
 
-		String job = request.getModel().getString("jref");
+		int job = request.getModel().getInteger("idJob");
 
 		boolean isJob = this.repository.findJobByRef(job) != null;
 		errors.state(request, isJob, "job", "auditor.auditrecord.error.must-exists");
-
-		boolean isDraft = request.getModel().getString("status") != "" && request.getModel().getString("status") != null;
-		errors.state(request, isDraft, "status", "auditor.auditrecord.error.must-accept");
 
 	}
 
@@ -82,12 +88,13 @@ public class AuditorAuditrecordCreateService implements AbstractCreateService<Au
 		moment = new Date(System.currentTimeMillis() - 1);
 		entity.setMoment(moment);
 
-		String job = request.getModel().getString("jref");
+		int job = request.getModel().getInteger("idJob");
 		entity.setJob(this.repository.findJobByRef(job));
-		if (request.getModel().getString("status") != "" && request.getModel().getString("status") != null) {
-			entity.setStatus(true);
+		boolean p = request.getModel().getBoolean("status");
+		if (p) {
+			entity.setIsFinalMode(true);
 		} else {
-			entity.setStatus(false);
+			entity.setIsFinalMode(false);
 		}
 
 		this.repository.save(entity);

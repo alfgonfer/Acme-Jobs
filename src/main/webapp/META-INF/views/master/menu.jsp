@@ -42,7 +42,6 @@
 			<acme:menu-separator/>
 			<acme:menu-suboption code="master.menu.authenticated.job.list" action="/authenticated/job/list"/>
 			<acme:menu-suboption code="master.menu.authenticated.messagethread.list" action="/authenticated/messagethread/list_mine"/>
-			<acme:menu-suboption code="master.menu.authenticated.message.create" action="/authenticated/message/create"/>
 		</acme:menu-option>
 
 		<acme:menu-option code="master.menu.administrator" access="hasRole('Administrator')">
@@ -82,7 +81,6 @@
 	    <acme:menu-option code="master.menu.auditor" access="hasRole('Auditor')">
 			<acme:menu-suboption code="master.menu.auditor.list" action="/auditor/job/list_mine"/>
 			<acme:menu-suboption code="master.menu.notauditor.list" action="/notauditor/job/list_mine"/>
-			<acme:menu-suboption code="master.menu.auditrecord.create" action="/auditor/auditrecord/create"/>
 		</acme:menu-option>
 
 		<acme:menu-option code="master.menu.consumer" access="hasRole('Consumer')">

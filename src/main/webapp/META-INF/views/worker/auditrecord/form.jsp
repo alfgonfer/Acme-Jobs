@@ -5,7 +5,7 @@
 
 <acme:form>
 	<acme:form-textbox code="worker.auditrecord.form.label.title" path="title"/>
-	<acme:form-textbox code="worker.auditrecord.form.label.status" path="status"/>
+	<acme:form-textbox code="worker.auditrecord.form.label.status" path="isFinalMode"/>
 	<acme:form-textbox code="worker.auditrecord.form.label.moment" path="moment"/>
 	<acme:form-textarea code="worker.auditrecord.form.label.body" path="body"/>
 	
