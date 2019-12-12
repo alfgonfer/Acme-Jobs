@@ -1,3 +1,4 @@
+
 package acme.features.employer.job;
 
 import java.util.Collection;
@@ -11,6 +12,7 @@ import acme.entities.configuration.Configuration;
 import acme.entities.descriptor.Descriptor;
 import acme.entities.duties.Duty;
 import acme.entities.jobs.Job;
+import acme.entities.roles.Employer;
 import acme.framework.repositories.AbstractRepository;
 
 @Repository
@@ -30,9 +32,9 @@ public interface EmployerJobRepository extends AbstractRepository {
 
 	@Query("select j from Job j where j.employer.id = ?1")
 	Collection<Job> findManyByEmployerId(int employerId);
-  
-  @Query("select j from Job j where j.employer.id = ?1")
-	Collection<Job> findManyByEmployerId(int employerId);
+
+	@Query("select e from Employer e where e.id = ?1")
+	Employer findOneEmployerById(int employerId);
 
 	@Query("select ar from Auditrecord ar where ar.job.id=?1")
 	Collection<Auditrecord> findManyAuditrecordByJobId(int id);
@@ -42,7 +44,5 @@ public interface EmployerJobRepository extends AbstractRepository {
 
 	@Query("select a from Configuration a where a.id=6")
 	Configuration findConfiguration();
-	//@Query("select a from Configuration a where a.id=6")
-	//Configuration findConfiguration();
 
 }
