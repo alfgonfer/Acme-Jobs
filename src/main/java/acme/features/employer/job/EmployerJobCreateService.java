@@ -1,7 +1,7 @@
 
 package acme.features.employer.job;
 
-import java.util.Date;
+import java.util.Calendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -89,7 +89,8 @@ public class EmployerJobCreateService implements AbstractCreateService<Employer,
 		Configuration configuration = this.repositoryConfiguration.findConfiguration();
 		String spamWords = configuration.getSpamWords();
 		Double spamThreshold = configuration.getSpamThreshold();
-		Date now = new Date(System.currentTimeMillis() - 1);
+		Calendar now = Calendar.getInstance();
+		now.add(Calendar.DAY_OF_YEAR, 7);
 
 		// Validation title ----------------------------------------------------------------------------------------------------------
 		hasTitle = entity.getTitle() != null;
@@ -120,7 +121,7 @@ public class EmployerJobCreateService implements AbstractCreateService<Employer,
 		errors.state(request, hasDeadline, "deadline", "employer.job.error.must-have-deadline");
 
 		if (hasDeadline) {
-			isFuture = entity.getDeadline().after(now);
+			isFuture = entity.getDeadline().after(now.getTime());
 			errors.state(request, isFuture, "deadline", "employer.job.error.must-be-future");
 
 		}
@@ -154,9 +155,7 @@ public class EmployerJobCreateService implements AbstractCreateService<Employer,
 		Descriptor descriptor;
 		String description;
 
-		this.repository.save(entity); //Guarda el trabajo para que al ponerlo en el descriptor, 
-										//exista el job previamente, sí no se hace así provocará un fallo
-										//con las propiedades transient de descriptor
+		this.repository.save(entity);
 
 		description = request.getModel().getString("description");
 		descriptor = new Descriptor();
