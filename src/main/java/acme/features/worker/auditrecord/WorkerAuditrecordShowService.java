@@ -29,7 +29,7 @@ public class WorkerAuditrecordShowService implements AbstractShowService<Worker,
 		assert entity != null;
 		assert model != null;
 
-		request.unbind(entity, model, "title", "status", "moment", "body");
+		request.unbind(entity, model, "title", "isFinalMode", "moment", "body");
 	}
 
 	@Override

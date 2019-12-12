@@ -1,10 +1,10 @@
-auditor.auditrecord.list.label.status = Estado
+auditor.auditrecord.list.label.status = Está en modo final
 auditor.auditrecord.list.label.moment = Momento
 auditor.auditrecord.list.label.title = Titulo
 
 
 auditor.auditrecord.form.label.title = Titulo:
-auditor.auditrecord.form.label.status = Estado:
+auditor.auditrecord.form.label.status = Está en modo final:
 auditor.auditrecord.form.label.moment = Momento:
 auditor.auditrecord.form.label.body = Cuerpo:
 auditor.auditrecord.form.label.button.return = Volver
@@ -15,3 +15,4 @@ auditor.auditrecord.form.checkbox.status= Es modo final:
 auditor.auditrecord.error.must-accept= Debes marcar la casilla.
 auditor.auditrecord.error.must-exists= El trabajo debe existir.
 
+auditor.auditrecord.list.button.addAudit= Crear un registro de auditoría
