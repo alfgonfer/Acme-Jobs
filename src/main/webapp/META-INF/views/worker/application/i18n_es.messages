@@ -6,12 +6,12 @@ worker.application.list.label.reference = Referencia
 
 worker.application.form.label.job = Trabajo:
 worker.application.form.label.worker = Trabajador:
-worker.application.form.label.status = Status:
+worker.application.form.label.status = Estado:
 worker.application.form.label.skills = Habilidades:
 worker.application.form.label.qualifications = Cualificaciones:
 worker.application.form.label.moment = Momento:
 worker.application.form.label.reference = Referencia:
-worker.application.form.label.statement = Sentencia:
+worker.application.form.label.statement = Defensa:
 worker.application.form.label.button.return = Volver
 worker.application.form.label.button.create = Crear
 

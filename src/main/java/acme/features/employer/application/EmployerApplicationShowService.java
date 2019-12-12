@@ -33,7 +33,7 @@ public class EmployerApplicationShowService implements AbstractShowService<Emplo
 		Principal principal;
 
 		applicationId = request.getModel().getInteger("id");
-		application = this.repository.findOneJobById(applicationId);
+		application = this.repository.findOneById(applicationId);
 		employer = application.getJob().getEmployer();
 		principal = request.getPrincipal();
 
@@ -48,7 +48,7 @@ public class EmployerApplicationShowService implements AbstractShowService<Emplo
 		assert entity != null;
 		assert model != null;
 
-		request.unbind(entity, model, "status", "skills", "statement", "qualifications", "moment", "reference", "justification");
+		request.unbind(entity, model, "status", "skills", "statement", "qualifications", "moment", "reference", "justification", "statement");
 
 	}
 
@@ -60,7 +60,7 @@ public class EmployerApplicationShowService implements AbstractShowService<Emplo
 		int id;
 
 		id = request.getModel().getInteger("id");
-		result = this.repository.findOneJobById(id);
+		result = this.repository.findOneById(id);
 
 		return result;
 	}

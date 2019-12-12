@@ -32,7 +32,7 @@ public class NotauditorJobShowService implements AbstractShowService<Auditor, Jo
 		job = this.repository.findOneJobById(jobId);
 		Auditor = job.getAuditor();
 		principal = request.getPrincipal();
-		result = job.isFinalMode() || !job.isFinalMode() && Auditor.getId() == principal.getActiveRoleId();
+		result = job.isFinalMode() || Auditor.getUserAccount().getId() == principal.getAccountId();
 		return result;
 	}
 

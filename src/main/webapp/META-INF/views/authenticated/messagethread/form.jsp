@@ -4,9 +4,9 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <acme:form>
-	<acme:form-textarea code="authenticated.messagethread.form.label.title" path="title"/>
+	<acme:form-textbox code="authenticated.messagethread.form.label.title" path="title"/>
 	<acme:form-moment code="authenticated.messagethread.form.label.moment" path="moment"/>
-	<acme:form-textarea code="authenticated.messagethread.form.label.usernames" path="usernames"/>
+	<acme:form-textbox code="authenticated.messagethread.form.label.usernames" path="usernames"/>
 	<jstl:set var="id" value="${id}"/>
 	<h4><acme:menu-suboption code="authenticated.messagethread.form.button.message" action="/authenticated/message/list_mine?id=${id}"/></h4>
     <h4><acme:menu-suboption code="authenticated.messagethread.form.button.message.create" action="/authenticated/message/create?id=${id}"/></h4>
