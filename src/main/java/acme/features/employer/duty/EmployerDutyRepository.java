@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import acme.entities.configuration.Configuration;
+import acme.entities.descriptor.Descriptor;
 import acme.entities.duties.Duty;
 import acme.framework.repositories.AbstractRepository;
 
@@ -22,4 +23,6 @@ public interface EmployerDutyRepository extends AbstractRepository {
 	@Query("select a from Configuration a where a.id=6")
 	Configuration findConfiguration();
 
+	@Query("select d from Descriptor d where d.id=?1")
+	Descriptor findOneById(int id);
 }
