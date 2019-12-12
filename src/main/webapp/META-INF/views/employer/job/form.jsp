@@ -24,14 +24,14 @@
 	<acme:form-money code="employer.job.form.label.salary" path="salary"/>
 	<acme:form-textbox code="employer.job.form.label.moreInfo" path="moreInfo"/>
 	
-	<jstl:if test="${finalMode.equals('false')}">
+	<jstl:if test="${command == 'create'}">
 	<acme:form-select code="employer.job.form.label.finalMode" path="finalMode">
 	<acme:form-option code="employer.job.form.label.finalMode.false" value="false"/>
 	<acme:form-option code="employer.job.form.label.finalMode.true" value="true"/>
 	</acme:form-select>
 	</jstl:if>
 	
-	<jstl:if test="${!finalMode.equals('false')}">
+	<jstl:if test="${finalMode == false}">
 	<acme:form-select code="employer.job.form.label.finalMode" path="finalMode">
 	<acme:form-option code="employer.job.form.label.finalMode.true" value="true"/>
 	</acme:form-select>
@@ -47,7 +47,7 @@
 	
 
 	<acme:form-submit test ="${command == 'create'}" code="employer.job.form.button.create" action="/employer/job/create"/>
-	<jstl:if test="${!finalMode.equals('false')}">
+	<jstl:if test="${finalMode == false}">
 	<acme:form-submit test="${command == 'show'}" code="employer.job.form.button.update" action="/employer/job/update"/>
 	<acme:form-submit test="${command == 'update'}" code="employer.job.form.button.update" action="/employer/job/update"/>
 	</jstl:if>
