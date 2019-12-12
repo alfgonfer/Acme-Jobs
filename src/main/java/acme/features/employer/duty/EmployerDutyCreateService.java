@@ -113,7 +113,7 @@ public class EmployerDutyCreateService implements AbstractCreateService<Employer
 		errors.state(request, hasPercentage, "percentage", "employer.duty.error.must-not-have-percentage");
 		if (hasPercentage) {
 			isPercentage = entity.getPercentage() >= 0 && entity.getPercentage() <= 100;
-			errors.state(request, hasPercentage, "percentage", "employer.duty.error.must-be-a-percentage");
+			errors.state(request, isPercentage, "percentage", "employer.duty.error.must-be-a-percentage");
 
 			if (isPercentage) {
 				percentageSumLess100 = true;
