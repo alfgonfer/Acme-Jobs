@@ -12,6 +12,7 @@ employer.duty.form.label.button.return = Volver
 employer.duty.list.button.addDuty = Añadir nuevo duty
 employer.duty.form.button.update = Actualizar
 employer.duty.form.button.create = Crear
+employer.duty.form.button.delete = Borrar
 
 employer.duty.error.must-not-be-spam = La descripción no debe de ser spam
 employer.duty.error.must-have-description= Debe tener una descripción
@@ -20,3 +21,4 @@ employer.duty.error.must-not-have-title-spam = El título de la tarea no puede c
 employer.duty.error.must-not-have-percentage = La tarea debe de tener un porcentaje
 employer.duty.error.must-be-a-percentage = El valor del porcentaje debe estar entre 0% y 100%
 employer.duty.error.must-be-less-or-equal-than-101 = La suma del porcentaje de todos los duties no puede ser superior al 100%
+
