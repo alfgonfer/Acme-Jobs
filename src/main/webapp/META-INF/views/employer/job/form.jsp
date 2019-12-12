@@ -4,16 +4,13 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <acme:form>
-	<jstl:set var="f" value="false"/>
-
-	
 	
 	<jstl:set var="read" value="true"/>
 	<jstl:if test="${command == 'create'}">
 	<jstl:set var="read" value="false"/>
 	</jstl:if>
 	
-	<acme:form-textarea code="employer.job.form.label.reference" path="reference" readonly="${read}"/>
+	<acme:form-textbox code="employer.job.form.label.reference" path="reference" readonly="${read}"/>
 	<acme:form-textbox code="employer.job.form.label.title" path="title"/>
 	
 	<jstl:if test="${command == 'create'}">
@@ -24,14 +21,14 @@
 	<acme:form-money code="employer.job.form.label.salary" path="salary"/>
 	<acme:form-textbox code="employer.job.form.label.moreInfo" path="moreInfo"/>
 	
-	<jstl:if test="${command == 'create'}">
+	<jstl:if test="${finalMode == false || command == 'create'}">
 	<acme:form-select code="employer.job.form.label.finalMode" path="finalMode">
 	<acme:form-option code="employer.job.form.label.finalMode.false" value="false"/>
 	<acme:form-option code="employer.job.form.label.finalMode.true" value="true"/>
 	</acme:form-select>
 	</jstl:if>
 	
-	<jstl:if test="${finalMode == false}">
+	<jstl:if test="${finalMode == true}">
 	<acme:form-select code="employer.job.form.label.finalMode" path="finalMode">
 	<acme:form-option code="employer.job.form.label.finalMode.true" value="true"/>
 	</acme:form-select>
@@ -40,7 +37,9 @@
 	<jstl:set var="jobId" value="${id}"/>
 	<jstl:if test="${command != 'create'}">
 	<h4><acme:menu-suboption code="employer.job.form.label.duties" action="/employer/descriptor/show?jobId=${jobId}"/></h4>
+	<jstl:if test="${finalMode == true}">
   	<h4><acme:menu-suboption code="employer.job.form.label.auditRecords" action="/employer/auditrecord/list_mine?id=${idJob}"/></h4>
+  	</jstl:if>
 	</jstl:if>
 	
 	

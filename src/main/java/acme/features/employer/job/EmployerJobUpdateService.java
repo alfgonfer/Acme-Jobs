@@ -1,7 +1,7 @@
 
 package acme.features.employer.job;
 
-import java.util.Date;
+import java.util.Calendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,6 +48,10 @@ public class EmployerJobUpdateService implements AbstractUpdateService<Employer,
 		job = this.repository.findOneJobById(id);
 
 		res = principalId == job.getEmployer().getUserAccount().getId();
+
+		if (res && job.isFinalMode()) {
+			res = false;
+		}
 
 		return res;
 	}
@@ -96,7 +100,8 @@ public class EmployerJobUpdateService implements AbstractUpdateService<Employer,
 		Configuration configuration = this.confRepository.findConfiguration();
 		String spamWords = configuration.getSpamWords();
 		Double spamThreshold = configuration.getSpamThreshold();
-		Date now = new Date(System.currentTimeMillis() - 1);
+		Calendar now = Calendar.getInstance();
+		now.add(Calendar.DAY_OF_YEAR, 7);
 
 		// Validation title ----------------------------------------------------------------------------------------------------------
 		hasTitle = entity.getTitle() != null;
@@ -127,7 +132,7 @@ public class EmployerJobUpdateService implements AbstractUpdateService<Employer,
 		errors.state(request, hasDeadline, "deadline", "employer.job.error.must-have-deadline");
 
 		if (hasDeadline) {
-			isFuture = entity.getDeadline().after(now);
+			isFuture = entity.getDeadline().after(now.getTime());
 			errors.state(request, isFuture, "deadline", "employer.job.error.must-be-future");
 
 		}
