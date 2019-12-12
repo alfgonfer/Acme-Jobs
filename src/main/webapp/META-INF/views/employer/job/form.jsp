@@ -4,6 +4,9 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <acme:form>
+	<jstl:set var="f" value="false"/>
+
+	
 	
 	<jstl:set var="read" value="true"/>
 	<jstl:if test="${command == 'create'}">
@@ -21,16 +24,33 @@
 	<acme:form-money code="employer.job.form.label.salary" path="salary"/>
 	<acme:form-textbox code="employer.job.form.label.moreInfo" path="moreInfo"/>
 	
+	<jstl:if test="${finalMode.equals('false')}">
+	<acme:form-select code="employer.job.form.label.finalMode" path="finalMode">
+	<acme:form-option code="employer.job.form.label.finalMode.false" value="false"/>
+	<acme:form-option code="employer.job.form.label.finalMode.true" value="true"/>
+	</acme:form-select>
+	</jstl:if>
+	
+	<jstl:if test="${!finalMode.equals('false')}">
+	<acme:form-select code="employer.job.form.label.finalMode" path="finalMode">
+	<acme:form-option code="employer.job.form.label.finalMode.true" value="true"/>
+	</acme:form-select>
+	</jstl:if>
 	<jstl:set var="idJob" value="${id}"/>
 	<jstl:set var="jobId" value="${id}"/>
 	<jstl:if test="${command != 'create'}">
 	<h4><acme:menu-suboption code="employer.job.form.label.duties" action="/employer/descriptor/show?jobId=${jobId}"/></h4>
   	<h4><acme:menu-suboption code="employer.job.form.label.auditRecords" action="/employer/auditrecord/list_mine?id=${idJob}"/></h4>
 	</jstl:if>
+	
+	
+	
 
 	<acme:form-submit test ="${command == 'create'}" code="employer.job.form.button.create" action="/employer/job/create"/>
+	<jstl:if test="${!finalMode.equals('false')}">
 	<acme:form-submit test="${command == 'show'}" code="employer.job.form.button.update" action="/employer/job/update"/>
 	<acme:form-submit test="${command == 'update'}" code="employer.job.form.button.update" action="/employer/job/update"/>
+	</jstl:if>
 	<acme:form-submit test ="${command == 'show'}" code="employer.job.form.button.delete" action="/employer/job/delete"/>
 	<acme:form-submit test ="${command == 'delete'}" code="employer.job.form.button.delete" action="/employer/job/delete"/>
 	<acme:form-return code="employer.job.form.label.button.return"/>
