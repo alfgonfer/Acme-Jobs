@@ -51,8 +51,8 @@
        `id` integer not null,
         `version` integer not null,
         `body` varchar(1024),
+        `is_final_mode` bit,
         `moment` datetime(6),
-        `status` bit,
         `title` varchar(255),
         `job_id` integer not null,
         primary key (`id`)

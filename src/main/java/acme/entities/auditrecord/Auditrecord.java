@@ -29,9 +29,9 @@ public class Auditrecord extends DomainEntity {
 	private String				title;
 
 	@NotNull
-	private Boolean				status;
+	private Boolean				isFinalMode;
 
-	//@NotNull
+	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date				moment;
 
@@ -52,7 +52,7 @@ public class Auditrecord extends DomainEntity {
 	//	Relationships -------------------------------------------------------------------------
 
 
-	//@NotNull
+	@NotNull
 	@Valid
 	@ManyToOne(optional = false)
 	private Job job;

@@ -12,7 +12,6 @@ authenticated.message.form.checkbox.agree = Lo entiendo
 
 authenticated.message.error.must-accept = Debes aceptar la condición de no poder borrar ni editar los mensajes creados
 authenticated.message.form.button.create= Crear
-authenticated.message.form.label.mttitle= Titulo del hilo:
 
 authenticated.message.form.label.button.return = Volver
 

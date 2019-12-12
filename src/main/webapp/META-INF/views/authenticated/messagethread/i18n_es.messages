@@ -8,5 +8,5 @@ authenticated.messagethread.form.label.usernames = Usuarios:
 authenticated.messagethread.form.label.message = Mensajes:
 authenticated.messagethread.form.label.button.return = Volver
 authenticated.messagethread.form.button.message= Lista de mensajes
-
+authenticated.messagethread.form.button.message.create= Crear un mensaje
 

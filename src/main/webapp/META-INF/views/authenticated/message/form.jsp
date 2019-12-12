@@ -15,11 +15,10 @@
 	<acme:form-textarea code="authenticated.message.form.label.tags" path="tags" />
 	<acme:form-textarea code="authenticated.message.form.label.body" path="body" />
 	<jstl:if test="${command == 'create'}">
-		<acme:form-textbox code="authenticated.message.form.label.mttitle" path="mttitle" />
 		<acme:form-checkbox code="authenticated.message.form.checkbox.agree" path="accept"/>
 	</jstl:if>
 	<acme:form-submit test="${command == 'create'}" code="authenticated.message.form.button.create"
-		action="/authenticated/message/create" />
+		action="/authenticated/message/create?id=${param.id}" />
 
 	<acme:form-return code="authenticated.message.form.label.button.return" />
 
