@@ -28,6 +28,8 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 
 import acme.datatypes.UserIdentity;
+import acme.entities.auditorrequest.AuditorRequest;
+import acme.entities.auditorrequest.AuditorRequest;
 import acme.entities.messagethreads.Messagethread;
 import acme.framework.helpers.PasswordHelper;
 import acme.framework.helpers.StringHelper;
@@ -97,13 +99,10 @@ public class UserAccount extends DomainEntity {
 	@ManyToMany()
 	private Collection<Messagethread>	messagethread;
 
+	@Valid
+	@OneToMany(mappedBy = "AuditorRequest")
+	private Collection<AuditorRequest>	request;
 
-	/*
-	 * @Valid
-	 * 
-	 * @OneToMany (mappedBy = "AuditorRequest")
-	 * private Collection<AuditorRequest> request;
-	 */
 
 	@Transient
 	public boolean hasRole(final UserRole role) {
