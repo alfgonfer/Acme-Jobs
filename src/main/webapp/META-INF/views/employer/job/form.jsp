@@ -51,7 +51,7 @@
 	<acme:form-submit test="${command == 'update'}" code="employer.job.form.button.update" action="/employer/job/update"/>
 	</jstl:if>
 	
-	<jstl:if test="${hasAplication == false}">
+	<jstl:if test="${hasApplication == false}">
 	<acme:form-submit test ="${command == 'show'}" code="employer.job.form.button.delete" action="/employer/job/delete"/>
 	<acme:form-submit test ="${command == 'delete'}" code="employer.job.form.button.delete" action="/employer/job/delete"/>
 	</jstl:if>
