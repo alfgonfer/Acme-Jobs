@@ -49,6 +49,7 @@ master.menu.authenticated.challenge.list = Lista de retos
 master.menu.authenticated.companyrecord.list= Lista de registros de compañías
 master.menu.authenticated.job.list = Lista de ofertas de trabajo activas
 master.menu.authenticated.messagethread.list = Lista de hilos de mensajes
+master.menu.authenticated.messagethread.create = Crear un nuevo hilo de mensajes
 
 # master.menu.administrator ###################################################
 
