@@ -189,6 +189,7 @@
         `version` integer not null,
         `deadline` datetime(6),
         `final_mode` bit not null,
+        `has_application` bit not null,
         `more_info` varchar(255),
         `reference` varchar(255),
         `salary_amount` double precision,

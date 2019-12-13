@@ -155,6 +155,8 @@ public class EmployerJobCreateService implements AbstractCreateService<Employer,
 		Descriptor descriptor;
 		String description;
 
+		entity.setHasApplication(false);
+
 		this.repository.save(entity);
 
 		description = request.getModel().getString("description");

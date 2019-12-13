@@ -559,9 +559,11 @@
 		<property name="deadline" value="2030/12/11 23:59"/>
 		<property name="salary" value="€ 15,000.00"/>
 		<property name="moreInfo" value="https://www.example.es/"/>
-		<property name="finalMode" value="false"/>
+		<property name="finalMode" value="true"/>
+		<property name="hasApplication" value ="true"/>
 		<property name="employer" ref="employer1Employer"/>
 		<property name="auditor" ref="auditor1Auditor"/>
+		
 
 	</bean>
 	
@@ -572,6 +574,7 @@
 		<property name="salary" value="€ 2,000.10"/>
 		<property name="moreInfo" value="https://www.example.es/"/>
 		<property name="finalMode" value="true"/>
+		<property name="hasApplication" value ="true"/>
 		<property name="employer" ref="employer2Employer"/>
 		<property name="auditor" ref="auditor1Auditor"/>
 
@@ -583,7 +586,8 @@
 		<property name="deadline" value="2024/11/01 23:59"/>
 		<property name="salary" value="€ 15,000.00"/>
 		<property name="moreInfo" value="https://www.example.es/"/>
-		<property name="finalMode" value="true"/>
+		<property name="finalMode" value="false"/>
+		<property name="hasApplication" value ="false"/>
 		<property name="employer" ref="employer1Employer"/>
 		<property name="auditor" ref="auditor1Auditor"/>
 
@@ -596,6 +600,7 @@
 		<property name="salary" value="€ 900,000.00"/>
 		<property name="moreInfo" value="https://www.example.es/"/>
 		<property name="finalMode" value="true"/>
+		<property name="hasApplication" value ="true"/>
 		<property name="employer" ref="employer2Employer"/>
 		<property name="auditor" ref="auditor2Auditor"/>
 
@@ -608,6 +613,7 @@
 		<property name="salary" value="€ 100.00"/>
 		<property name="moreInfo" value="https://www.example.es/"/>
 		<property name="finalMode" value="true"/>
+		<property name="hasApplication" value ="true"/>
 		<property name="employer" ref="employer1Employer"/>
 		<property name="auditor" ref="auditor2Auditor"/>
 
@@ -721,7 +727,7 @@
 		<property name="skills" value="very good in neural networks"/>
 		<property name="qualifications" value="master in intelligent systems"/>
 		<property name="worker" ref="worker2Worker"/>
-		<property name="job" ref="job3"/>
+		<property name="job" ref="job1"/>
 	</bean>
 	
 	<bean id="application4" class="acme.entities.application.Application">

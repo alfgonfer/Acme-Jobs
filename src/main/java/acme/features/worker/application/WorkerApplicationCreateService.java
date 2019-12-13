@@ -119,9 +119,18 @@ public class WorkerApplicationCreateService implements AbstractCreateService<Wor
 		assert request != null;
 		assert entity != null;
 
+		int jobId;
+		Job job;
+
+		jobId = request.getModel().getInteger("jobId");
+		job = this.repository.findJobById(jobId);
+
 		Date moment = new Date(System.currentTimeMillis() - 1);
 		entity.setMoment(moment);
 
+		job.setHasApplication(true);
+
+		this.repository.save(job);
 		this.repository.save(entity);
 
 	}
