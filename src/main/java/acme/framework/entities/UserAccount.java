@@ -98,6 +98,13 @@ public class UserAccount extends DomainEntity {
 	private Collection<Messagethread>	messagethread;
 
 
+	/*
+	 * @Valid
+	 * 
+	 * @OneToMany (mappedBy = "AuditorRequest")
+	 * private Collection<AuditorRequest> request;
+	 */
+
 	@Transient
 	public boolean hasRole(final UserRole role) {
 		assert role != null;
