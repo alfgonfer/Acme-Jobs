@@ -47,7 +47,7 @@
         primary key (`id`)
     ) engine=InnoDB;
 
-    create table `auditor_request` (
+    create table `auditorrequest` (
        `id` integer not null,
         `version` integer not null,
         `description` varchar(1024),
@@ -361,8 +361,8 @@
        foreign key (`user_account_id`) 
        references `user_account` (`id`);
 
-    alter table `auditor_request` 
-       add constraint `FKkn8ax54577bh95khvuyoapv0c` 
+    alter table `auditorrequest` 
+       add constraint `FK2nu5ndvri71kk1avp7v79loqo` 
        foreign key (`user_id`) 
        references `user_account` (`id`);
 

@@ -7,23 +7,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import acme.entities.auditorrequest.AuditorRequest;
+import acme.entities.auditorrequest.Auditorrequest;
 import acme.framework.components.BasicCommand;
 import acme.framework.controllers.AbstractController;
 import acme.framework.entities.Administrator;
 
 @Controller
 @RequestMapping("/administrator/auditorrequest/")
-public class AdministratorAuditorRequestController extends AbstractController<Administrator, AuditorRequest> {
+public class AdministratorAuditorrequestController extends AbstractController<Administrator, Auditorrequest> {
 
 	@Autowired
-	private AdministratorAuditorRequestListService		listService;
+	private AdministratorAuditorrequestListService		listService;
 
 	@Autowired
-	private AdministratorAuditorRequestShowService		showService;
+	private AdministratorAuditorrequestShowService		showService;
 
 	@Autowired
-	private AdministratorAuditorRequestUpdateService	updateService;
+	private AdministratorAuditorrequestUpdateService	updateService;
 
 
 	@PostConstruct

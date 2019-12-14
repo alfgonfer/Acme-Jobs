@@ -4,31 +4,31 @@ package acme.features.administrator.auditorrequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import acme.entities.auditorrequest.AuditorRequest;
+import acme.entities.auditorrequest.Auditorrequest;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
 import acme.framework.entities.Administrator;
 import acme.framework.services.AbstractShowService;
 
 @Service
-public class AdministratorAuditorRequestShowService implements AbstractShowService<Administrator, AuditorRequest> {
+public class AdministratorAuditorrequestShowService implements AbstractShowService<Administrator, Auditorrequest> {
 
 	// Internal state ----------------------------------------------------------------------------------------------
 
 	@Autowired
-	private AdministratorAuditorRequestRepository repository;
+	private AdministratorAuditorrequestRepository repository;
 
 	//AbstractShowService<Administrator, AuditorRequest> interface -------------------------------------------------
 
 
 	@Override
-	public boolean authorise(final Request<AuditorRequest> request) {
+	public boolean authorise(final Request<Auditorrequest> request) {
 		assert request != null;
 		return true;
 	}
 
 	@Override
-	public void unbind(final Request<AuditorRequest> request, final AuditorRequest entity, final Model model) {
+	public void unbind(final Request<Auditorrequest> request, final Auditorrequest entity, final Model model) {
 		assert request != null;
 		assert entity != null;
 		assert model != null;
@@ -38,11 +38,11 @@ public class AdministratorAuditorRequestShowService implements AbstractShowServi
 	}
 
 	@Override
-	public AuditorRequest findOne(final Request<AuditorRequest> request) {
+	public Auditorrequest findOne(final Request<Auditorrequest> request) {
 		assert request != null;
 
 		Integer id;
-		AuditorRequest result;
+		Auditorrequest result;
 
 		id = request.getModel().getInteger("id");
 

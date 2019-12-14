@@ -4,7 +4,7 @@ package acme.features.authenticated.auditorrequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import acme.entities.auditorrequest.AuditorRequest;
+import acme.entities.auditorrequest.Auditorrequest;
 import acme.entities.configuration.Configuration;
 import acme.features.utiles.ConfigurationRepository;
 import acme.features.utiles.Spamfilter;
@@ -17,7 +17,7 @@ import acme.framework.entities.UserAccount;
 import acme.framework.services.AbstractCreateService;
 
 @Service
-public class AuthenticatedAuditorRequestCreateService implements AbstractCreateService<Authenticated, AuditorRequest> {
+public class AuthenticatedAuditorRequestCreateService implements AbstractCreateService<Authenticated, Auditorrequest> {
 
 	// Internal state ---------------------------------------------------------------------------------------------------
 
@@ -30,13 +30,13 @@ public class AuthenticatedAuditorRequestCreateService implements AbstractCreateS
 
 
 	@Override
-	public boolean authorise(final Request<AuditorRequest> request) {
+	public boolean authorise(final Request<Auditorrequest> request) {
 		assert request != null;
 		return true;
 	}
 
 	@Override
-	public void bind(final Request<AuditorRequest> request, final AuditorRequest entity, final Errors errors) {
+	public void bind(final Request<Auditorrequest> request, final Auditorrequest entity, final Errors errors) {
 		assert request != null;
 		assert entity != null;
 		assert errors != null;
@@ -46,7 +46,7 @@ public class AuthenticatedAuditorRequestCreateService implements AbstractCreateS
 	}
 
 	@Override
-	public void unbind(final Request<AuditorRequest> request, final AuditorRequest entity, final Model model) {
+	public void unbind(final Request<Auditorrequest> request, final Auditorrequest entity, final Model model) {
 		assert request != null;
 		assert entity != null;
 		assert model != null;
@@ -55,19 +55,19 @@ public class AuthenticatedAuditorRequestCreateService implements AbstractCreateS
 	}
 
 	@Override
-	public AuditorRequest instantiate(final Request<AuditorRequest> request) {
+	public Auditorrequest instantiate(final Request<Auditorrequest> request) {
 		assert request != null;
 
-		AuditorRequest result;
+		Auditorrequest result;
 
-		result = new AuditorRequest();
+		result = new Auditorrequest();
 		result.setStatus("pending");
 
 		return result;
 	}
 
 	@Override
-	public void validate(final Request<AuditorRequest> request, final AuditorRequest entity, final Errors errors) {
+	public void validate(final Request<Auditorrequest> request, final Auditorrequest entity, final Errors errors) {
 		assert request != null;
 		assert entity != null;
 		assert errors != null;
@@ -112,7 +112,7 @@ public class AuthenticatedAuditorRequestCreateService implements AbstractCreateS
 	}
 
 	@Override
-	public void create(final Request<AuditorRequest> request, final AuditorRequest entity) {
+	public void create(final Request<Auditorrequest> request, final Auditorrequest entity) {
 		assert request != null;
 		assert entity != null;
 

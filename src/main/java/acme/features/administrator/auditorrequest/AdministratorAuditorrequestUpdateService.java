@@ -4,7 +4,7 @@ package acme.features.administrator.auditorrequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import acme.entities.auditorrequest.AuditorRequest;
+import acme.entities.auditorrequest.Auditorrequest;
 import acme.entities.roles.Auditor;
 import acme.framework.components.Errors;
 import acme.framework.components.Model;
@@ -14,24 +14,24 @@ import acme.framework.entities.UserAccount;
 import acme.framework.services.AbstractUpdateService;
 
 @Service
-public class AdministratorAuditorRequestUpdateService implements AbstractUpdateService<Administrator, AuditorRequest> {
+public class AdministratorAuditorrequestUpdateService implements AbstractUpdateService<Administrator, Auditorrequest> {
 
 	// Internal state ---------------------------------------------------------------------------------------------------
 
 	@Autowired
-	private AdministratorAuditorRequestRepository repository;
+	private AdministratorAuditorrequestRepository repository;
 
 	// AbstractUpdateService<Administrator, AuditorRequest> -------------------------------------------------------------
 
 
 	@Override
-	public boolean authorise(final Request<AuditorRequest> request) {
+	public boolean authorise(final Request<Auditorrequest> request) {
 		assert request != null;
 		return true;
 	}
 
 	@Override
-	public void bind(final Request<AuditorRequest> request, final AuditorRequest entity, final Errors errors) {
+	public void bind(final Request<Auditorrequest> request, final Auditorrequest entity, final Errors errors) {
 		assert request != null;
 		assert entity != null;
 		assert errors != null;
@@ -39,7 +39,7 @@ public class AdministratorAuditorRequestUpdateService implements AbstractUpdateS
 	}
 
 	@Override
-	public void unbind(final Request<AuditorRequest> request, final AuditorRequest entity, final Model model) {
+	public void unbind(final Request<Auditorrequest> request, final Auditorrequest entity, final Model model) {
 		assert request != null;
 		assert entity != null;
 		assert model != null;
@@ -48,11 +48,11 @@ public class AdministratorAuditorRequestUpdateService implements AbstractUpdateS
 	}
 
 	@Override
-	public AuditorRequest findOne(final Request<AuditorRequest> request) {
+	public Auditorrequest findOne(final Request<Auditorrequest> request) {
 		assert request != null;
 
 		Integer id;
-		AuditorRequest result;
+		Auditorrequest result;
 
 		id = request.getModel().getInteger("id");
 
@@ -63,7 +63,7 @@ public class AdministratorAuditorRequestUpdateService implements AbstractUpdateS
 	}
 
 	@Override
-	public void validate(final Request<AuditorRequest> request, final AuditorRequest entity, final Errors errors) {
+	public void validate(final Request<Auditorrequest> request, final Auditorrequest entity, final Errors errors) {
 		assert request != null;
 		assert entity != null;
 		assert errors != null;
@@ -71,7 +71,7 @@ public class AdministratorAuditorRequestUpdateService implements AbstractUpdateS
 	}
 
 	@Override
-	public void update(final Request<AuditorRequest> request, final AuditorRequest entity) {
+	public void update(final Request<Auditorrequest> request, final Auditorrequest entity) {
 		assert request != null;
 		assert entity != null;
 

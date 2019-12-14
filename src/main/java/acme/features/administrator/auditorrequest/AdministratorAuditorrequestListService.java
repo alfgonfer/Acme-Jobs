@@ -6,31 +6,31 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import acme.entities.auditorrequest.AuditorRequest;
+import acme.entities.auditorrequest.Auditorrequest;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
 import acme.framework.entities.Administrator;
 import acme.framework.services.AbstractListService;
 
 @Service
-public class AdministratorAuditorRequestListService implements AbstractListService<Administrator, AuditorRequest> {
+public class AdministratorAuditorrequestListService implements AbstractListService<Administrator, Auditorrequest> {
 
 	// Internal state ------------------------------------------------------------------------------------------------
 
 	@Autowired
-	private AdministratorAuditorRequestRepository repository;
+	private AdministratorAuditorrequestRepository repository;
 
 
 	//AbstractListService<Administrator, AuditorRequest> interface ---------------------------------------------------
 
 	@Override
-	public boolean authorise(final Request<AuditorRequest> request) {
+	public boolean authorise(final Request<Auditorrequest> request) {
 		assert request != null;
 		return true;
 	}
 
 	@Override
-	public void unbind(final Request<AuditorRequest> request, final AuditorRequest entity, final Model model) {
+	public void unbind(final Request<Auditorrequest> request, final Auditorrequest entity, final Model model) {
 		assert request != null;
 		assert entity != null;
 		assert model != null;
@@ -39,10 +39,10 @@ public class AdministratorAuditorRequestListService implements AbstractListServi
 	}
 
 	@Override
-	public Collection<AuditorRequest> findMany(final Request<AuditorRequest> request) {
+	public Collection<Auditorrequest> findMany(final Request<Auditorrequest> request) {
 		assert request != null;
 
-		Collection<AuditorRequest> result;
+		Collection<Auditorrequest> result;
 
 		result = this.repository.findAllAuditorsRequest();
 

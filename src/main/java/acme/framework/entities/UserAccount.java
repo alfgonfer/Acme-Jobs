@@ -28,7 +28,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 
 import acme.datatypes.UserIdentity;
-import acme.entities.auditorrequest.AuditorRequest;
+import acme.entities.auditorrequest.Auditorrequest;
 import acme.entities.messagethreads.Messagethread;
 import acme.framework.helpers.PasswordHelper;
 import acme.framework.helpers.StringHelper;
@@ -100,7 +100,7 @@ public class UserAccount extends DomainEntity {
 
 	@Valid
 	@OneToMany(mappedBy = "user")
-	private Collection<AuditorRequest>	request;
+	private Collection<Auditorrequest>	request;
 
 
 	@Transient

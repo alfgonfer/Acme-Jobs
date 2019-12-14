@@ -19,9 +19,9 @@
        drop 
        foreign key FK_clqcq9lyspxdxcp6o4f3vkelj;
 
-    alter table `auditor_request` 
+    alter table `auditorrequest` 
        drop 
-       foreign key `FKkn8ax54577bh95khvuyoapv0c`;
+       foreign key `FK2nu5ndvri71kk1avp7v79loqo`;
 
     alter table `auditrecord` 
        drop 
@@ -101,7 +101,7 @@
 
     drop table if exists `auditor`;
 
-    drop table if exists `auditor_request`;
+    drop table if exists `auditorrequest`;
 
     drop table if exists `auditrecord`;
 

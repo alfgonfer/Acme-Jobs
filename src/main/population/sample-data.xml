@@ -806,7 +806,7 @@
 	
 	<!--  Auditior request -->
 	
-	<bean id="auditorRequest1" class="acme.entities.auditorrequest.AuditorRequest">
+	<bean id="auditorRequest1" class="acme.entities.auditorrequest.Auditorrequest">
 		<property name="firm" value="Garpe"/>
 		<property name="respStatement" value="Boss"/>
 		<property name="description" value="I want to become auditor"/>
@@ -814,7 +814,7 @@
 		<property name="user" ref="worker1UserAccount"/>
 	</bean>
 	
-	<bean id="auditorRequest2" class="acme.entities.auditorrequest.AuditorRequest">
+	<bean id="auditorRequest2" class="acme.entities.auditorrequest.Auditorrequest">
 		<property name="firm" value="AlmaRomerita"/>
 		<property name="respStatement" value="Boss"/>
 		<property name="description" value="I want to become auditor"/>
