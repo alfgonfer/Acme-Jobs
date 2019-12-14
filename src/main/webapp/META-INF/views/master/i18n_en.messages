@@ -78,8 +78,10 @@ master.menu.administrator.auditorRequest.list = List of auditor's requests
 # master.menu.sponsor ###################################################
 
 master.menu.sponsor = Sponsor
-master.menu.sponsor.comercialbanner.list = List of comercial banners
-master.menu.sponsor.noncomercialbanner.list = List of non comercial banners
+master.menu.sponsor.comercialbanner.list = List of my comercial banners
+master.menu.sponsor.comercialbanner.create = Create comercial banner
+master.menu.sponsor.noncomercialbanner.list = List of my non comercial banners
+master.menu.sponsor.noncomercialbanner.create = Create a non comercial banner
 
 # master.menu.provider ########################################################
 
@@ -129,6 +131,9 @@ master.menu.user-account.become-worker = Become a worker
 master.menu.user-account.worker = Worker data
 master.menu.user-account.become-auditor = Make a request to become auditor
 master.menu.user-account.auditor = Auditor data
+master.menu.user-account.become-sponsor = Become a sponsor
+master.menu.user-account.sponsor = Sponsor data
+
 
 # master.footer ###############################################################
 

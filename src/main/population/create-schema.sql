@@ -80,6 +80,7 @@
     create table `banner` (
        `id` integer not null,
         `version` integer not null,
+        `final_mode` bit not null,
         `slogan` varchar(255),
         `url_picture` varchar(255),
         `url_target` varchar(255),
@@ -107,6 +108,7 @@
     create table `comercialbanner` (
        `id` integer not null,
         `version` integer not null,
+        `final_mode` bit not null,
         `slogan` varchar(255),
         `url_picture` varchar(255),
         `url_target` varchar(255),
@@ -147,7 +149,7 @@
         primary key (`id`)
     ) engine=InnoDB;
 
-    create table `credit_card` (
+    create table `creditcard` (
        `id` integer not null,
         `version` integer not null,
         `credit_number` varchar(255),
@@ -234,6 +236,7 @@
     create table `noncomercialbanner` (
        `id` integer not null,
         `version` integer not null,
+        `final_mode` bit not null,
         `slogan` varchar(255),
         `url_picture` varchar(255),
         `url_target` varchar(255),
@@ -322,8 +325,8 @@
     alter table `application` 
        add constraint UK_ct7r18vvxl5g4c4k7aefpa4do unique (`reference`);
 
-    alter table `credit_card` 
-       add constraint UK_4cr95y27s8ti6otoyflmma6oy unique (`sponsor_id`);
+    alter table `creditcard` 
+       add constraint UK_ciu6eebpd7klqu0u6sv9o6n53 unique (`sponsor_id`);
 
     alter table `job` 
        add constraint UK_7jmfdvs0b0jx7i33qxgv22h7b unique (`reference`);
@@ -387,8 +390,8 @@
        foreign key (`user_account_id`) 
        references `user_account` (`id`);
 
-    alter table `credit_card` 
-       add constraint `FK31l5hvh7p1nx1aw6v649gw3rc` 
+    alter table `creditcard` 
+       add constraint `FK89f7jlst6msbsgc3l4fvxt1fd` 
        foreign key (`sponsor_id`) 
        references `sponsor` (`id`);
 
