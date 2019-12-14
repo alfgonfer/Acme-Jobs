@@ -1,6 +1,8 @@
 
 package acme.features.authenticated.auditorrequest;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -58,10 +60,14 @@ public class AuthenticatedAuditorRequestCreateService implements AbstractCreateS
 	public Auditorrequest instantiate(final Request<Auditorrequest> request) {
 		assert request != null;
 
+		Date now;
 		Auditorrequest result;
 
 		result = new Auditorrequest();
 		result.setStatus("pending");
+
+		now = new Date(System.currentTimeMillis() - 1);
+		result.setMoment(now);
 
 		return result;
 	}
@@ -116,17 +122,20 @@ public class AuthenticatedAuditorRequestCreateService implements AbstractCreateS
 		assert request != null;
 		assert entity != null;
 
+		Date now;
 		Principal principal;
 		Integer id;
 		UserAccount user;
 
 		principal = request.getPrincipal();
 		id = principal.getAccountId();
+		now = new Date(System.currentTimeMillis() - 1);
 
 		user = this.repository.findOneUserAccountById(id);
 
 		entity.setUser(user);
 		entity.setStatus("pending");
+		entity.setMoment(now);
 
 		this.repository.save(entity);
 

@@ -43,7 +43,7 @@ public class AdministratorAuditorrequestUpdateService implements AbstractUpdateS
 		assert request != null;
 		assert entity != null;
 		assert model != null;
-		request.unbind(entity, model, "username", "description", "status", "firm", "respStatement");
+		request.unbind(entity, model, "username", "description", "status", "firm", "respStatement", "moment");
 
 	}
 
@@ -75,7 +75,7 @@ public class AdministratorAuditorrequestUpdateService implements AbstractUpdateS
 		assert request != null;
 		assert entity != null;
 
-		if (entity.getStatus() == "accepted") {
+		if (entity.getStatus().equals("accepted")) {
 
 			Auditor auditor;
 			UserAccount user;

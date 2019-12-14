@@ -1,9 +1,13 @@
 
 package acme.entities.auditorrequest;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
@@ -37,6 +41,10 @@ public class Auditorrequest extends DomainEntity {
 	@NotNull
 	@Pattern(regexp = "^(pending)|(accepted)|(rejected)$", message = "It must be pending, accepted or rejected.")
 	private String				status;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@NotNull
+	private Date				moment;
 
 	//RelationShips
 

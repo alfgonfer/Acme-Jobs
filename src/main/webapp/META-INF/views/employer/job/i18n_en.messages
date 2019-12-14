@@ -15,6 +15,7 @@ employer.job.form.label.finalMode.true = Yes
 employer.job.form.label.duties = Click here to see the descriptor
 employer.job.form.label.auditRecords = Click here to see the list of audit records of the job
 employer.job.form.label.description = Description:
+administrator.auditorrequest.form.label.moment = Moment:
 employer.job.form.button.update = Update
 employer.job.form.button.create = Create
 employer.job.form.label.button.return = Return

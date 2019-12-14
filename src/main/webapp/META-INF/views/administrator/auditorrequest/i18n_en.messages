@@ -1,6 +1,7 @@
 administrator.auditorrequest.list.label.username =  Username
 administrator.auditorrequest.list.label.description = Description
 administrator.auditorrequest.list.label.status = Status
+administrator.auditorrequest.list.label.moment = Moment
 
 administrator.auditorrequest.form.label.username = Username:
 administrator.auditorrequest.form.label.firm = Firm:
@@ -10,6 +11,7 @@ administrator.auditorrequest.form.label.pending = Pending
 administrator.auditorrequest.form.label.accepted = Accepted
 administrator.auditorrequest.form.label.rejected = Rejected
 administrator.auditorrequest.form.label.description = Description of the request:
+administrator.auditorrequest.form.label.moment = Moment:
 
 administrator.auditorrequest.form.label.button.update = Update
 administrator.auditorrequest.form.label.button.return = Return

@@ -52,6 +52,7 @@
         `version` integer not null,
         `description` varchar(1024),
         `firm` varchar(255),
+        `moment` datetime(6),
         `resp_statement` varchar(255),
         `status` varchar(255),
         `user_id` integer,

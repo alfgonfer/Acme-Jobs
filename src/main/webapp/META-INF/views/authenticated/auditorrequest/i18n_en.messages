@@ -2,7 +2,7 @@ authenticated.auditorrequest.form.label.description = Description of the request
 authenticated.auditorrequest.form.label.firm = Firm:
 authenticated.auditorrequest.form.label.respStatement = Responsability statement:
 
-authenticated.auditorrequest.form.label.button.create = Create
+authenticated.auditorrequest.form.button.create = Create
 authenticated.auditorrequest.form.label.button.return = Return
 
 authenticated.auditorrequest.error.must-have-description = The request must have a description
