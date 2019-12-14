@@ -50,6 +50,7 @@ master.menu.authenticated.challenge.list = List of challenges
 master.menu.authenticated.companyrecord.list= List of company records
 master.menu.authenticated.job.list = List of active jobs
 master.menu.authenticated.messagethread.list = List of Message threads
+master.menu.authenticated.messagethread.create = Create a new Message thread
 
 # master.menu.administrator ###################################################
 
@@ -71,6 +72,7 @@ master.menu.administrator.challenge.list = List of challenges
 master.menu.administrator.challenge.create = Create a challenge
 master.menu.administrator.companyrecord.list = List of company records
 master.menu.administrator.companyrecord.create = Create a company record
+master.menu.administrator.auditorRequest.list = List of auditor's requests
 
 
 # master.menu.sponsor ###################################################
@@ -127,8 +129,11 @@ master.menu.user-account.become-employer = Become a employer
 master.menu.user-account.employer = Employer data
 master.menu.user-account.become-worker = Become a worker
 master.menu.user-account.worker = Worker data
+master.menu.user-account.become-auditor = Make a request to become auditor
+master.menu.user-account.auditor = Auditor data
 master.menu.user-account.become-sponsor = Become a sponsor
 master.menu.user-account.sponsor = Sponsor data
+
 
 # master.footer ###############################################################
 
