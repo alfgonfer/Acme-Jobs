@@ -15,6 +15,6 @@ public interface AdministratorNoncomercialbannerRepository extends AbstractRepos
 	@Query("select a from Noncomercialbanner a where a.id=?1")
 	Noncomercialbanner findOneById(int id);
 
-	@Query("select a from Noncomercialbanner a")
+	@Query("select a from Noncomercialbanner a where a.finalMode= true")
 	Collection<Noncomercialbanner> findManyAll();
 }

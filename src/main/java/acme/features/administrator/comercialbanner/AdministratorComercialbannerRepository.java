@@ -15,6 +15,6 @@ public interface AdministratorComercialbannerRepository extends AbstractReposito
 	@Query("select a from Comercialbanner a where a.id=?1")
 	Comercialbanner findOneById(int id);
 
-	@Query("select a from Comercialbanner a")
+	@Query("select a from Comercialbanner a where a.finalMode= true")
 	Collection<Comercialbanner> findManyAll();
 }

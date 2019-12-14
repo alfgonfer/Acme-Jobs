@@ -46,6 +46,7 @@ public class AdministratorComercialbannerCreateService implements AbstractCreate
 	public Comercialbanner instantiate(final Request<Comercialbanner> request) {
 		Comercialbanner result;
 		result = new Comercialbanner();
+		result.setFinalMode(true);
 		return result;
 	}
 

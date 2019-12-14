@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -22,7 +23,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class CreditCard extends DomainEntity {
+public class Creditcard extends DomainEntity {
 
 	private static final long	serialVersionUID	= 1L;
 
@@ -40,12 +41,19 @@ public class CreditCard extends DomainEntity {
 	private Date				expiration;
 
 	@NotBlank
-	@Pattern(regexp = "^[0-9]{3}$", message = "This param must be 3 numbers")
+	@Pattern(regexp = "^[0-9]{3}$", message = "authenticated.creditcard.error.must-have-securityCode-pattern")
 	private String				securityCode;
 
 	@NotNull
 	@Valid
 	@OneToOne(optional = false)
 	private Sponsor				sponsor;
+
+
+	// Derivated atributes
+	@Transient
+	public Integer getSponsorId() {
+		return this.sponsor.getId();
+	}
 
 }

@@ -22,10 +22,22 @@ public class SponsorComercialbannerController extends AbstractController<Sponsor
 	@Autowired
 	private SponsorComercialbannerShowService	showService;
 
+	@Autowired
+	private SponsorComercialbannerCreateService	createService;
+
+	@Autowired
+	private SponsorComercialbannerUpdateService	updateService;
+
+	@Autowired
+	private SponsorComercialbannerDeleteService	deleteService;
+
 
 	@PostConstruct
 	private void initialise() {
 		super.addBasicCommand(BasicCommand.LIST, this.listService);
 		super.addBasicCommand(BasicCommand.SHOW, this.showService);
+		super.addBasicCommand(BasicCommand.CREATE, this.createService);
+		super.addBasicCommand(BasicCommand.UPDATE, this.updateService);
+		super.addBasicCommand(BasicCommand.DELETE, this.deleteService);
 	}
 }
