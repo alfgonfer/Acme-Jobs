@@ -74,8 +74,10 @@ master.menu.administrator.companyrecord.create = Crear registro de compañia
 # master.menu.sponsor ###################################################
 
 master.menu.sponsor = Patrocinador
-master.menu.sponsor.comercialbanner.list = Lista de anuncios comerciales
-master.menu.sponsor.noncomercialbanner.list = Lista de anuncios no comerciales
+master.menu.sponsor.comercialbanner.list = Lista de mis anuncios comerciales
+master.menu.sponsor.comercialbanner.create = Crear anuncio comercial
+master.menu.sponsor.noncomercialbanner.list = Lista de mis anuncios no comerciales
+master.menu.sponsor.noncomercialbanner.create = Crear anuncio no comercial
 
 # master.menu.provider ########################################################
 

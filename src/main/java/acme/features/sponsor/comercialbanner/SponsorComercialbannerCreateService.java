@@ -17,7 +17,7 @@ import acme.framework.entities.Principal;
 import acme.framework.services.AbstractCreateService;
 
 @Service
-public class SponsorComercialBannerCreateService implements AbstractCreateService<Sponsor, Comercialbanner> {
+public class SponsorComercialbannerCreateService implements AbstractCreateService<Sponsor, Comercialbanner> {
 
 	// Internal state ------------------------------------------------------------------------------------------------
 
@@ -29,6 +29,7 @@ public class SponsorComercialBannerCreateService implements AbstractCreateServic
 
 
 	// AbstractCreateService<Sponsor, Comercialbanner> interface ------------------------------------------------------
+
 	@Override
 	public boolean authorise(final Request<Comercialbanner> request) {
 		assert request != null;
@@ -73,6 +74,8 @@ public class SponsorComercialBannerCreateService implements AbstractCreateServic
 		creditCard = this.repository.findOneCreditCardBySponsorId(sponsor.getId());
 		result = new Comercialbanner();
 		result.setCreditCard(creditCard.getCreditNumber());
+		result.setFinalMode(false);
+		result.setSponsor(sponsor);
 		return result;
 	}
 

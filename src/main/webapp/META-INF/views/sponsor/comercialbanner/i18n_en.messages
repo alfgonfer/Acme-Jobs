@@ -13,6 +13,7 @@ sponsor.comercialbanner.form.label.finalmode.false = No
 sponsor.comercialbanner.form.label.button.create = Create
 sponsor.comercialbanner.form.label.button.update = Update
 sponsor.comercialbanner.form.label.button.return = Return
+sponsor.comercialbanner.form.label.button.delete = Delete
 
 sponsor.comercialbanner.error.must-have-slogan = The comercial banner must have a slogan
 sponsor.comercialbanner.error.must-have-not-spam-slogan = The comercial banner must not contains spam in the slogan

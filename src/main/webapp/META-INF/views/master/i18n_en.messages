@@ -76,8 +76,10 @@ master.menu.administrator.companyrecord.create = Create a company record
 # master.menu.sponsor ###################################################
 
 master.menu.sponsor = Sponsor
-master.menu.sponsor.comercialbanner.list = List of comercial banners
-master.menu.sponsor.noncomercialbanner.list = List of non comercial banners
+master.menu.sponsor.comercialbanner.list = List of my comercial banners
+master.menu.sponsor.comercialbanner.create = Create comercial banner
+master.menu.sponsor.noncomercialbanner.list = List of my non comercial banners
+master.menu.sponsor.noncomercialbanner.create = Create a non comercial banner
 
 # master.menu.provider ########################################################
 
