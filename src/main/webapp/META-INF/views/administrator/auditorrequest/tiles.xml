@@ -18,8 +18,8 @@
 
 <tiles-definitions>
 
-	<definition name="administrator/auditorrequest/form" extends="master">
-		<put-attribute name="body" type="template" value="../administrator/auditorrequest/form.jsp" />
+	<definition name="administrator/auditorrequest/list" extends="master">
+		<put-attribute name="body" type="template" value="../administrator/auditorrequest/list.jsp" />
 	</definition>
 	
 	<definition name="administrator/auditorrequest/form" extends="master">

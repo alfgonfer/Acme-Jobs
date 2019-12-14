@@ -17,8 +17,6 @@
 	"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
-
-	
 	
 	<definition name="authenticated/auditorrequest/form" extends="master">
 		<put-attribute name="body" type="template" value="../authenticated/auditorrequest/form.jsp" />

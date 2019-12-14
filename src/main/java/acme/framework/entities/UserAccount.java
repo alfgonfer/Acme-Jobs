@@ -29,7 +29,6 @@ import org.hibernate.validator.constraints.Length;
 
 import acme.datatypes.UserIdentity;
 import acme.entities.auditorrequest.AuditorRequest;
-import acme.entities.auditorrequest.AuditorRequest;
 import acme.entities.messagethreads.Messagethread;
 import acme.framework.helpers.PasswordHelper;
 import acme.framework.helpers.StringHelper;
@@ -100,7 +99,7 @@ public class UserAccount extends DomainEntity {
 	private Collection<Messagethread>	messagethread;
 
 	@Valid
-	@OneToMany(mappedBy = "AuditorRequest")
+	@OneToMany(mappedBy = "user")
 	private Collection<AuditorRequest>	request;
 
 

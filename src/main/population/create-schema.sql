@@ -47,6 +47,17 @@
         primary key (`id`)
     ) engine=InnoDB;
 
+    create table `auditor_request` (
+       `id` integer not null,
+        `version` integer not null,
+        `description` varchar(1024),
+        `firm` varchar(255),
+        `resp_statement` varchar(255),
+        `status` varchar(255),
+        `user_id` integer,
+        primary key (`id`)
+    ) engine=InnoDB;
+
     create table `auditrecord` (
        `id` integer not null,
         `version` integer not null,
@@ -348,6 +359,11 @@
     alter table `auditor` 
        add constraint FK_clqcq9lyspxdxcp6o4f3vkelj 
        foreign key (`user_account_id`) 
+       references `user_account` (`id`);
+
+    alter table `auditor_request` 
+       add constraint `FKkn8ax54577bh95khvuyoapv0c` 
+       foreign key (`user_id`) 
        references `user_account` (`id`);
 
     alter table `auditrecord` 

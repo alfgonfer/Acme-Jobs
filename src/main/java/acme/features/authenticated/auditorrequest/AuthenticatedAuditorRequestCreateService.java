@@ -50,7 +50,7 @@ public class AuthenticatedAuditorRequestCreateService implements AbstractCreateS
 		assert request != null;
 		assert entity != null;
 		assert model != null;
-		request.unbind(entity, model, "username", "description", "status", "firm", "respStatement");
+		request.unbind(entity, model, "description", "firm", "respStatement");
 
 	}
 
