@@ -9,6 +9,7 @@ import acme.entities.roles.Employer;
 import acme.framework.components.Errors;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
+import acme.framework.entities.Principal;
 import acme.framework.services.AbstractDeleteService;
 
 @Service
@@ -21,9 +22,19 @@ public class EmployerDutyDeleteService implements AbstractDeleteService<Employer
 
 	@Override
 	public boolean authorise(final Request<Duty> request) {
-		assert request != null;
-		boolean b = request.getPrincipal().hasRole(Employer.class);
-		return b;
+		Duty Duty;
+		Principal principal;
+		int idPrincipal, id;
+		boolean res;
+
+		principal = request.getPrincipal();
+		idPrincipal = principal.getAccountId();
+		id = request.getModel().getInteger("id");
+		Duty = this.repository.findDutyById(id);
+
+		res = idPrincipal == Duty.getDescriptor().getJob().getEmployer().getUserAccount().getId();
+
+		return res;
 	}
 
 	@Override
