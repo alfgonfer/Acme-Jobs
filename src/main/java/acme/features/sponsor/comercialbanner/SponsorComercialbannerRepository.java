@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import acme.entities.comercialbanner.Comercialbanner;
+import acme.entities.creditcard.Creditcard;
+import acme.entities.roles.Sponsor;
 import acme.framework.repositories.AbstractRepository;
 
 @Repository
@@ -17,4 +19,10 @@ public interface SponsorComercialbannerRepository extends AbstractRepository {
 
 	@Query("select a from Comercialbanner a where not a.sponsor.id =?1")
 	Collection<Comercialbanner> findManyBySponsor(int idSponsor);
+
+	@Query("select s from Sponsor s where s.userAccount.id = ?1")
+	Sponsor findOneSponsorByUserAccountId(int id);
+
+	@Query("select c from Creditcard c where c.sponsor.id=?1")
+	Creditcard findOneCreditCardBySponsorId(int id);
 }

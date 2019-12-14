@@ -5,5 +5,13 @@ sponsor.comercialbanner.form.label.urlPicture = Url de imagen:
 sponsor.comercialbanner.form.label.slogan = Eslogan:
 sponsor.comercialbanner.form.label.urlTarget = Url del anuncio:
 sponsor.comercialbanner.form.label.creditCard = Tarjeta de credito:
+sponsor.comercialbanner.form.label.finalmode = Publicar
+sponsor.comercialbanner.form.label.finalmode.true = Si
+sponsor.comercialbanner.form.label.finalmode.false = No
 
+sponsor.comercialbanner.form.label.button.create = Crear
+sponsor.comercialbanner.form.label.button.update = Actualizar
 sponsor.comercialbanner.form.label.button.return = Volver
+
+sponsor.comercialbanner.error.must-have-slogan = El banner comercial debe de tener un eslogan
+sponsor.comercialbanner.error.must-have-not-spam-slogan = El banner comercial no debe de contener spam en el eslogan

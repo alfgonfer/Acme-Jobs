@@ -1,5 +1,5 @@
 
-package acme.features.authenticated.sponsor;
+package acme.features.authenticated.creditcard;
 
 import javax.annotation.PostConstruct;
 
@@ -7,29 +7,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import acme.entities.roles.Sponsor;
+import acme.entities.creditcard.Creditcard;
 import acme.framework.components.BasicCommand;
 import acme.framework.controllers.AbstractController;
 import acme.framework.entities.Authenticated;
 
 @Controller
-@RequestMapping("/authenticated/sponsor/")
-public class AuthenticatedSponsorController extends AbstractController<Authenticated, Sponsor> {
+@RequestMapping("/authenticated/creditcard/")
+public class AuthenticatedCreditCardController extends AbstractController<Authenticated, Creditcard> {
 
 	// Internal State --------------------------------------------------------------------------------------
 
 	@Autowired
-	private AuthenticatedSponsorCreateService	createService;
-
-	@Autowired
-	private AuthenticatedSponsorUpdateService	updateService;
+	private AuthenticatedCreditCardUpdateService updateService;
 
 
 	// Constructors -----------------------------------------------------------------------------------------
 
 	@PostConstruct
 	private void initialise() {
-		super.addBasicCommand(BasicCommand.CREATE, this.createService);
 		super.addBasicCommand(BasicCommand.UPDATE, this.updateService);
+
 	}
+
 }

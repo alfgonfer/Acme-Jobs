@@ -1,5 +1,5 @@
 
-package acme.features.authenticated.sponsor;
+package acme.features.authenticated.creditcard;
 
 import java.util.Date;
 
@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.entities.creditcard.Creditcard;
-import acme.entities.roles.Sponsor;
 import acme.framework.components.Errors;
 import acme.framework.components.HttpMethod;
 import acme.framework.components.Model;
@@ -15,130 +14,127 @@ import acme.framework.components.Request;
 import acme.framework.components.Response;
 import acme.framework.entities.Authenticated;
 import acme.framework.entities.Principal;
-import acme.framework.entities.UserAccount;
 import acme.framework.helpers.PrincipalHelper;
-import acme.framework.services.AbstractCreateService;
+import acme.framework.services.AbstractUpdateService;
 
 @Service
-public class AuthenticatedSponsorCreateService implements AbstractCreateService<Authenticated, Sponsor> {
+public class AuthenticatedCreditCardUpdateService implements AbstractUpdateService<Authenticated, Creditcard> {
 
 	// Internal state -------------------------------------------------------------------------------------
 
 	@Autowired
-	private AuthenticatedSponsorRepository repository;
+	private AuthenticatedCreditCardRepository repository;
 
 
-	// AbstractCreateService<Authenticated, Sponsor> interface --------------------------------------------
-
+	//AbstractUpdateService<Authenticated, Creditcard> interface ------------------------------------------
 	@Override
-	public boolean authorise(final Request<Sponsor> request) {
+	public boolean authorise(final Request<Creditcard> request) {
 		assert request != null;
-		return true;
+		Creditcard creditCart;
+		Principal principal;
+		Integer id;
+		boolean res;
+
+		principal = request.getPrincipal();
+
+		id = request.getModel().getInteger("id");
+
+		creditCart = this.repository.findOneCreditCardBySponsorId(id);
+
+		res = principal.getAccountId() == creditCart.getSponsor().getUserAccount().getId();
+
+		return res;
 	}
 
 	@Override
-	public void bind(final Request<Sponsor> request, final Sponsor entity, final Errors errors) {
+	public void bind(final Request<Creditcard> request, final Creditcard entity, final Errors errors) {
 		assert request != null;
 		assert entity != null;
 		assert errors != null;
-		request.bind(entity, errors, "creditNumber", "name", "surname", "expiration", "securityCode");
+
+		request.bind(entity, errors);
 
 	}
 
 	@Override
-	public void unbind(final Request<Sponsor> request, final Sponsor entity, final Model model) {
+	public void unbind(final Request<Creditcard> request, final Creditcard entity, final Model model) {
 		assert request != null;
 		assert entity != null;
 		assert model != null;
-		request.unbind(entity, model, "orgName");
+
+		request.unbind(entity, model, "creditNumber", "name", "surname", "expiration", "securityCode", "sponsorId");
+
 	}
 
 	@Override
-	public Sponsor instantiate(final Request<Sponsor> request) {
+	public Creditcard findOne(final Request<Creditcard> request) {
 		assert request != null;
 
-		Sponsor result;
-		Principal principal;
-		int userAccountId;
-		UserAccount userAccount;
+		Creditcard result;
+		Integer id;
 
-		principal = request.getPrincipal();
-		userAccountId = principal.getAccountId();
-		userAccount = this.repository.findOneUserAccountById(userAccountId);
-
-		result = new Sponsor();
-
-		result.setUserAccount(userAccount);
+		id = request.getModel().getInteger("id");
+		result = this.repository.findOneCreditCardBySponsorId(id);
 
 		return result;
 	}
 
 	@Override
-	public void validate(final Request<Sponsor> request, final Sponsor entity, final Errors errors) {
+	public void validate(final Request<Creditcard> request, final Creditcard entity, final Errors errors) {
 		assert request != null;
 		assert entity != null;
 		assert errors != null;
+
 		boolean hasExpiration, isFuture, hasNumber, hasNameOwner, hasSurname, hasSecurityCode, securityCodePattern;
 		Date now;
 
 		now = new Date(System.currentTimeMillis() - 1);
 
 		// Expiration validation ------------------------------------------------------------------------------------
-		hasExpiration = request.getModel().getDate("expiration") != null;
+		hasExpiration = entity.getExpiration() != null;
 		errors.state(request, hasExpiration, "expiration", "authenticated.sponsor.error.must-have-expiration");
 		if (hasExpiration) {
-			isFuture = now.before(request.getModel().getDate("expiration"));
+			isFuture = now.before(entity.getExpiration());
 			errors.state(request, isFuture, "expiration", "authenticated.sponsor.error.expirated");
 		}
 
 		// Number validation ----------------------------------------------------------------------------------------
 
-		hasNumber = request.getModel().getString("creditNumber") != null && !request.getModel().getString("creditNumber").isEmpty();
+		hasNumber = entity.getCreditNumber() != null && !entity.getCreditNumber().isEmpty();
 		errors.state(request, hasNumber, "creditNumber", "authenticated.sponsor.error.must-have-creditNumber");
 
 		// Name validation ------------------------------------------------------------------------------------------
 
-		hasNameOwner = request.getModel().getString("name") != null && !request.getModel().getString("name").isEmpty();
+		hasNameOwner = entity.getName() != null && !entity.getName().isEmpty();
 		errors.state(request, hasNameOwner, "name", "authenticated.sponsor.error.must-have-name");
 
 		// Surname validation ---------------------------------------------------------------------------------------
 
-		hasSurname = request.getModel().getString("surname") != null && !request.getModel().getString("surname").isEmpty();
+		hasSurname = entity.getSurname() != null && !entity.getSurname().isEmpty();
 		errors.state(request, hasSurname, "surname", "authenticated.sponsor.error.must-have-surname");
 
 		// Security code validation ----------------------------------------------------------------------------------
 
-		hasSecurityCode = request.getModel().getString("securityCode") != null && !request.getModel().getString("securityCode").isEmpty();
+		hasSecurityCode = entity.getSecurityCode() != null && !entity.getSecurityCode().isEmpty();
 		errors.state(request, hasSecurityCode, "securityCode", "authenticated.sponsor.error.must-have-securityCode");
 		if (hasSecurityCode) {
-			securityCodePattern = request.getModel().getString("securityCode").toString().matches("^[0-9]{3}$");
+			securityCodePattern = entity.getSecurityCode().matches("^[0-9]{3}$");
 			errors.state(request, securityCodePattern, "securityCode", "authenticated.sponsor.error.must-have-securityCode-pattern");
 		}
 
 	}
 
 	@Override
-	public void create(final Request<Sponsor> request, final Sponsor entity) {
+	public void update(final Request<Creditcard> request, final Creditcard entity) {
 		assert request != null;
 		assert entity != null;
 
-		Creditcard creditCard = new Creditcard();
-
-		String number = request.getModel().getString("creditNumber");
-
-		creditCard.setCreditNumber(number.trim());
-		creditCard.setName(request.getModel().getString("name"));
-		creditCard.setSurname(request.getModel().getString("surname"));
-		creditCard.setExpiration(request.getModel().getDate("expiration"));
-		creditCard.setSecurityCode(request.getModel().getString("securityCode"));
-		creditCard.setSponsor(entity);
-
 		this.repository.save(entity);
-		this.repository.save(creditCard);
+
 	}
 
 	@Override
-	public void onSuccess(final Request<Sponsor> request, final Response<Sponsor> response) {
+	public void onSuccess(final Request<Creditcard> request, final Response<Creditcard> response) {
 		assert request != null;
 		assert response != null;
 
