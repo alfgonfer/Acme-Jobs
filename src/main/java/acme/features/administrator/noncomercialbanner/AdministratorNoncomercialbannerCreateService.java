@@ -46,6 +46,7 @@ public class AdministratorNoncomercialbannerCreateService implements AbstractCre
 	public Noncomercialbanner instantiate(final Request<Noncomercialbanner> request) {
 		Noncomercialbanner result;
 		result = new Noncomercialbanner();
+		result.setFinalMode(true);
 		return result;
 	}
 

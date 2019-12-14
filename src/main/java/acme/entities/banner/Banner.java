@@ -3,6 +3,7 @@ package acme.entities.banner;
 
 import javax.persistence.Entity;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.URL;
 
@@ -31,5 +32,8 @@ public class Banner extends DomainEntity {
 	@NotBlank
 	@URL
 	private String				urlTarget;
+
+	@NotNull
+	private boolean				finalMode;
 
 }

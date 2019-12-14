@@ -23,10 +23,14 @@ public class AuthenticatedMessagethreadController extends AbstractController<Aut
 	@Autowired
 	private AuthenticatedMessagethreadListMineService	listMineService;
 
+	@Autowired
+	private AuthenticatedMessagethreadCreateService		createService;
+
 
 	@PostConstruct
 	private void initialise() {
 		super.addBasicCommand(BasicCommand.SHOW, this.showService);
+		super.addBasicCommand(BasicCommand.CREATE, this.createService);
 		super.addCustomCommand(CustomCommand.LIST_MINE, BasicCommand.LIST, this.listMineService);
 	}
 }

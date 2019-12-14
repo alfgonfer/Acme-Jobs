@@ -305,7 +305,7 @@
 	</bean>
 	
 	<!--CreditCard  -->
-	<bean id="Creditcard01" class="acme.entities.creditcard.CreditCard">
+	<bean id="Creditcard01" class="acme.entities.creditcard.Creditcard">
 		<property name="creditNumber" value="4716826134105316"/>
 		<property name="name" value="Sponsor"/>
 		<property name="surname" value="Example"/>
@@ -319,6 +319,7 @@
 		<property name="urlPicture" value="https://static1.seekingalpha.com/images/marketing_images/numbers_words_signs/words_phrases/jobs_gear.jpeg"/>
 		<property name="slogan" value="get your job today!"/>
 		<property name="urlTarget" value="https://es.wikipedia.org/wiki/Trabajo_(economía)"/>
+		<property name="finalMode" value="true"/>
 		<property name="jingle"><null/></property>
 		<property name="sponsor" ref="sponsor1Sponsor"/>
 	</bean>
@@ -327,6 +328,7 @@
 		<property name="urlPicture" value="https://www.informatica.us.es/docs/imagen-etsii/logo-ETSII-US-Horizontal-Color.png"/>
 		<property name="slogan" value="visit the faculty's web!"/>
 		<property name="urlTarget" value="https://www.informatica.us.es/"/>
+		<property name="finalMode" value="true"/>
 		<property name="jingle" value="https://www.youtube.com/watch?v=3PgNPc-iFW8"/>
 		<property name="sponsor" ref="sponsor2Sponsor"/>
 	</bean>
@@ -336,6 +338,7 @@
 		<property name="urlPicture" value="http://www.almaromerita.es/img/mi-tienda-logo-1535397747.jpg"/>
 		<property name="slogan" value="buy our's product!"/>
 		<property name="urlTarget" value="http://www.almaromerita.es/"/>
+		<property name="finalMode" value="true"/>
 		<property name="creditCard" value="4716826134105316"/>
 		<property name="sponsor" ref="sponsor1Sponsor"/>
 	</bean>
@@ -343,6 +346,7 @@
 	<bean id="comercialBanner02" class="acme.entities.comercialbanner.Comercialbanner">
 		<property name="urlPicture" value="http://www.dulcesgarpe.com/wp-content/uploads/2015/01/logo.png"/>
 		<property name="slogan" value="best sweets of the world!"/>
+		<property name="finalMode" value="true"/>
 		<property name="urlTarget" value="http://dulcesgarpe.com/tienda/"/>
 		<property name="creditCard" value="5525482640963406"/>
 		<property name="sponsor" ref="sponsor1Sponsor"/>
@@ -800,6 +804,7 @@
 			</list>
 		</property>
 	</bean>
+	
 	<bean id="message1" class="acme.entities.messages.Message">
 		<property name="title" value="Mensaje 1"/>
 		<property name="moment" value="2019/11/27 17:00"/>
@@ -808,6 +813,26 @@
 		<property name="messageThread" ref="messagethread1"/>
 	</bean>
 	
+	
+	<!--  Auditior request -->
+	
+	<bean id="auditorRequest1" class="acme.entities.auditorrequest.Auditorrequest">
+		<property name="firm" value="Garpe"/>
+		<property name="respStatement" value="Boss"/>
+		<property name="description" value="I want to become auditor"/>
+		<property name="status" value="pending"/>
+		<property name="user" ref="worker1UserAccount"/>
+		<property name="moment" value="2019/12/12 12:12"/>
+	</bean>
+	
+	<bean id="auditorRequest2" class="acme.entities.auditorrequest.Auditorrequest">
+		<property name="firm" value="AlmaRomerita"/>
+		<property name="respStatement" value="Boss"/>
+		<property name="description" value="I want to become auditor"/>
+		<property name="status" value="rejected"/>
+		<property name="user" ref="worker2UserAccount"/>
+		<property name="moment" value="2019/12/11 12:12"/>
+	</bean>
 	
 
 </beans>
