@@ -11,6 +11,6 @@ import acme.framework.repositories.AbstractRepository;
 public interface AuthenticatedDescriptorRepository extends AbstractRepository {
 
 	@Query("select d from Descriptor d where job.id=?1")
-	Descriptor findOneByJobId(int id);
+	Descriptor findOneByDescriptorId(int id);
 
 }

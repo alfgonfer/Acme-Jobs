@@ -20,7 +20,13 @@ public class AuthenticatedDescriptorShowService implements AbstractShowService<A
 	@Override
 	public boolean authorise(final Request<Descriptor> request) {
 		assert request != null;
-		return true;
+		boolean res;
+		Integer id = request.getModel().getInteger("jobId");
+		Descriptor result = this.repository.findOneByDescriptorId(id);
+
+		res = result.getJob().isFinalMode();
+
+		return res;
 	}
 
 	@Override
@@ -40,7 +46,7 @@ public class AuthenticatedDescriptorShowService implements AbstractShowService<A
 		int id;
 
 		id = request.getModel().getInteger("jobId");
-		result = this.repository.findOneByJobId(id);
+		result = this.repository.findOneByDescriptorId(id);
 		return result;
 	}
 

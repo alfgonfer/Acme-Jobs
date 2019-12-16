@@ -8,6 +8,7 @@ import acme.entities.descriptor.Descriptor;
 import acme.entities.roles.Employer;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
+import acme.framework.entities.Principal;
 import acme.framework.services.AbstractShowService;
 
 @Service
@@ -20,7 +21,20 @@ public class EmployerDescriptorShowService implements AbstractShowService<Employ
 	@Override
 	public boolean authorise(final Request<Descriptor> request) {
 		assert request != null;
-		return true;
+
+		Descriptor descriptor;
+		Principal principal;
+		int idPrincipal, id;
+		boolean res;
+
+		principal = request.getPrincipal();
+		idPrincipal = principal.getAccountId();
+		id = request.getModel().getInteger("jobId");
+		descriptor = this.repository.findOneByJobId(id);
+
+		res = idPrincipal == descriptor.getJob().getEmployer().getUserAccount().getId();
+
+		return res;
 	}
 
 	@Override

@@ -6,10 +6,12 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import acme.entities.descriptor.Descriptor;
 import acme.entities.duties.Duty;
 import acme.entities.roles.Employer;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
+import acme.framework.entities.Principal;
 import acme.framework.services.AbstractListService;
 
 @Service
@@ -22,7 +24,20 @@ public class EmployerDutyListService implements AbstractListService<Employer, Du
 	@Override
 	public boolean authorise(final Request<Duty> request) {
 		assert request != null;
-		return true;
+
+		Descriptor descriptor;
+		Principal principal;
+		int idPrincipal, id;
+		boolean res;
+
+		principal = request.getPrincipal();
+		idPrincipal = principal.getAccountId();
+		id = request.getModel().getInteger("idDescriptor");
+		descriptor = this.repository.findOneById(id);
+
+		res = idPrincipal == descriptor.getJob().getEmployer().getUserAccount().getId();
+
+		return res;
 	}
 
 	@Override
