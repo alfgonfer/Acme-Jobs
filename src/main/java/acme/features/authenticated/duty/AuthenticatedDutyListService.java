@@ -6,6 +6,7 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import acme.entities.descriptor.Descriptor;
 import acme.entities.duties.Duty;
 import acme.features.authenticated.job.AuthenticatedJobRepository;
 import acme.framework.components.Model;
@@ -26,7 +27,13 @@ public class AuthenticatedDutyListService implements AbstractListService<Authent
 	@Override
 	public boolean authorise(final Request<Duty> request) {
 		assert request != null;
-		return true;
+		boolean res;
+		Integer id = request.getModel().getInteger("id");
+		Descriptor descriptor = this.repository.findOneByDescriptorId(id);
+
+		res = descriptor.getJob().isFinalMode();
+
+		return res;
 	}
 
 	@Override

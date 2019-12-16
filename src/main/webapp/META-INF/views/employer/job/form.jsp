@@ -21,14 +21,35 @@
 	<acme:form-money code="employer.job.form.label.salary" path="salary"/>
 	<acme:form-textbox code="employer.job.form.label.moreInfo" path="moreInfo"/>
 	
-	<jstl:if test="${finalMode != false || command == 'create'}">
+	<jstl:if test="${finalMode == null && command == 'create'}">
 	<acme:form-select code="employer.job.form.label.finalMode" path="finalMode">
 	<acme:form-option code="employer.job.form.label.finalMode.false" value="false"/>
 	<acme:form-option code="employer.job.form.label.finalMode.true" value="true"/>
 	</acme:form-select>
 	</jstl:if>
 	
-	<jstl:if test="${finalMode == true}">
+	<jstl:if test="${finalMode == false && command == 'create'}">
+	<acme:form-select code="employer.job.form.label.finalMode" path="finalMode">
+	<acme:form-option code="employer.job.form.label.finalMode.false" value="false"/>
+	<acme:form-option code="employer.job.form.label.finalMode.true" value="true"/>
+	</acme:form-select>
+	</jstl:if>
+	
+	<jstl:if test="${finalMode == true && command == 'create'}">
+	<acme:form-select code="employer.job.form.label.finalMode" path="finalMode">
+	<acme:form-option code="employer.job.form.label.finalMode.true" value="true"/>
+	<acme:form-option code="employer.job.form.label.finalMode.false" value="false"/>
+	</acme:form-select>
+	</jstl:if>
+	
+	<jstl:if test="${finalMode == false && command != 'create'}">
+	<acme:form-select code="employer.job.form.label.finalMode" path="finalMode">
+	<acme:form-option code="employer.job.form.label.finalMode.false" value="false"/>
+	<acme:form-option code="employer.job.form.label.finalMode.true" value="true"/>
+	</acme:form-select>
+	</jstl:if>
+	
+	<jstl:if test="${finalMode == true && command != 'create'}">
 	<acme:form-select code="employer.job.form.label.finalMode" path="finalMode">
 	<acme:form-option code="employer.job.form.label.finalMode.true" value="true"/>
 	</acme:form-select>

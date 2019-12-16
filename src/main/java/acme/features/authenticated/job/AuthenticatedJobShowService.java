@@ -20,7 +20,13 @@ public class AuthenticatedJobShowService implements AbstractShowService<Authenti
 	@Override
 	public boolean authorise(final Request<Job> request) {
 		assert request != null;
-		return true;
+		boolean res;
+		Integer id = request.getModel().getInteger("id");
+		Job result = this.repository.findOneJobById(id);
+
+		res = result.isFinalMode();
+
+		return res;
 	}
 
 	@Override

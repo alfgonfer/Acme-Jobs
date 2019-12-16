@@ -15,6 +15,7 @@ import acme.features.utiles.Spamfilter;
 import acme.framework.components.Errors;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
+import acme.framework.entities.Principal;
 import acme.framework.services.AbstractCreateService;
 
 @Service
@@ -34,7 +35,20 @@ public class EmployerDutyCreateService implements AbstractCreateService<Employer
 	@Override
 	public boolean authorise(final Request<Duty> request) {
 		assert request != null;
-		return true;
+
+		Descriptor descriptor;
+		Principal principal;
+		int idPrincipal, id;
+		boolean res;
+
+		principal = request.getPrincipal();
+		idPrincipal = principal.getAccountId();
+		id = request.getModel().getInteger("idDescriptor");
+		descriptor = this.repository.findOneById(id);
+
+		res = idPrincipal == descriptor.getJob().getEmployer().getUserAccount().getId();
+
+		return res;
 	}
 
 	@Override
