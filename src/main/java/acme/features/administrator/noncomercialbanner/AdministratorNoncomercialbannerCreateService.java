@@ -21,8 +21,7 @@ public class AdministratorNoncomercialbannerCreateService implements AbstractCre
 	@Override
 	public boolean authorise(final Request<Noncomercialbanner> request) {
 		assert request != null;
-		boolean b = request.getPrincipal().hasRole(Administrator.class);
-		return b;
+		return true;
 	}
 
 	@Override
@@ -59,6 +58,10 @@ public class AdministratorNoncomercialbannerCreateService implements AbstractCre
 
 	@Override
 	public void create(final Request<Noncomercialbanner> request, final Noncomercialbanner entity) {
+		assert request != null;
+		assert entity != null;
+
+		entity.setFinalMode(true);
 		this.repository.save(entity);
 	}
 
