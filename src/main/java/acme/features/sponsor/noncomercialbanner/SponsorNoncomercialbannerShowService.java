@@ -8,6 +8,7 @@ import acme.entities.noncomercialbanner.Noncomercialbanner;
 import acme.entities.roles.Sponsor;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
+import acme.framework.entities.Principal;
 import acme.framework.services.AbstractShowService;
 
 @Service
@@ -20,8 +21,24 @@ public class SponsorNoncomercialbannerShowService implements AbstractShowService
 	@Override
 	public boolean authorise(final Request<Noncomercialbanner> request) {
 		assert request != null;
-		boolean b = request.getPrincipal().hasRole(Sponsor.class);
-		return b;
+
+		Integer id;
+		boolean res;
+		Principal principal;
+		Noncomercialbanner banner;
+		Sponsor sponsor;
+
+		id = request.getModel().getInteger("id");
+
+		principal = request.getPrincipal();
+
+		sponsor = this.repository.findOneSponsorByUserAccountId(principal.getAccountId());
+
+		banner = this.repository.findOneById(id);
+
+		res = sponsor.getId() == banner.getSponsor().getId() || banner.isFinalMode();
+
+		return res;
 	}
 
 	@Override

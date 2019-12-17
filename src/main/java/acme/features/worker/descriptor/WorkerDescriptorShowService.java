@@ -20,7 +20,15 @@ public class WorkerDescriptorShowService implements AbstractShowService<Worker, 
 	@Override
 	public boolean authorise(final Request<Descriptor> request) {
 		assert request != null;
-		return true;
+		boolean res;
+		Integer id;
+		Descriptor result;
+
+		id = request.getModel().getInteger("jobId");
+		result = this.repository.findOneByJobId(id);
+
+		res = result.getJob().isFinalMode();
+		return res;
 	}
 
 	@Override

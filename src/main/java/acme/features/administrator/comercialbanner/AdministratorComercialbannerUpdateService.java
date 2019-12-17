@@ -5,10 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.entities.comercialbanner.Comercialbanner;
+import acme.entities.roles.Sponsor;
 import acme.framework.components.Errors;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
 import acme.framework.entities.Administrator;
+import acme.framework.entities.Principal;
 import acme.framework.services.AbstractUpdateService;
 
 @Service
@@ -21,8 +23,25 @@ public class AdministratorComercialbannerUpdateService implements AbstractUpdate
 	@Override
 	public boolean authorise(final Request<Comercialbanner> request) {
 		assert request != null;
-		boolean b = request.getPrincipal().hasRole(Administrator.class);
-		return b;
+
+		boolean res;
+		Integer id;
+		Comercialbanner result;
+		Principal principal;
+		Integer idPrincipal;
+		Sponsor sponsor;
+
+		id = request.getModel().getInteger("id");
+		result = this.repository.findOneById(id);
+
+		principal = request.getPrincipal();
+		idPrincipal = principal.getAccountId();
+
+		sponsor = this.repository.findOneSponsorByUserAccountId(idPrincipal);
+
+		res = result.isFinalMode() || sponsor.getId() == result.getSponsor().getId();
+
+		return res;
 	}
 
 	@Override

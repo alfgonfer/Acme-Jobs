@@ -21,8 +21,14 @@ public class AdministratorNoncomercialbannerDeleteService implements AbstractDel
 	@Override
 	public boolean authorise(final Request<Noncomercialbanner> request) {
 		assert request != null;
-		boolean b = request.getPrincipal().hasRole(Administrator.class);
-		return b;
+
+		Integer id;
+		Noncomercialbanner result;
+		id = request.getModel().getInteger("id");
+
+		result = this.repository.findOneById(id);
+
+		return result.isFinalMode();
 	}
 
 	@Override
