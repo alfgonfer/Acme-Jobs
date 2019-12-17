@@ -85,7 +85,6 @@ public class AdministratorDashboardShowService implements AbstractShowService<Ad
 		result.setApplicationPendingPerDay(this.getApplicationPendingPerDay(this.getPendingPerDay()));
 		result.setApplicationAcceptedPerDay(this.getApplicationAcceptedPerDay(this.getAcceptedPerDay()));
 		result.setApplicationRejectedPerDay(this.getApplicationRejectedPerDay(this.getRejectedPerDay()));
-		System.out.println(result.getApplicationPendingPerDay());
 
 		return result;
 	}
