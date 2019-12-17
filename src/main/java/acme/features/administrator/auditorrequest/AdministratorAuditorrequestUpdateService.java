@@ -27,7 +27,18 @@ public class AdministratorAuditorrequestUpdateService implements AbstractUpdateS
 	@Override
 	public boolean authorise(final Request<Auditorrequest> request) {
 		assert request != null;
-		return true;
+
+		boolean res;
+		Integer id;
+
+		Auditorrequest result;
+
+		id = request.getModel().getInteger("id");
+		result = this.repository.findOneAuditorRequestById(id);
+
+		res = result.getStatus().equals("pending");
+
+		return res;
 	}
 
 	@Override
