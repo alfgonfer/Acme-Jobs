@@ -46,7 +46,7 @@ public class AuthenticatedMessagethreadListMineService implements AbstractListSe
 
 		principal = request.getPrincipal();
 
-		result = this.repository.findManybyUser(principal.getAccountId());
+		result = this.repository.findMTByUserId(principal.getActiveRoleId());
 
 		return result;
 	}

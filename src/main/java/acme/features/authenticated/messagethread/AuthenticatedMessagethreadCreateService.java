@@ -1,8 +1,6 @@
 
 package acme.features.authenticated.messagethread;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,13 +8,13 @@ import org.springframework.stereotype.Service;
 
 import acme.entities.configuration.Configuration;
 import acme.entities.messagethreads.Messagethread;
+import acme.entities.participates.Participates;
 import acme.features.utiles.ConfigurationRepository;
 import acme.features.utiles.Spamfilter;
 import acme.framework.components.Errors;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
 import acme.framework.entities.Authenticated;
-import acme.framework.entities.Principal;
 import acme.framework.entities.UserAccount;
 import acme.framework.services.AbstractCreateService;
 
@@ -65,20 +63,12 @@ public class AuthenticatedMessagethreadCreateService implements AbstractCreateSe
 		assert request != null;
 
 		Date moment;
-		Principal principal;
-		UserAccount principalUser;
-		Collection<UserAccount> users = new ArrayList<>();
 
-		principal = request.getPrincipal();
-
-		principalUser = this.repository.findUserByUserName(principal.getUsername());
-		users.add(principalUser);
 		Messagethread result = new Messagethread();
 		moment = new Date(System.currentTimeMillis() - 1);
 
 		result.setMoment(moment);
 		result.setUsernames("");
-		result.setUsers(users);
 
 		return result;
 	}
@@ -126,33 +116,24 @@ public class AuthenticatedMessagethreadCreateService implements AbstractCreateSe
 		assert entity != null;
 
 		Date moment;
-		Collection<UserAccount> users = new ArrayList<>();
-
-		UserAccount user;
-		UserAccount userPrincipal;
-		Principal principal;
+		//Collection<Participates> users = new ArrayList<>();
 
 		moment = new Date(System.currentTimeMillis() - 1);
-
-		String[] usernames = entity.getUsernames().split(",");
-
-		for (String i : usernames) {
-
-			user = this.repository.findUserByUserName(i.trim());
-
-			users.add(user);
-
-		}
-
-		principal = request.getPrincipal();
-		userPrincipal = this.repository.findUserByUserName(principal.getUsername());
-		users.add(userPrincipal);
-
-		entity.setUsers(users);
 
 		entity.setMoment(moment);
 
 		this.repository.save(entity);
+
+		String[] usernames = entity.getUsernames().split(",");
+
+		for (String i : usernames) {
+			Participates p = new Participates();
+			p.setMessagethread(entity);
+			UserAccount user = this.repository.findUserByUserName(i.trim());
+			p.setAuthenticated(user.getRole(Authenticated.class));
+			this.repository.save(p);
+
+		}
 
 	}
 

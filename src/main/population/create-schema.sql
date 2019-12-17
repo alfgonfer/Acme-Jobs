@@ -261,6 +261,14 @@
         primary key (`id`)
     ) engine=InnoDB;
 
+    create table `participates` (
+       `id` integer not null,
+        `version` integer not null,
+        `authenticated_id` integer,
+        `messagethread_id` integer,
+        primary key (`id`)
+    ) engine=InnoDB;
+
     create table `provider` (
        `id` integer not null,
         `version` integer not null,
@@ -304,7 +312,7 @@
     ) engine=InnoDB;
 
     create table `user_account_messagethread` (
-       `users_id` integer not null,
+       `user_account_id` integer not null,
         `messagethread_id` integer not null
     ) engine=InnoDB;
 
@@ -431,6 +439,16 @@
        foreign key (`sponsor_id`) 
        references `sponsor` (`id`);
 
+    alter table `participates` 
+       add constraint `FK2v2b6kxya4od7kymllfa9iv0v` 
+       foreign key (`authenticated_id`) 
+       references `authenticated` (`id`);
+
+    alter table `participates` 
+       add constraint `FKsyju38rbst3bgj3okjyo7ovly` 
+       foreign key (`messagethread_id`) 
+       references `messagethread` (`id`);
+
     alter table `provider` 
        add constraint FK_b1gwnjqm6ggy9yuiqm0o4rlmd 
        foreign key (`user_account_id`) 
@@ -447,8 +465,8 @@
        references `messagethread` (`id`);
 
     alter table `user_account_messagethread` 
-       add constraint `FKh8iu87gcefeem2dlwqgdo5vkg` 
-       foreign key (`users_id`) 
+       add constraint `FK5590jid94qdluwlnsbr2w4tbx` 
+       foreign key (`user_account_id`) 
        references `user_account` (`id`);
 
     alter table `worker` 

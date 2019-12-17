@@ -71,6 +71,14 @@
        drop 
        foreign key `FKiqlwh7t99w47gee8as9xvk5xt`;
 
+    alter table `participates` 
+       drop 
+       foreign key `FK2v2b6kxya4od7kymllfa9iv0v`;
+
+    alter table `participates` 
+       drop 
+       foreign key `FKsyju38rbst3bgj3okjyo7ovly`;
+
     alter table `provider` 
        drop 
        foreign key FK_b1gwnjqm6ggy9yuiqm0o4rlmd;
@@ -85,7 +93,7 @@
 
     alter table `user_account_messagethread` 
        drop 
-       foreign key `FKh8iu87gcefeem2dlwqgdo5vkg`;
+       foreign key `FK5590jid94qdluwlnsbr2w4tbx`;
 
     alter table `worker` 
        drop 
@@ -138,6 +146,8 @@
     drop table if exists `noncomercialbanner`;
 
     drop table if exists `offers`;
+
+    drop table if exists `participates`;
 
     drop table if exists `provider`;
 
