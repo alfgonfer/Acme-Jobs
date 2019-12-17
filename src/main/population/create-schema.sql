@@ -112,7 +112,12 @@
         `slogan` varchar(255),
         `url_picture` varchar(255),
         `url_target` varchar(255),
-        `credit_card` varchar(255),
+        `credit_number` varchar(255),
+        `expiration` datetime(6),
+        `name` varchar(255),
+        `security_code` varchar(255),
+        `surname` varchar(255),
+        `type` varchar(255),
         `sponsor_id` integer not null,
         primary key (`id`)
     ) engine=InnoDB;
@@ -146,18 +151,6 @@
         `user_account_id` integer,
         `company` varchar(255),
         `sector` varchar(255),
-        primary key (`id`)
-    ) engine=InnoDB;
-
-    create table `creditcard` (
-       `id` integer not null,
-        `version` integer not null,
-        `credit_number` varchar(255),
-        `expiration` datetime(6),
-        `name` varchar(255),
-        `security_code` varchar(255),
-        `surname` varchar(255),
-        `sponsor_id` integer not null,
         primary key (`id`)
     ) engine=InnoDB;
 
@@ -326,9 +319,6 @@
     alter table `application` 
        add constraint UK_ct7r18vvxl5g4c4k7aefpa4do unique (`reference`);
 
-    alter table `creditcard` 
-       add constraint UK_ciu6eebpd7klqu0u6sv9o6n53 unique (`sponsor_id`);
-
     alter table `job` 
        add constraint UK_7jmfdvs0b0jx7i33qxgv22h7b unique (`reference`);
 
@@ -390,11 +380,6 @@
        add constraint FK_6cyha9f1wpj0dpbxrrjddrqed 
        foreign key (`user_account_id`) 
        references `user_account` (`id`);
-
-    alter table `creditcard` 
-       add constraint `FK89f7jlst6msbsgc3l4fvxt1fd` 
-       foreign key (`sponsor_id`) 
-       references `sponsor` (`id`);
 
     alter table `descriptor` 
        add constraint `FKgfulfilmwi4hhaquiu7fr5g0g` 

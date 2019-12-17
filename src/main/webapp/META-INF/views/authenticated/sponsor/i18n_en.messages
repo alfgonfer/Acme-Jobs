@@ -1,22 +1,6 @@
 authenticated.sponsor.form.label.orgName = Organization name:
-authenticated.sponsor.form.message = Information about your associated credit card
-authenticated.sponsor.form.label.creditNumber = Number of the credit card:
-authenticated.sponsor.form.label.name = Name of the owner of the credit card:
-authenticated.sponsor.form.label.surname = Surname:
-authenticated.sponsor.form.label.expiration = Expiration date of the credit card:
-authenticated.sponsor.form.label.securityCode = Security code:
 
-authenticated.sponsor.form.creditCard = View your credit card information
 authenticated.sponsor.form.button.create = Register
 authenticated.sponsor.form.button.update = Update
 authenticated.sponsor.form.label.button.return = Return
-
-authenticated.sponsor.error.must-have-expiration = The credit card must have expiration date
-authenticated.sponsor.error.expirated = The credit card is expirated
-authenticated.sponsor.error.must-have-creditNumber = The credit card must have a number
-authenticated.sponsor.error.must-have-name = The credit card must have the name of the owner
-authenticated.sponsor.error.must-have-surname = The credit card must have the surnames of the owner
-authenticated.sponsor.error.must-have-securityCode = The credit card must have the security code
-authenticated.sponsor.error.must-have-securityCode-pattern = The security code of the credit card must be 3 numbers
-
 

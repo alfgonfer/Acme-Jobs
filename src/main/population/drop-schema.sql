@@ -39,10 +39,6 @@
        drop 
        foreign key FK_6cyha9f1wpj0dpbxrrjddrqed;
 
-    alter table `creditcard` 
-       drop 
-       foreign key `FK89f7jlst6msbsgc3l4fvxt1fd`;
-
     alter table `descriptor` 
        drop 
        foreign key `FKgfulfilmwi4hhaquiu7fr5g0g`;
@@ -118,8 +114,6 @@
     drop table if exists `configuration`;
 
     drop table if exists `consumer`;
-
-    drop table if exists `creditcard`;
 
     drop table if exists `descriptor`;
 

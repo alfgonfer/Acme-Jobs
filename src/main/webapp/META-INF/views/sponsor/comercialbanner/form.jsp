@@ -38,6 +38,20 @@
 	<acme:form-option code="sponsor.comercialbanner.form.label.finalmode.true" value="true"/>
 	</acme:form-select>
 	</jstl:if>
+	
+	<h4><acme:message code="sponsor.comercialbanner.form.message"/></h4>
+	<acme:form-textbox code="sponsor.comercialbanner.form.label.creditNumber" path="creditNumber"/>
+	<acme:form-textbox code="sponsor.comercialbanner.form.label.name" path="name"/>
+	<acme:form-textbox code="sponsor.comercialbanner.form.label.surname" path="surname"/>
+	<acme:form-moment code="sponsor.comercialbanner.form.label.expiration" path="expiration"/>
+	<acme:form-textbox code="sponsor.comercialbanner.form.label.securityCode" path="securityCode"/>
+	
+	<acme:form-select code="sponsor.comercialbanner.form.label.type" path="type">
+	<acme:form-option code="sponsor.comercialbanner.form.label.type.Visa" value="Visa"/>
+	<acme:form-option code="sponsor.comercialbanner.form.label.type.Master_Card" value="Master Card"/>
+	<acme:form-option code="sponsor.comercialbanner.form.label.type.American_Express" value="American Express"/>
+	<acme:form-option code="sponsor.comercialbanner.form.label.type.Dinners_Club" value="Dinners Club"/>
+	</acme:form-select>
 
 	<acme:form-submit test ="${command == 'create'}" code="sponsor.comercialbanner.form.label.button.create" action="/sponsor/comercialbanner/create"/>
 	<acme:form-submit test ="${command == 'update'}" code="sponsor.comercialbanner.form.label.button.update" action="/sponsor/comercialbanner/update?id=${id}"/>
