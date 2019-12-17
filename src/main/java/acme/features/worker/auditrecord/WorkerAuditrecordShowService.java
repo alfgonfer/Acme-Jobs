@@ -20,7 +20,14 @@ public class WorkerAuditrecordShowService implements AbstractShowService<Worker,
 	@Override
 	public boolean authorise(final Request<Auditrecord> request) {
 		assert request != null;
-		return true;
+		boolean res;
+		Integer id;
+		Auditrecord result;
+
+		id = request.getModel().getInteger("id");
+		result = this.repository.findOneAuditrecordById(id);
+		res = result.getIsFinalMode();
+		return res;
 	}
 
 	@Override
