@@ -2,11 +2,13 @@
 package acme.features.employer.job;
 
 import java.util.Calendar;
+import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.entities.configuration.Configuration;
+import acme.entities.duties.Duty;
 import acme.entities.jobs.Job;
 import acme.entities.roles.Employer;
 import acme.features.utiles.ConfigurationRepository;
@@ -95,13 +97,14 @@ public class EmployerJobUpdateService implements AbstractUpdateService<Employer,
 		assert errors != null;
 
 		boolean hasTitle, hasSpamTitle;
-		boolean hasSalary, isEuro, hasDeadline, isFuture;
+		boolean hasSalary, isEuro, hasDeadline, isFuture, is100;
 
 		Configuration configuration = this.confRepository.findConfiguration();
 		String spamWords = configuration.getSpamWords();
 		Double spamThreshold = configuration.getSpamThreshold();
 		Calendar now = Calendar.getInstance();
 		now.add(Calendar.DAY_OF_YEAR, 7);
+		Collection<Duty> duties;
 
 		// Validation title ----------------------------------------------------------------------------------------------------------
 		hasTitle = entity.getTitle() != null;
@@ -135,6 +138,17 @@ public class EmployerJobUpdateService implements AbstractUpdateService<Employer,
 			isFuture = entity.getDeadline().after(now.getTime());
 			errors.state(request, isFuture, "deadline", "employer.job.error.must-be-future");
 
+		}
+
+		//Validation duties 100% --------------------------------------------------------------------------------------------------------
+		if (entity.isFinalMode()) {
+			duties = this.repository.findDutiesByJobId(entity.getId());
+			Double sum = 0.0;
+			for (Duty d : duties) {
+				sum += d.getPercentage();
+			}
+			is100 = sum == 100.0;
+			errors.state(request, is100, "finalMode", "employer.job.error.must-100");
 		}
 
 	}
