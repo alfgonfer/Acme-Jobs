@@ -331,11 +331,11 @@
 		<property name="urlTarget" value="http://www.almaromerita.es/"/>
 		<property name="finalMode" value="true"/>
 		<property name="sponsor" ref="sponsor1Sponsor"/>
-		<property name="creditNumber" value="4539 3467 9531 2635"/>
+		<property name="creditNumber" value="4539346795312635"/>
 		<property name="name" value="sponsor1"/>
 		<property name="surname" value="sponsor1"/>
 		<property name="expiration" value="2024/12/12 12:12"/>
-		<property name="securityCode" value="sponsor1Sponsor"/>
+		<property name="securityCode" value="954"/>
 		<property name="type" value="Visa"/>
 	</bean>
 	
@@ -344,13 +344,12 @@
 		<property name="slogan" value="best sweets of the world!"/>
 		<property name="finalMode" value="true"/>
 		<property name="urlTarget" value="http://dulcesgarpe.com/tienda/"/>
-		<property name="creditCard" value="5525482640963406"/>
 		<property name="sponsor" ref="sponsor1Sponsor"/>
 		<property name="creditNumber" value="4539346795312635"/>
 		<property name="name" value="sponsor1"/>
 		<property name="surname" value="sponsor1"/>
 		<property name="expiration" value="2024/12/12 12:12"/>
-		<property name="securityCode" value="sponsor1Sponsor"/>
+		<property name="securityCode" value="836"/>
 		<property name="type" value="Visa"/>
 	</bean>
 	
