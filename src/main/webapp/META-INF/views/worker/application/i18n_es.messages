@@ -12,6 +12,7 @@ worker.application.form.label.qualifications = Cualificaciones:
 worker.application.form.label.moment = Momento:
 worker.application.form.label.reference = Referencia:
 worker.application.form.label.statement = Defensa:
+worker.application.form.label.justification = Justificación:
 worker.application.form.label.button.return = Volver
 worker.application.form.label.button.create = Crear
 

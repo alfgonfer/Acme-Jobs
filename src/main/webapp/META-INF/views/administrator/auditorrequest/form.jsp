@@ -22,11 +22,7 @@
 	</jstl:if>
 	
 	<jstl:if test="${status == 'rejected'}">
-	<acme:form-select code="administrator.auditorrequest.form.label.status" path="status">
-	<acme:form-option code="administrator.auditorrequest.form.label.rejected" value="rejected"/>
-	<acme:form-option code="administrator.auditorrequest.form.label.pending" value="pending"/>
-	<acme:form-option code="administrator.auditorrequest.form.label.accepted" value="accepted"/>
-	</acme:form-select>
+	<acme:form-textbox code="administrator.auditorrequest.form.label.status" path="status" readonly="true"/>
 	</jstl:if>
 	
 	<jstl:if test="${status == 'accepted'}">
