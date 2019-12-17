@@ -16,4 +16,5 @@ administrator.dashboard.form.label.stdevOffer= Standard deviation of offers rewa
 administrator.dashboard.form.label.mediaJobsEmployer= Average number of jobs per employer:
 administrator.dashboard.form.label.mediaApplicationWorker= Average number of applications per worker:
 administrator.dashboard.form.label.mediaApplicationEmployer= Average number of applications per employer:
+administrator.dashboard.form.title.applicationPendingPerDay = Application pending in the last 4 weeks:
 administrator.configuration.form.label.button.return = Return

@@ -16,4 +16,5 @@ administrator.dashboard.form.label.stdevOffer= Desviación típica de la recompe
 administrator.dashboard.form.label.mediaJobsEmployer= Media de trabajos por empleador:
 administrator.dashboard.form.label.mediaApplicationWorker= Media de aplicaciones por trabajador:
 administrator.dashboard.form.label.mediaApplicationEmployer= Media de aplicaciones por empleador:
+administrator.dashboard.form.title.applicationPendingPerDay = Aplicaciones pendientes en las últimas 4 semanas:
 administrator.configuration.form.label.button.return = Volver

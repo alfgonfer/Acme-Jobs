@@ -62,4 +62,8 @@ public class Dashboard implements Serializable {
 
 	private Double						avgApplicationWorker;
 
+	private List<Integer>				diasPending;
+
+	private List<Integer>				applicationPendingPerDay;
+
 }

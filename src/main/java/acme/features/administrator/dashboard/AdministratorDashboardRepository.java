@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import acme.entities.application.Application;
 import acme.framework.repositories.AbstractRepository;
 
 @Repository
@@ -67,5 +68,8 @@ public interface AdministratorDashboardRepository extends AbstractRepository {
 
 	@Query("select avg( select count(a) from Application a where a.worker.id = w.id ) from Worker w")
 	Double getMediaApplicationPerWorker();
+
+	@Query("select a from Application a where a.status='pending'")
+	List<Application> getPendingApplications();
 
 }
