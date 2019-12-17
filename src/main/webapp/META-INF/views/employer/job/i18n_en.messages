@@ -31,5 +31,6 @@ employer.job.error.must-have-reference = The job must have a reference
 employer.job.error.must-be-not-duplicated-reference = The job can not have a duplicated reference
 employer.job.error.must-have-descriptor = The job must have a description
 employer.job.error.must-not-have-spam-descriptor = The description of the job must not be spam
+employer.job.error.must-100 = The percentage of the duties must sum 100%
 
 

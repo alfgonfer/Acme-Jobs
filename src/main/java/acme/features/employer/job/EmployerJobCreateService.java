@@ -156,6 +156,7 @@ public class EmployerJobCreateService implements AbstractCreateService<Employer,
 		String description;
 
 		entity.setHasApplication(false);
+		entity.setFinalMode(false);
 
 		this.repository.save(entity);
 
