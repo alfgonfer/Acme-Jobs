@@ -20,9 +20,6 @@
 	</acme:form-select>
 	</jstl:if>
 	
-	
-	
-	
 	<jstl:if test="${status == 'pending' && command == 'update'}">
 	<h3><acme:message code="employer.application.form.label.message"/></h3>
 	<acme:form-select code="employer.application.form.label.status" path="status">
@@ -50,13 +47,13 @@
 	</acme:form-select>
 	</jstl:if>
 	
-	<jstl:if test="${status != 'pending'} && ${command == show}">
+	<jstl:if test="${status != 'pending' && command == 'show'}">
 		<acme:form-textarea code="employer.application.form.label.status" path="status" readonly="true"/>
 	</jstl:if>
 	<acme:form-textarea code="employer.application.form.label.justification" path="justification"/>
 
 
     <acme:form-submit test ="${command == 'show' && status == 'pending'}" code="employer.application.form.button.update" action="/employer/application/update"/>
-    <acme:form-submit test ="${command == 'update'  && status == 'pending'}" code="employer.application.form.button.update" action="/employer/application/update"/>
+    <acme:form-submit test ="${command == 'update'}" code="employer.application.form.button.update" action="/employer/application/update"/>
 	<acme:form-return code="employer.application.form.label.button.return"/>
 </acme:form>

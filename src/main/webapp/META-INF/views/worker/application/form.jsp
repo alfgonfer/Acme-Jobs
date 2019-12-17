@@ -8,12 +8,12 @@
 	<jstl:if test="${command != 'create'}">
 	<acme:form-moment code="worker.application.form.label.moment" path="moment"/>
 	</jstl:if>
-	<jstl:if test="${command == 'show' }">
-	<acme:form-textbox code="worker.application.form.label.status" path="status" readonly="true"/>
-	</jstl:if>
 	<acme:form-textarea code="worker.application.form.label.skills" path="skills"/>
 	<acme:form-textarea code="worker.application.form.label.statement" path="statement"/>
 	<acme:form-textarea code="worker.application.form.label.qualifications" path="qualifications"/>
+	<jstl:if test="${command == 'show' }">
+	<acme:form-textbox code="worker.application.form.label.status" path="status" readonly="true"/>
+	</jstl:if>
 	<jstl:if test="${status != 'pending'}">
 		<acme:form-textbox code="worker.application.form.label.justification" path="justification"/>
 	</jstl:if>

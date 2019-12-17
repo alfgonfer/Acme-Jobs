@@ -6,7 +6,7 @@
 <acme:form>
 	
 	<acme:form-textbox code="authenticated.auditorrequest.form.label.firm" path="firm"/>
-	<acme:form-textbox code="authenticated.auditorrequest.form.label.respStatement" path="respStatement"/>
+	<acme:form-textarea code="authenticated.auditorrequest.form.label.respStatement" path="respStatement"/>
 	<acme:form-textarea code="authenticated.auditorrequest.form.label.description" path="description"/>
 	
 	
