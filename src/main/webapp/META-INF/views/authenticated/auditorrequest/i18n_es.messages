@@ -11,5 +11,4 @@ authenticated.auditorrequest.error.must-have-firm = La petición debe de contene
 authenticated.auditorrequest.error.must-not-have-spam-firm = La firma de la petición no puede contener spam
 authenticated.auditorrequest.error.must-have-respStatement = La petición debe de contener un puesto de responsabilidad
 authenticated.auditorrequest.error.must-not-have-spam-respStatement =  El puesto de responsabilidad no debe de contener spam
-
-
+authenticated.auditorrequest.error.cannot-request = No puedes crear una nueva petición mientras tengas otra pendiente de revision

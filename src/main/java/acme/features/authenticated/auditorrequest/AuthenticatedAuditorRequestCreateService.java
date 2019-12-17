@@ -1,6 +1,7 @@
 
 package acme.features.authenticated.auditorrequest;
 
+import java.util.Collection;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import acme.entities.auditorrequest.Auditorrequest;
 import acme.entities.configuration.Configuration;
+import acme.entities.roles.Auditor;
 import acme.features.utiles.ConfigurationRepository;
 import acme.features.utiles.Spamfilter;
 import acme.framework.components.Errors;
@@ -34,7 +36,16 @@ public class AuthenticatedAuditorRequestCreateService implements AbstractCreateS
 	@Override
 	public boolean authorise(final Request<Auditorrequest> request) {
 		assert request != null;
-		return true;
+		Principal principal;
+		Integer id;
+		Auditor auditor;
+
+		principal = request.getPrincipal();
+		id = principal.getAccountId();
+
+		auditor = this.repository.findOneAuditorByUserId(id);
+
+		return auditor == null;
 	}
 
 	@Override
@@ -78,41 +89,57 @@ public class AuthenticatedAuditorRequestCreateService implements AbstractCreateS
 		assert entity != null;
 		assert errors != null;
 
-		boolean hasDescription, hasSpamDescription, hasFirm, hasSpamFirm, hasRepStatement, hasSpamStatement;
+		boolean hasDescription, hasSpamDescription, hasFirm, hasSpamFirm, hasRepStatement, hasSpamStatement, canRequest;
+		Principal principal;
 		Configuration configuration;
 		String spamWords;
 		Double spamThreshold;
+		UserAccount user;
+		Collection<Auditorrequest> requests;
+		Integer id;
 
-		configuration = this.configurationRepository.findConfiguration();
+		principal = request.getPrincipal();
+		id = principal.getAccountId();
+		user = this.repository.findOneUserAccountById(id);
 
-		spamWords = configuration.getSpamWords();
-		spamThreshold = configuration.getSpamThreshold();
+		requests = this.repository.allRequestByUserAccountId(user.getId());
 
-		hasDescription = entity.getDescription() != null && !entity.getDescription().isEmpty();
-		errors.state(request, hasDescription, "description", "authenticated.auditorrequest.error.must-have-description");
+		canRequest = requests.isEmpty();
+		errors.state(request, canRequest, "firm", "authenticated.auditorrequest.error.cannot-request");
 
-		if (hasDescription) {
+		if (canRequest) {
 
-			hasSpamDescription = Spamfilter.spamThreshold(entity.getDescription(), spamWords, spamThreshold);
-			errors.state(request, !hasSpamDescription, "description", "authenticated.auditorrequest.error.must-not-have-spam-description");
-		}
+			configuration = this.configurationRepository.findConfiguration();
 
-		hasFirm = entity.getFirm() != null && !entity.getFirm().isEmpty();
-		errors.state(request, hasDescription, "firm", "authenticated.auditorrequest.error.must-have-firm");
+			spamWords = configuration.getSpamWords();
+			spamThreshold = configuration.getSpamThreshold();
 
-		if (hasFirm) {
+			hasDescription = entity.getDescription() != null && !entity.getDescription().isEmpty();
+			errors.state(request, hasDescription, "description", "authenticated.auditorrequest.error.must-have-description");
 
-			hasSpamFirm = Spamfilter.spamThreshold(entity.getFirm(), spamWords, spamThreshold);
-			errors.state(request, !hasSpamFirm, "firm", "authenticated.auditorrequest.error.must-not-have-spam-firm");
-		}
+			if (hasDescription) {
 
-		hasRepStatement = entity.getRespStatement() != null && !entity.getRespStatement().isEmpty();
-		errors.state(request, hasRepStatement, "respStatement", "authenticated.auditorrequest.error.must-have-respStatement");
+				hasSpamDescription = Spamfilter.spamThreshold(entity.getDescription(), spamWords, spamThreshold);
+				errors.state(request, !hasSpamDescription, "description", "authenticated.auditorrequest.error.must-not-have-spam-description");
+			}
 
-		if (hasRepStatement) {
+			hasFirm = entity.getFirm() != null && !entity.getFirm().isEmpty();
+			errors.state(request, hasDescription, "firm", "authenticated.auditorrequest.error.must-have-firm");
 
-			hasSpamStatement = Spamfilter.spamThreshold(entity.getRespStatement(), spamWords, spamThreshold);
-			errors.state(request, !hasSpamStatement, "respStatement", "authenticated.auditorrequest.error.must-not-have-spam-respStatement");
+			if (hasFirm) {
+
+				hasSpamFirm = Spamfilter.spamThreshold(entity.getFirm(), spamWords, spamThreshold);
+				errors.state(request, !hasSpamFirm, "firm", "authenticated.auditorrequest.error.must-not-have-spam-firm");
+			}
+
+			hasRepStatement = entity.getRespStatement() != null && !entity.getRespStatement().isEmpty();
+			errors.state(request, hasRepStatement, "respStatement", "authenticated.auditorrequest.error.must-have-respStatement");
+
+			if (hasRepStatement) {
+
+				hasSpamStatement = Spamfilter.spamThreshold(entity.getRespStatement(), spamWords, spamThreshold);
+				errors.state(request, !hasSpamStatement, "respStatement", "authenticated.auditorrequest.error.must-not-have-spam-respStatement");
+			}
 		}
 
 	}
