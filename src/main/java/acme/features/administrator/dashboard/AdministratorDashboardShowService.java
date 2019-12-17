@@ -52,7 +52,8 @@ public class AdministratorDashboardShowService implements AbstractShowService<Ad
 		assert model != null;
 
 		request.unbind(entity, model, "totalAnnouncement", "totalInvestorsRecord", "totalCompanyRecords", "minRewardRequest", "maxRewardRequest", "minRewardOffers", "maxRewardOffers", "companysBySector", "sectorsOfCompanys", "inverstorsBySector",
-			"sectorsOfInverstors", "mediaRequest", "mediaOffer", "stdevRequest", "stdevOffer", "jobsByFinalMode", "statusOfApplication", "applicationByStatus", "avgApplicationEmployer", "avgJobEmployer", "avgApplicationWorker");
+			"sectorsOfInverstors", "mediaRequest", "mediaOffer", "stdevRequest", "stdevOffer", "jobsByFinalMode", "statusOfApplication", "applicationByStatus", "avgApplicationEmployer", "avgJobEmployer", "avgApplicationWorker", "diasPending",
+			"applicationPendingPerDay", "applicationAcceptedPerDay", "applicationRejectedPerDay");
 
 	}
 
@@ -82,6 +83,9 @@ public class AdministratorDashboardShowService implements AbstractShowService<Ad
 		result.setAvgApplicationWorker(this.getMediaApplicationPerWorker());
 		result.setDiasPending(this.getDiasPending(this.getPendingPerDay()));
 		result.setApplicationPendingPerDay(this.getApplicationPendingPerDay(this.getPendingPerDay()));
+		result.setApplicationAcceptedPerDay(this.getApplicationAcceptedPerDay(this.getAcceptedPerDay()));
+		result.setApplicationRejectedPerDay(this.getApplicationRejectedPerDay(this.getRejectedPerDay()));
+		System.out.println(result.getApplicationPendingPerDay());
 
 		return result;
 	}
@@ -212,6 +216,7 @@ public class AdministratorDashboardShowService implements AbstractShowService<Ad
 		return res;
 	}
 
+	// Pending application per day ----------------------------------------------------------------------------
 	public Map<Integer, Integer> getPendingPerDay() {
 		Map<Integer, Integer> res = new TreeMap<>();
 		List<Application> result = this.repository.getPendingApplications();
@@ -230,12 +235,9 @@ public class AdministratorDashboardShowService implements AbstractShowService<Ad
 
 			diasDiferencia = (int) ((dateApplication.getTime() - now.getTime()) / 86400000);
 
-			if (-28 < diasDiferencia && diasDiferencia > 1) {
+			if (-28 < diasDiferencia && diasDiferencia < 1) {
 
-				suma = res.get(diasDiferencia);
-				if (suma == null || suma == 0) {
-					suma = 0;
-				}
+				suma = res.get(diasDiferencia) + 1;
 				res.put(diasDiferencia, suma);
 
 			}
@@ -258,14 +260,114 @@ public class AdministratorDashboardShowService implements AbstractShowService<Ad
 		List<Integer> res = new ArrayList<>();
 
 		for (Integer d : dias) {
-			if (d == 0) {
-				res.add(1);
 
-			} else {
-				res.add(applicationsPerDay.get(d));
+			res.add(applicationsPerDay.get(d));
+		}
+
+		return res;
+
+	}
+
+	// Accepted application per day ----------------------------------------------------------------------------
+	public Map<Integer, Integer> getAcceptedPerDay() {
+		Map<Integer, Integer> res = new TreeMap<>();
+		List<Application> result = this.repository.getAcceptedApplications();
+		Date now = new Date(System.currentTimeMillis() - 1);
+		Date dateApplication;
+		Integer diasDiferencia;
+		Integer suma;
+
+		for (int i = -28; i <= 0; i++) {
+			res.put(i, 0);
+		}
+
+		for (Application a : result) {
+
+			dateApplication = a.getMoment();
+
+			diasDiferencia = (int) ((dateApplication.getTime() - now.getTime()) / 86400000);
+
+			if (-28 < diasDiferencia && diasDiferencia < 1) {
+
+				suma = res.get(diasDiferencia) + 1;
+				res.put(diasDiferencia, suma);
+
 			}
 
 		}
+
+		return res;
+	}
+
+	public List<Integer> getDiasAccepted(final Map<Integer, Integer> applicationsPerDay) {
+
+		List<Integer> res = new ArrayList<>(applicationsPerDay.keySet());
+		return res;
+
+	}
+
+	public List<Integer> getApplicationAcceptedPerDay(final Map<Integer, Integer> applicationsPerDay) {
+
+		List<Integer> dias = new ArrayList<>(applicationsPerDay.keySet());
+		List<Integer> res = new ArrayList<>();
+
+		for (Integer d : dias) {
+
+			res.add(applicationsPerDay.get(d));
+		}
+
+		return res;
+
+	}
+
+	// Accepted application per day ----------------------------------------------------------------------------
+	public Map<Integer, Integer> getRejectedPerDay() {
+		Map<Integer, Integer> res = new TreeMap<>();
+		List<Application> result = this.repository.getRejectedApplications();
+		Date now = new Date(System.currentTimeMillis() - 1);
+		Date dateApplication;
+		Integer diasDiferencia;
+		Integer suma;
+
+		for (int i = -28; i <= 0; i++) {
+			res.put(i, 0);
+		}
+
+		for (Application a : result) {
+
+			dateApplication = a.getMoment();
+
+			diasDiferencia = (int) ((dateApplication.getTime() - now.getTime()) / 86400000);
+
+			if (-28 < diasDiferencia && diasDiferencia < 1) {
+
+				suma = res.get(diasDiferencia) + 1;
+				res.put(diasDiferencia, suma);
+
+			}
+
+		}
+
+		return res;
+	}
+
+	public List<Integer> getDiasRejected(final Map<Integer, Integer> applicationsPerDay) {
+
+		List<Integer> res = new ArrayList<>(applicationsPerDay.keySet());
+		return res;
+
+	}
+
+	public List<Integer> getApplicationRejectedPerDay(final Map<Integer, Integer> applicationsPerDay) {
+
+		List<Integer> dias = new ArrayList<>(applicationsPerDay.keySet());
+		List<Integer> res = new ArrayList<>();
+
+		for (Integer d : dias) {
+
+			res.add(applicationsPerDay.get(d));
+		}
+
 		return res;
 
 	}

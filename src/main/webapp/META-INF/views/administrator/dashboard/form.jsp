@@ -255,9 +255,7 @@
 	<div><canvas id="canvas5"></canvas></div>
 	<script type="text/javascript">
 	$(document).ready(function(){
-		<jstl:forEach var="item" items="${applicationPendingPerDay}">
-		window.alert("${item}");,
-		</jstl:forEach>
+		
 		
 		
 		var data = {
@@ -302,7 +300,124 @@
 	canvas = document.getElementById("canvas5");
 	context = canvas.getContext("2d");
 	new Chart(context, {
-		type	:	"bar",
+		type	:	"line",
+		data	:	data,
+		options	:	options
+	});
+});
+	</script>
+	
+	<!--	Chart of accepted applications per day  -->	
+	
+	<h2><acme:message code="administrator.dashboard.form.title.applicationAcceptedPerDay"/></h2>
+	<div><canvas id="canvas6"></canvas></div>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		
+		
+		
+		var data = {
+				labels	:	[
+					<jstl:forEach var="item" items="${diasPending}">
+					"${item}",
+					</jstl:forEach>
+				],
+				datasets	:	[ 
+					{
+						data : [
+							<jstl:forEach var="item" items="${applicationAcceptedPerDay}">
+							"${item}",
+							</jstl:forEach>
+							
+						],
+						 
+				}
+					]
+		
+		
+	};
+	
+	var options =	{
+			scales	:	{
+				yAxes	:	[
+					{
+						ticks	:	{
+							suggestedMin	:	0.0,
+							suggestedMax	:	10.0
+						}
+					}
+				]
+			},
+			legend	:	{
+				display : false
+			}
+	};
+	
+	var canvas, context;
+	
+	canvas = document.getElementById("canvas6");
+	context = canvas.getContext("2d");
+	new Chart(context, {
+		type	:	"line",
+		data	:	data,
+		options	:	options
+	});
+});
+	</script>
+	
+	
+		<!--	Chart of rejected applications per day  -->	
+	
+	<h2><acme:message code="administrator.dashboard.form.title.applicationRejectedPerDay"/></h2>
+	<div><canvas id="canvas7"></canvas></div>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		
+		
+		
+		var data = {
+				labels	:	[
+					<jstl:forEach var="item" items="${diasPending}">
+					"${item}",
+					</jstl:forEach>
+				],
+				datasets	:	[ 
+					{
+						data : [
+							<jstl:forEach var="item" items="${applicationRejectedPerDay}">
+							"${item}",
+							</jstl:forEach>
+							
+						],
+						 
+				}
+					]
+		
+		
+	};
+	
+	var options =	{
+			scales	:	{
+				yAxes	:	[
+					{
+						ticks	:	{
+							suggestedMin	:	0.0,
+							suggestedMax	:	10.0
+						}
+					}
+				]
+			},
+			legend	:	{
+				display : false
+			}
+	};
+	
+	var canvas, context;
+	
+	canvas = document.getElementById("canvas7");
+	context = canvas.getContext("2d");
+	new Chart(context, {
+		type	:	"line",
 		data	:	data,
 		options	:	options
 	});

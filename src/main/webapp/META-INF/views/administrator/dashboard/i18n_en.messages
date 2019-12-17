@@ -17,4 +17,6 @@ administrator.dashboard.form.label.mediaJobsEmployer= Average number of jobs per
 administrator.dashboard.form.label.mediaApplicationWorker= Average number of applications per worker:
 administrator.dashboard.form.label.mediaApplicationEmployer= Average number of applications per employer:
 administrator.dashboard.form.title.applicationPendingPerDay = Application pending in the last 4 weeks:
+administrator.dashboard.form.title.applicationRejectedPerDay = Application rejected in the last 4 weeks:
+administrator.dashboard.form.title.applicationAcceptedPerDay = Application accepted in teh last 4 weeks:
 administrator.configuration.form.label.button.return = Return

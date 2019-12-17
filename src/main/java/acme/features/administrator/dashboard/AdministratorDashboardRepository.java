@@ -72,4 +72,10 @@ public interface AdministratorDashboardRepository extends AbstractRepository {
 	@Query("select a from Application a where a.status='pending'")
 	List<Application> getPendingApplications();
 
+	@Query("select a from Application a where a.status='accepted'")
+	List<Application> getAcceptedApplications();
+
+	@Query("select a from Application a where a.status='rejected'")
+	List<Application> getRejectedApplications();
+
 }
