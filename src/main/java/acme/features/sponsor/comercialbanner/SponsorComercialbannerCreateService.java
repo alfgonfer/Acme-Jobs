@@ -108,31 +108,31 @@ public class SponsorComercialbannerCreateService implements AbstractCreateServic
 
 		// Expiration validation ------------------------------------------------------------------------------------
 		hasExpiration = entity.getExpiration() != null;
-		errors.state(request, hasExpiration, "expiration", "authenticated.sponsor.error.must-have-expiration");
+		errors.state(request, hasExpiration, "expiration", "sponsor.comercialbanner.error.must-have-expiration");
 		if (hasExpiration) {
 			isFuture = now.before(entity.getExpiration());
-			errors.state(request, isFuture, "expiration", "authenticated.sponsor.error.expirated");
+			errors.state(request, isFuture, "expiration", "sponsor.comercialbanner.error.expirated");
 		}
 
 		// Number validation ----------------------------------------------------------------------------------------
 
 		hasNumber = entity.getCreditNumber() != null;
-		errors.state(request, hasNumber, "creditNumber", "authenticated.sponsor.error.must-have-creditNumber");
+		errors.state(request, hasNumber, "creditNumber", "sponsor.comercialbanner.error.must-have-creditNumber");
 
 		// Name validation ------------------------------------------------------------------------------------------
 
 		hasNameOwner = entity.getName() != null;
-		errors.state(request, hasNameOwner, "name", "authenticated.sponsor.error.must-have-name");
+		errors.state(request, hasNameOwner, "name", "sponsor.comercialbanner.error.must-have-name");
 
 		// Surname validation ---------------------------------------------------------------------------------------
 
 		hasSurname = entity.getSurname() != null;
-		errors.state(request, hasSurname, "surname", "authenticated.sponsor.error.must-have-surname");
+		errors.state(request, hasSurname, "surname", "sponsor.comercialbanner.error.must-have-surname");
 
 		// Security code validation ----------------------------------------------------------------------------------
 
 		hasSecurityCode = entity.getSecurityCode() != null;
-		errors.state(request, hasSecurityCode, "securityCode", "authenticated.sponsor.error.must-have-securityCode");
+		errors.state(request, hasSecurityCode, "securityCode", "sponsor.comercialbanner.error.must-have-securityCode");
 
 	}
 

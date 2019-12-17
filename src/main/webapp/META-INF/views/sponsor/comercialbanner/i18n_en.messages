@@ -36,5 +36,5 @@ sponsor.comercialbanner.error.must-have-name = The credit card must have the nam
 sponsor.comercialbanner.error.must-have-surname = The credit card must have the surnames of the owner
 sponsor.comercialbanner.error.must-have-securityCode = The credit card must have the security code
 sponsor.comercialbanner.error.must-have-securityCode-pattern = The security code of the credit card must be 3 numbers
-
+sponsor.comercialbanner.error.must-have-securityCode-pattern = The security code of the credit card must be 3 numbers
 

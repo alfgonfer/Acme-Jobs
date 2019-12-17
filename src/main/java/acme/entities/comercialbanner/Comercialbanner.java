@@ -44,7 +44,7 @@ public class Comercialbanner extends Banner {
 	private Date				expiration;
 
 	@NotBlank
-	@Pattern(regexp = "^[0-9]{3}$", message = "authenticated.creditcard.error.must-have-securityCode-pattern")
+	@Pattern(regexp = "^[0-9]{3}$", message = "sponsor.comercialbanner.error.must-have-securityCode-pattern")
 	private String				securityCode;
 
 	@NotBlank

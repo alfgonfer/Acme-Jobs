@@ -30,7 +30,7 @@ public class SponsorComercialbannerShowService implements AbstractShowService<Sp
 		assert entity != null;
 		assert model != null;
 
-		request.unbind(entity, model, "urlPicture", "slogan", "urlTarget", "creditCard", "finalMode");
+		request.unbind(entity, model, "urlPicture", "slogan", "urlTarget", "creditNumber", "finalMode");
 	}
 
 	@Override

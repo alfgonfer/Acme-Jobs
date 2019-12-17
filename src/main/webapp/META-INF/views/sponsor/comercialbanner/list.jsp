@@ -17,5 +17,5 @@
 
 <acme:list>
 	<acme:list-column code="sponsor.comercialbanner.list.label.slogan" path="slogan" width="60%"/>	
-	<acme:list-column code="sponsor.comercialbanner.list.label.creditCard" path="creditCard" width="40%"/>		
+	<acme:list-column code="sponsor.comercialbanner.list.label.creditCard" path="creditNumber" width="40%"/>		
 </acme:list>
