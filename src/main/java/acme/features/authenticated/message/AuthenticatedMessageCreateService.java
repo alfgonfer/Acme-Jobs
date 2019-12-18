@@ -21,7 +21,7 @@ public class AuthenticatedMessageCreateService implements AbstractCreateService<
 	//Internal state --------------------------------------------------------------------------------------------------
 
 	@Autowired
-	AuthenticatedMessageRepository repository;
+	private AuthenticatedMessageRepository repository;
 
 
 	// AbstractCreateService<Authenticated, Message> -------------------------------------------------------------
@@ -29,8 +29,15 @@ public class AuthenticatedMessageCreateService implements AbstractCreateService<
 	@Override
 	public boolean authorise(final Request<Message> request) {
 		assert request != null;
-		boolean b = request.getPrincipal().hasRole(Authenticated.class);
-		return b;
+
+		boolean result = false;
+		Collection<Authenticated> users = this.repository.findUsersFromMTId(request.getModel().getInteger("id"));
+		for (Authenticated au : users) {
+			if (au.getId() == request.getPrincipal().getActiveRoleId()) {
+				result = true;
+			}
+		}
+		return result;
 	}
 
 	@Override
