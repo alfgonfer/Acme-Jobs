@@ -6,6 +6,7 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import acme.entities.descriptor.Descriptor;
 import acme.entities.duties.Duty;
 import acme.entities.roles.Auditor;
 import acme.framework.components.Model;
@@ -22,7 +23,17 @@ public class NotauditorDutyListService implements AbstractListService<Auditor, D
 	@Override
 	public boolean authorise(final Request<Duty> request) {
 		assert request != null;
-		return true;
+
+		boolean res;
+		Integer id;
+		Descriptor result;
+
+		id = request.getModel().getInteger("id");
+		result = this.repository.findDescriptorByDescriptorId(id);
+
+		res = result.getJob().isFinalMode();
+
+		return res;
 	}
 
 	@Override

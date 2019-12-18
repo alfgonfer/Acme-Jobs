@@ -9,6 +9,7 @@ import acme.framework.components.Errors;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
 import acme.framework.entities.Administrator;
+import acme.framework.entities.Principal;
 import acme.framework.services.AbstractUpdateService;
 
 @Service
@@ -21,8 +22,25 @@ public class AdministratorComercialbannerUpdateService implements AbstractUpdate
 	@Override
 	public boolean authorise(final Request<Comercialbanner> request) {
 		assert request != null;
-		boolean b = request.getPrincipal().hasRole(Administrator.class);
-		return b;
+
+		boolean res;
+		Integer id;
+		Comercialbanner result;
+		Principal principal;
+		Integer idPrincipal;
+		Administrator administrator;
+
+		id = request.getModel().getInteger("id");
+		result = this.repository.findOneById(id);
+
+		principal = request.getPrincipal();
+		idPrincipal = principal.getAccountId();
+
+		administrator = this.repository.findAdministratorByUserAccountId(idPrincipal);
+
+		res = result.isFinalMode() || administrator.getId() == result.getAdministrator().getId();
+
+		return res;
 	}
 
 	@Override

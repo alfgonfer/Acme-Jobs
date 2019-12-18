@@ -21,8 +21,17 @@ public class AdministratorComercialbannerDeleteService implements AbstractDelete
 	@Override
 	public boolean authorise(final Request<Comercialbanner> request) {
 		assert request != null;
-		boolean b = request.getPrincipal().hasRole(Administrator.class);
-		return b;
+
+		boolean res;
+		Integer id;
+		Comercialbanner result;
+
+		id = request.getModel().getInteger("id");
+		result = this.repository.findOneById(id);
+
+		res = result.isFinalMode();
+
+		return res;
 	}
 
 	@Override

@@ -31,7 +31,7 @@ public class AdministratorComercialbannerListService implements AbstractListServ
 		assert entity != null;
 		assert model != null;
 
-		request.unbind(entity, model, "urlPicture", "slogan", "urlTarget", "creditCard");
+		request.unbind(entity, model, "urlPicture", "slogan", "urlTarget", "creditNumber");
 	}
 
 	@Override

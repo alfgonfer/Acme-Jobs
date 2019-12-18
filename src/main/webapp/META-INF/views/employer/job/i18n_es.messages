@@ -30,3 +30,4 @@ employer.job.error.must-have-reference = El trabajo debe de tener una referencia
 employer.job.error.must-be-not-duplicated-reference = La referencia del trabajo no debe de estar duplicada
 employer.job.error.must-have-descriptor = El trabajo debe de tener una descripción
 employer.job.error.must-not-have-spam-descriptor = La descripción no puede contener spam
+employer.job.error.must-100 = El porcentaje de las tareas debe de sumar el 100%

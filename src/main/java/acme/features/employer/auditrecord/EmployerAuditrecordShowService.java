@@ -8,32 +8,29 @@ import acme.entities.auditrecord.Auditrecord;
 import acme.entities.roles.Employer;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
-import acme.framework.entities.Principal;
 import acme.framework.services.AbstractShowService;
 
 @Service
 public class EmployerAuditrecordShowService implements AbstractShowService<Employer, Auditrecord> {
 
 	@Autowired
-	EmployerAuditrecordRepository repository;
+	private EmployerAuditrecordRepository repository;
 
 
 	@Override
 	public boolean authorise(final Request<Auditrecord> request) {
 		assert request != null;
 
-		boolean result;
-		int AuditrecordId;
-		Auditrecord Auditrecord;
-		Employer Employer;
-		Principal principal;
+		boolean res;
+		Integer id;
+		Auditrecord result;
 
-		AuditrecordId = request.getModel().getInteger("id");
-		Auditrecord = this.repository.findOneAuditrecordById(AuditrecordId);
-		Employer = Auditrecord.getJob().getEmployer();
-		principal = request.getPrincipal();
-		result = Auditrecord.getJob().isFinalMode() || !Auditrecord.getJob().isFinalMode() && Employer.getId() == principal.getActiveRoleId();
-		return result;
+		id = request.getModel().getInteger("id");
+		result = this.repository.findOneAuditrecordById(id);
+
+		res = result.getIsFinalMode();
+
+		return res;
 	}
 
 	@Override
@@ -42,7 +39,7 @@ public class EmployerAuditrecordShowService implements AbstractShowService<Emplo
 		assert entity != null;
 		assert model != null;
 
-		request.unbind(entity, model, "title", "isFinalMode", "moment", "body");
+		request.unbind(entity, model, "title", "isFinalMode", "moment", "body", "jobTitle", "auditorUser");
 	}
 
 	@Override

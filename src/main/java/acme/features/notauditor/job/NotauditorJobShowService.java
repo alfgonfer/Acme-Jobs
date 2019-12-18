@@ -8,14 +8,13 @@ import acme.entities.jobs.Job;
 import acme.entities.roles.Auditor;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
-import acme.framework.entities.Principal;
 import acme.framework.services.AbstractShowService;
 
 @Service
 public class NotauditorJobShowService implements AbstractShowService<Auditor, Job> {
 
 	@Autowired
-	NotauditorJobRepository repository;
+	private NotauditorJobRepository repository;
 
 
 	@Override
@@ -25,14 +24,10 @@ public class NotauditorJobShowService implements AbstractShowService<Auditor, Jo
 		boolean result;
 		int jobId;
 		Job job;
-		Auditor Auditor;
-		Principal principal;
 
 		jobId = request.getModel().getInteger("id");
 		job = this.repository.findOneJobById(jobId);
-		Auditor = job.getAuditor();
-		principal = request.getPrincipal();
-		result = job.isFinalMode() || Auditor.getUserAccount().getId() == principal.getAccountId();
+		result = job.isFinalMode();
 		return result;
 	}
 

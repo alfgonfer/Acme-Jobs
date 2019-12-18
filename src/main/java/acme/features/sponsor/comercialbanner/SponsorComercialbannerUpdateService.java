@@ -1,6 +1,8 @@
 
 package acme.features.sponsor.comercialbanner;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -66,7 +68,7 @@ public class SponsorComercialbannerUpdateService implements AbstractUpdateServic
 		assert entity != null;
 		assert model != null;
 
-		request.unbind(entity, model, "urlPicture", "slogan", "urlTarget", "finalMode");
+		request.unbind(entity, model, "urlPicture", "slogan", "urlTarget", "finalMode", "creditNumber", "name", "surname", "expiration", "securityCode", "type");
 
 	}
 
@@ -93,21 +95,65 @@ public class SponsorComercialbannerUpdateService implements AbstractUpdateServic
 		String spamWords;
 		Double spamThreshold;
 
-		boolean hasSlogan, hasSpamSlogan;
+		boolean hasSlogan, hasSpamSlogan, hasExpiration;
+		boolean isFuture, hasNumber, hasNameOwner, hasSurname, hasSecurityCode, securityCodePattern;
+		Date now;
+		now = new Date(System.currentTimeMillis() - 1);
 
-		hasSlogan = entity.getSlogan() != null && !entity.getSlogan().isEmpty();
-		errors.state(request, hasSlogan, "slogan", "sponsor.comercialbanner.error.must-have-slogan");
+		// Slogan validation ---------------------------------------------------------------------------------
 
-		if (hasSlogan) {
+		if (!errors.hasErrors("slogan")) {
+			hasSlogan = entity.getSlogan() != null && !entity.getSlogan().isEmpty();
+			errors.state(request, hasSlogan, "slogan", "sponsor.comercialbanner.error.must-have-slogan");
 
-			configuration = this.ConfigurationRepository.findConfiguration();
-			spamWords = configuration.getSpamWords();
-			spamThreshold = configuration.getSpamThreshold();
+			if (hasSlogan) {
 
-			hasSpamSlogan = Spamfilter.spamThreshold(entity.getSlogan(), spamWords, spamThreshold);
-			errors.state(request, !hasSpamSlogan, "slogan", "sponsor.comercialbanner.error.must-have-not-spam-slogan");
+				configuration = this.ConfigurationRepository.findConfiguration();
+				spamWords = configuration.getSpamWords();
+				spamThreshold = configuration.getSpamThreshold();
+
+				hasSpamSlogan = Spamfilter.spamThreshold(entity.getSlogan(), spamWords, spamThreshold);
+				errors.state(request, !hasSpamSlogan, "slogan", "sponsor.comercialbanner.error.must-have-not-spam-slogan");
+			}
 		}
 
+		// Expiration validation ------------------------------------------------------------------------------------
+
+		if (!errors.hasErrors("expiration")) {
+			hasExpiration = entity.getExpiration() != null;
+			errors.state(request, hasExpiration, "expiration", "authenticated.sponsor.error.must-have-expiration");
+			if (hasExpiration) {
+				isFuture = now.before(entity.getExpiration());
+				errors.state(request, isFuture, "expiration", "authenticated.sponsor.error.expirated");
+			}
+
+			// Number validation ----------------------------------------------------------------------------------------
+
+			if (!errors.hasErrors("creditNumber")) {
+				hasNumber = entity.getCreditNumber() != null;
+				errors.state(request, hasNumber, "creditNumber", "authenticated.sponsor.error.must-have-creditNumber");
+			}
+			// Name validation ------------------------------------------------------------------------------------------
+
+			if (!errors.hasErrors("name")) {
+				hasNameOwner = entity.getName() != null;
+				errors.state(request, hasNameOwner, "name", "authenticated.sponsor.error.must-have-name");
+			}
+
+			// Surname validation ---------------------------------------------------------------------------------------
+
+			if (!errors.hasErrors("surname")) {
+				hasSurname = entity.getSurname() != null;
+				errors.state(request, hasSurname, "surname", "authenticated.sponsor.error.must-have-surname");
+			}
+
+			// Security code validation ----------------------------------------------------------------------------------
+
+			if (!errors.hasErrors("securityCode")) {
+				hasSecurityCode = entity.getSecurityCode() != null;
+				errors.state(request, hasSecurityCode, "securityCode", "authenticated.sponsor.error.must-have-securityCode");
+			}
+		}
 	}
 
 	@Override

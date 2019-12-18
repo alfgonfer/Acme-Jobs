@@ -66,6 +66,7 @@
         `is_final_mode` bit,
         `moment` datetime(6),
         `title` varchar(255),
+        `auditor_id` integer not null,
         `job_id` integer not null,
         primary key (`id`)
     ) engine=InnoDB;
@@ -112,8 +113,14 @@
         `slogan` varchar(255),
         `url_picture` varchar(255),
         `url_target` varchar(255),
-        `credit_card` varchar(255),
-        `sponsor_id` integer not null,
+        `credit_number` varchar(255),
+        `expiration` datetime(6),
+        `name` varchar(255),
+        `security_code` varchar(255),
+        `surname` varchar(255),
+        `type` varchar(255),
+        `administrator_id` integer,
+        `sponsor_id` integer,
         primary key (`id`)
     ) engine=InnoDB;
 
@@ -146,18 +153,6 @@
         `user_account_id` integer,
         `company` varchar(255),
         `sector` varchar(255),
-        primary key (`id`)
-    ) engine=InnoDB;
-
-    create table `creditcard` (
-       `id` integer not null,
-        `version` integer not null,
-        `credit_number` varchar(255),
-        `expiration` datetime(6),
-        `name` varchar(255),
-        `security_code` varchar(255),
-        `surname` varchar(255),
-        `sponsor_id` integer not null,
         primary key (`id`)
     ) engine=InnoDB;
 
@@ -243,7 +238,8 @@
         `url_picture` varchar(255),
         `url_target` varchar(255),
         `jingle` varchar(255),
-        `sponsor_id` integer not null,
+        `administrator_id` integer,
+        `sponsor_id` integer,
         primary key (`id`)
     ) engine=InnoDB;
 
@@ -335,9 +331,6 @@
     alter table `application` 
        add constraint UK_ct7r18vvxl5g4c4k7aefpa4do unique (`reference`);
 
-    alter table `creditcard` 
-       add constraint UK_ciu6eebpd7klqu0u6sv9o6n53 unique (`sponsor_id`);
-
     alter table `job` 
        add constraint UK_7jmfdvs0b0jx7i33qxgv22h7b unique (`reference`);
 
@@ -381,6 +374,11 @@
        references `user_account` (`id`);
 
     alter table `auditrecord` 
+       add constraint `FKditgyx355sc4ye86w7tj22cq6` 
+       foreign key (`auditor_id`) 
+       references `auditor` (`id`);
+
+    alter table `auditrecord` 
        add constraint `FKa5p4w0gnuwmtb07juvrg8ptn6` 
        foreign key (`job_id`) 
        references `job` (`id`);
@@ -391,6 +389,11 @@
        references `user_account` (`id`);
 
     alter table `comercialbanner` 
+       add constraint `FKcvbsmt5226xsmf6kxc5p8leal` 
+       foreign key (`administrator_id`) 
+       references `administrator` (`id`);
+
+    alter table `comercialbanner` 
        add constraint `FKii9iupedxt6hx534i7mm6wjhv` 
        foreign key (`sponsor_id`) 
        references `sponsor` (`id`);
@@ -399,11 +402,6 @@
        add constraint FK_6cyha9f1wpj0dpbxrrjddrqed 
        foreign key (`user_account_id`) 
        references `user_account` (`id`);
-
-    alter table `creditcard` 
-       add constraint `FK89f7jlst6msbsgc3l4fvxt1fd` 
-       foreign key (`sponsor_id`) 
-       references `sponsor` (`id`);
 
     alter table `descriptor` 
        add constraint `FKgfulfilmwi4hhaquiu7fr5g0g` 
@@ -439,6 +437,11 @@
        add constraint `FKjrdkemfq5su0eieym0n8bdtgy` 
        foreign key (`creator_id`) 
        references `authenticated` (`id`);
+
+    alter table `noncomercialbanner` 
+       add constraint `FKafyjtxoa8c41616xvnuaphdgp` 
+       foreign key (`administrator_id`) 
+       references `administrator` (`id`);
 
     alter table `noncomercialbanner` 
        add constraint `FKiqlwh7t99w47gee8as9xvk5xt` 

@@ -25,6 +25,10 @@
 
     alter table `auditrecord` 
        drop 
+       foreign key `FKditgyx355sc4ye86w7tj22cq6`;
+
+    alter table `auditrecord` 
+       drop 
        foreign key `FKa5p4w0gnuwmtb07juvrg8ptn6`;
 
     alter table `authenticated` 
@@ -33,15 +37,15 @@
 
     alter table `comercialbanner` 
        drop 
+       foreign key `FKcvbsmt5226xsmf6kxc5p8leal`;
+
+    alter table `comercialbanner` 
+       drop 
        foreign key `FKii9iupedxt6hx534i7mm6wjhv`;
 
     alter table `consumer` 
        drop 
        foreign key FK_6cyha9f1wpj0dpbxrrjddrqed;
-
-    alter table `creditcard` 
-       drop 
-       foreign key `FK89f7jlst6msbsgc3l4fvxt1fd`;
 
     alter table `descriptor` 
        drop 
@@ -70,6 +74,10 @@
     alter table `messagethread` 
        drop 
        foreign key `FKjrdkemfq5su0eieym0n8bdtgy`;
+
+    alter table `noncomercialbanner` 
+       drop 
+       foreign key `FKafyjtxoa8c41616xvnuaphdgp`;
 
     alter table `noncomercialbanner` 
        drop 
@@ -130,8 +138,6 @@
     drop table if exists `configuration`;
 
     drop table if exists `consumer`;
-
-    drop table if exists `creditcard`;
 
     drop table if exists `descriptor`;
 

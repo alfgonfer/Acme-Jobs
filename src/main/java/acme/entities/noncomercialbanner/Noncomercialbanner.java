@@ -4,12 +4,12 @@ package acme.entities.noncomercialbanner;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.URL;
 
 import acme.entities.banner.Banner;
 import acme.entities.roles.Sponsor;
+import acme.framework.entities.Administrator;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,18 +20,21 @@ public class Noncomercialbanner extends Banner {
 
 	// Serialization Identify ------------------------------------------------------------------------------------------------
 
-	private static final long serialVersionUID = 1L;
+	private static final long	serialVersionUID	= 1L;
 
 	//	Atributes	----------------------------------------------------------------------------------------------------------
 
 	@URL
-	private String jingle;
+	private String				jingle;
 
 	//	Relationships -------------------------------------------------------------------------
 
-	@NotNull
 	@Valid
-	@ManyToOne(optional = false)
-	private Sponsor sponsor;
+	@ManyToOne(optional = true)
+	private Sponsor				sponsor;
+
+	@Valid
+	@ManyToOne(optional = true)
+	private Administrator		administrator;
 
 }

@@ -20,7 +20,17 @@ public class WorkerJobShowService implements AbstractShowService<Worker, Job> {
 	@Override
 	public boolean authorise(final Request<Job> request) {
 		assert request != null;
-		return true;
+
+		boolean res;
+		Integer id;
+		Job result;
+
+		id = request.getModel().getInteger("id");
+		result = this.repository.findOneJobById(id);
+
+		res = result.isFinalMode();
+
+		return res;
 	}
 
 	@Override

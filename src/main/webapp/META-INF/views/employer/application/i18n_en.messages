@@ -25,5 +25,6 @@ employer.application.form.label.button.return = Return
 
 
 employer.request.error.must-justificated = The rejected application must have a mandatory justification
+worker.application.error.had-applicated = You have already applicated to this job
 
 

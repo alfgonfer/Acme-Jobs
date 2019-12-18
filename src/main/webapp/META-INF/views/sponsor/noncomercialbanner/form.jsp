@@ -8,7 +8,7 @@
 
 	<jstl:set var="id" value="${id}"/>
 	<acme:form-url code="sponsor.noncomercialbanner.form.label.urlPicture" path="urlPicture"/>
-	<acme:form-textarea code="sponsor.noncomercialbanner.form.label.slogan" path="slogan"/>
+	<acme:form-textbox code="sponsor.noncomercialbanner.form.label.slogan" path="slogan"/>
 	<acme:form-url code="sponsor.noncomercialbanner.form.label.urlTarget" path="urlTarget"/>
 	<acme:form-url code="sponsor.noncomercialbanner.form.label.jingle" path="jingle"/>
 	
