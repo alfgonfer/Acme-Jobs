@@ -8,7 +8,6 @@ import acme.entities.jobs.Job;
 import acme.entities.roles.Auditor;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
-import acme.framework.entities.Principal;
 import acme.framework.services.AbstractShowService;
 
 @Service
@@ -25,14 +24,10 @@ public class AuditorJobShowService implements AbstractShowService<Auditor, Job> 
 		boolean result;
 		int jobId;
 		Job job;
-		Auditor Auditor;
-		Principal principal;
 
 		jobId = request.getModel().getInteger("id");
 		job = this.repository.findOneJobById(jobId);
-		Auditor = job.getAuditor();
-		principal = request.getPrincipal();
-		result = job.isFinalMode() || !job.isFinalMode() && Auditor.getId() == principal.getActiveRoleId();
+		result = job.isFinalMode();
 		return result;
 	}
 

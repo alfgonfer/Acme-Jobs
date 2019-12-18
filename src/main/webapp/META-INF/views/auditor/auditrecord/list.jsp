@@ -17,7 +17,7 @@
 
 <acme:list>
 	<acme:list-column code="auditor.auditrecord.list.label.title" path="title" width="40%"/>
-	<acme:list-column code="auditor.auditrecord.list.label.title" path="title" width="40%"/>	
+	<acme:list-column code="auditor.auditrecord.list.label.auditor" path="auditorUser" width="40%"/>	
 	<acme:list-column code="auditor.auditrecord.list.label.status" path="isFinalMode" width="10%"/>		
 	<acme:list-column code="auditor.auditrecord.list.label.moment" path="moment" width="10%"/>	
 	

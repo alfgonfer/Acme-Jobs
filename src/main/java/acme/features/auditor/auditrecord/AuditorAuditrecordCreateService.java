@@ -1,6 +1,7 @@
 
 package acme.features.auditor.auditrecord;
 
+import java.util.Collection;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,26 +101,36 @@ public class AuditorAuditrecordCreateService implements AbstractCreateService<Au
 		Configuration configuration;
 		String spamWords;
 		Double spamThreshold;
-		boolean hasSpamTitle, hasSpamBody;
-
+		boolean hasSpamTitle, hasSpamBody, notAuditYet;
+		int job = request.getModel().getInteger("idJob");
 		configuration = this.configurationRepository.findConfiguration();
 		spamWords = configuration.getSpamWords();
 		spamThreshold = configuration.getSpamThreshold();
-		int job = request.getModel().getInteger("idJob");
 
-		boolean isJob = this.repository.findJobByRef(job) != null;
-		errors.state(request, isJob, "job", "auditor.auditrecord.error.must-exists");
-
-		if (!errors.hasErrors("title") && entity.getTitle() != null) {
-
-			hasSpamTitle = Spamfilter.spamThreshold(entity.getTitle(), spamWords, spamThreshold);
-			errors.state(request, !hasSpamTitle, "title", "auditor.auditrecord.error.spam-title");
+		notAuditYet = true;
+		Collection<Auditrecord> audits = this.repository.findManyByJobIdAll(job);
+		for (Auditrecord at : audits) {
+			if (at.getAuditor().equals(entity.getAuditor())) {
+				notAuditYet = false;
+				break;
+			}
 		}
+		errors.state(request, notAuditYet, "title", "auditor.auditrecord.error.already-auditor");
+		if (notAuditYet) {
+			boolean isJob = this.repository.findJobByRef(job) != null;
+			errors.state(request, isJob, "job", "auditor.auditrecord.error.must-exists");
 
-		if (!errors.hasErrors("body") && entity.getBody() != null) {
-			hasSpamBody = Spamfilter.spamThreshold(entity.getBody(), spamWords, spamThreshold);
-			errors.state(request, !hasSpamBody, "body", "auditor.auditrecord.error.spam-body");
+			if (!errors.hasErrors("title") && entity.getTitle() != null) {
 
+				hasSpamTitle = Spamfilter.spamThreshold(entity.getTitle(), spamWords, spamThreshold);
+				errors.state(request, !hasSpamTitle, "title", "auditor.auditrecord.error.spam-title");
+			}
+
+			if (!errors.hasErrors("body") && entity.getBody() != null) {
+				hasSpamBody = Spamfilter.spamThreshold(entity.getBody(), spamWords, spamThreshold);
+				errors.state(request, !hasSpamBody, "body", "auditor.auditrecord.error.spam-body");
+
+			}
 		}
 
 	}

@@ -36,14 +36,12 @@ public class AuditorAuditUpdateService implements AbstractUpdateService<Auditor,
 		boolean result;
 		int auditrecordId;
 		Auditrecord auditrecord;
-		Auditor auditor;
 		Principal principal;
 
 		auditrecordId = request.getModel().getInteger("id");
 		auditrecord = this.repository.findOneAuditrecordById(auditrecordId);
-		auditor = auditrecord.getJob().getAuditor();
 		principal = request.getPrincipal();
-		result = auditor.getId() == principal.getActiveRoleId() && !auditrecord.getIsFinalMode();
+		result = auditrecord.getAuditor().getId() == principal.getActiveRoleId() && !auditrecord.getIsFinalMode();
 		return result;
 	}
 

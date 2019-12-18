@@ -26,3 +26,4 @@ auditor.auditrecord.list.button.addAudit= Crear un registro de auditoría
 
 auditor.auditrecord.error.spam-title = El título no puede contener spam
 auditor.auditrecord.error.spam-body = El cuerpo no puede contener spam
+auditor.auditrecord.error.already-auditor = Ya eres un auditor de este trabajo

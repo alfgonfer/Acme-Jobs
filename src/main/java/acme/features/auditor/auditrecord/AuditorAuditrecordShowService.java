@@ -25,14 +25,12 @@ public class AuditorAuditrecordShowService implements AbstractShowService<Audito
 		boolean result;
 		int AuditrecordId;
 		Auditrecord Auditrecord;
-		Auditor auditor;
 		Principal principal;
 
 		AuditrecordId = request.getModel().getInteger("id");
 		Auditrecord = this.repository.findOneAuditrecordById(AuditrecordId);
-		auditor = Auditrecord.getJob().getAuditor();
 		principal = request.getPrincipal();
-		result = Auditrecord.getJob().isFinalMode() || !Auditrecord.getJob().isFinalMode() && auditor.getId() == principal.getActiveRoleId();
+		result = Auditrecord.getIsFinalMode() || Auditrecord.getAuditor().getId() == principal.getActiveRoleId();
 		return result;
 	}
 

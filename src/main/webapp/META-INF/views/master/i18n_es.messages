@@ -93,9 +93,9 @@ master.menu.consumer.OfferCreate = Crear una oferta
 # master.menu.auditor ########################################################
 
 master.menu.auditor = Auditor
-master.menu.auditor.list = Lista de sus trabajos
+master.menu.auditor.list = Lista de trabajos en los que eres auditor
 master.menu.employer.jobCreate = Crear un nuevo trabajo
-master.menu.notauditor.list = Lista de los que no son sus trabajos
+master.menu.notauditor.list = Lista de trabajos en los que no eres auditor
 master.menu.auditor.list.mine = Lista de mis registros de auditorías
 
 # master.menu.consumer ##########################################################
