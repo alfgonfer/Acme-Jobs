@@ -15,3 +15,7 @@ authenticated.message.form.button.create= Crear
 
 authenticated.message.form.label.button.return = Volver
 
+authenticated.messagethread.error.spam-title = El título no puede contener spam
+authenticated.messagethread.error.spam-tags = Los etiquetas no puden contener spam
+authenticated.messagethread.error.spam-body = El cuerpo no puede contener spam
+authenticated.message.error.must-be-yours = Debes de ser un participante del hilo

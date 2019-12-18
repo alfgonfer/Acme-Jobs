@@ -17,5 +17,10 @@ authenticated.message.form.button.create= Create
 
 authenticated.message.form.label.button.return = Return
 
+authenticated.messagethread.error.spam-title = The title must not contain spam
+authenticated.messagethread.error.spam-tags = The tags must not contain spam
+authenticated.messagethread.error.spam-body = The body must not contain spam
+authenticated.message.error.must-be-yours = You must be a participant of the thread
+
 
 

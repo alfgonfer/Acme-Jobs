@@ -7,8 +7,11 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import acme.entities.configuration.Configuration;
 import acme.entities.messages.Message;
 import acme.entities.messagethreads.Messagethread;
+import acme.features.utiles.ConfigurationRepository;
+import acme.features.utiles.Spamfilter;
 import acme.framework.components.Errors;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
@@ -21,7 +24,10 @@ public class AuthenticatedMessageCreateService implements AbstractCreateService<
 	//Internal state --------------------------------------------------------------------------------------------------
 
 	@Autowired
-	AuthenticatedMessageRepository repository;
+	private AuthenticatedMessageRepository	repository;
+
+	@Autowired
+	private ConfigurationRepository			configurationRepository;
 
 
 	// AbstractCreateService<Authenticated, Message> -------------------------------------------------------------
@@ -74,14 +80,56 @@ public class AuthenticatedMessageCreateService implements AbstractCreateService<
 		assert entity != null;
 		assert errors != null;
 
+		boolean hasTitle, hasSpamTitle, hasTags, hasTagsSpam, hasBody, hasBodySpam;
+		Configuration configuration;
+		String spamWords;
+		Double spamThreshold;
+		configuration = this.configurationRepository.findConfiguration();
+		spamWords = configuration.getSpamWords();
+		spamThreshold = configuration.getSpamThreshold();
+
 		int messageThread = request.getModel().getInteger("id");
 		Messagethread mt = this.repository.findMTById(messageThread);
 		Collection<Messagethread> mts = this.repository.findManybyUser(request.getPrincipal().getAccountId());
 		if (!mts.contains(mt)) {
-			errors.state(request, mts.contains(mt), "messageThread", "authenticated.message.error.must-be-yours");
+			errors.state(request, mts.contains(mt), "title", "authenticated.message.error.must-be-yours");
 		}
 		boolean isAccepted = request.getModel().getString("accept") != "" && request.getModel().getString("accept") != null;
 		errors.state(request, isAccepted, "accept", "authenticated.message.error.must-accept");
+
+		if (!errors.hasErrors("title")) {
+
+			hasTitle = entity.getTitle() != null;
+			if (hasTitle) {
+
+				hasSpamTitle = Spamfilter.spamThreshold(entity.getTitle(), spamWords, spamThreshold);
+				errors.state(request, !hasSpamTitle, "title", "authenticated.messagethread.error.spam-title");
+
+			}
+
+		}
+
+		if (!errors.hasErrors("tags")) {
+
+			hasTags = entity.getTags() != null;
+			if (hasTags) {
+
+				hasTagsSpam = Spamfilter.spamThreshold(entity.getTags(), spamWords, spamThreshold);
+				errors.state(request, !hasTagsSpam, "tags", "authenticated.messagethread.error.spam-tags");
+			}
+
+		}
+
+		if (!errors.hasErrors("body")) {
+
+			hasBody = entity.getBody() != null;
+			if (hasBody) {
+
+				hasTagsSpam = Spamfilter.spamThreshold(entity.getBody(), spamWords, spamThreshold);
+				errors.state(request, !hasTagsSpam, "body", "authenticated.messagethread.error.spam-body");
+			}
+
+		}
 
 	}
 
