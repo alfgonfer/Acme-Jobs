@@ -23,7 +23,7 @@ public interface NotauditorJobRepository extends AbstractRepository {
 	@Query("select ar from Auditrecord ar where not ar.auditor.id=?1")
 	Collection<Auditrecord> findManyNotAuditRecordByAuditorId(int AuditorId);
 
-	@Query("select j from Job j ")
+	@Query("select j from Job j where j.finalMode=true")
 	Collection<Job> findAllJobs();
 
 	@Query("select au from Auditor au where au.id = ?1")

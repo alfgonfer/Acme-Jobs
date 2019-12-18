@@ -51,7 +51,7 @@ public class AuditorAuditUpdateService implements AbstractUpdateService<Auditor,
 		assert entity != null;
 		assert errors != null;
 
-		request.bind(entity, errors, "auditorUser", "moment", "job");
+		request.bind(entity, errors, "jobTitle", "auditorUser", "moment", "job");
 
 	}
 

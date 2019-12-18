@@ -3,6 +3,7 @@ auditor.auditrecord.list.label.moment = Moment
 auditor.auditrecord.list.label.title = Title
 auditor.auditrecord.list.label.auditor = Auditor
 
+auditor.auditrecord.form.label.jobTitle = Title of the job:
 auditor.auditrecord.form.label.auditor = Auditor:
 auditor.auditrecord.form.label.title = Title:
 auditor.auditrecord.form.label.status = Is Final Mode:

@@ -1,8 +1,10 @@
 authenticated.auditrecord.list.label.status = Estado
 authenticated.auditrecord.list.label.moment = Momento
 authenticated.auditrecord.list.label.title = Titulo
+authenticated.auditrecord.list.label.auditorUser = Auditor
 
 
+authenticated.auditrecord.form.label.auditorUser = Auditor:
 authenticated.duty.form.label.jobTitle = Titulo del trabajo de este registro de auditoría:
 authenticated.duty.form.label.jobId = Id del trabajo de este registro de auditoría:
 authenticated.auditrecord.form.label.title = Titulo:
