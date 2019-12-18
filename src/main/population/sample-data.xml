@@ -796,6 +796,7 @@
 		<property name="moment" value="2018/11/30 19:00"/>
 		<property name="body" value="Example of audit record 6"/>
 		<property name="job" ref="job1"/>
+		<property name="auditor" ref="auditor2Auditor"/>
 	</bean>
 	
 	<!-- Messages & threads -->

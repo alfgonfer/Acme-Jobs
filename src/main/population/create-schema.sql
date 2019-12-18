@@ -119,7 +119,8 @@
         `security_code` varchar(255),
         `surname` varchar(255),
         `type` varchar(255),
-        `sponsor_id` integer not null,
+        `administrator_id` integer,
+        `sponsor_id` integer,
         primary key (`id`)
     ) engine=InnoDB;
 
@@ -236,7 +237,8 @@
         `url_picture` varchar(255),
         `url_target` varchar(255),
         `jingle` varchar(255),
-        `sponsor_id` integer not null,
+        `administrator_id` integer,
+        `sponsor_id` integer,
         primary key (`id`)
     ) engine=InnoDB;
 
@@ -378,6 +380,11 @@
        references `user_account` (`id`);
 
     alter table `comercialbanner` 
+       add constraint `FKcvbsmt5226xsmf6kxc5p8leal` 
+       foreign key (`administrator_id`) 
+       references `administrator` (`id`);
+
+    alter table `comercialbanner` 
        add constraint `FKii9iupedxt6hx534i7mm6wjhv` 
        foreign key (`sponsor_id`) 
        references `sponsor` (`id`);
@@ -416,6 +423,11 @@
        add constraint `FKhlmmbswdtxwq1f6w6gmj14oci` 
        foreign key (`message_thread_id`) 
        references `messagethread` (`id`);
+
+    alter table `noncomercialbanner` 
+       add constraint `FKafyjtxoa8c41616xvnuaphdgp` 
+       foreign key (`administrator_id`) 
+       references `administrator` (`id`);
 
     alter table `noncomercialbanner` 
        add constraint `FKiqlwh7t99w47gee8as9xvk5xt` 

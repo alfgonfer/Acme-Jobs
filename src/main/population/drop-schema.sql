@@ -37,6 +37,10 @@
 
     alter table `comercialbanner` 
        drop 
+       foreign key `FKcvbsmt5226xsmf6kxc5p8leal`;
+
+    alter table `comercialbanner` 
+       drop 
        foreign key `FKii9iupedxt6hx534i7mm6wjhv`;
 
     alter table `consumer` 
@@ -66,6 +70,10 @@
     alter table `message` 
        drop 
        foreign key `FKhlmmbswdtxwq1f6w6gmj14oci`;
+
+    alter table `noncomercialbanner` 
+       drop 
+       foreign key `FKafyjtxoa8c41616xvnuaphdgp`;
 
     alter table `noncomercialbanner` 
        drop 
