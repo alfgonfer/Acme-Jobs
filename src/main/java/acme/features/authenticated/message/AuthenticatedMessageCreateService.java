@@ -1,7 +1,6 @@
 
 package acme.features.authenticated.message;
 
-import java.util.Collection;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import acme.entities.configuration.Configuration;
 import acme.entities.messages.Message;
-import acme.entities.messagethreads.Messagethread;
 import acme.features.utiles.ConfigurationRepository;
 import acme.features.utiles.Spamfilter;
 import acme.framework.components.Errors;
@@ -88,12 +86,6 @@ public class AuthenticatedMessageCreateService implements AbstractCreateService<
 		spamWords = configuration.getSpamWords();
 		spamThreshold = configuration.getSpamThreshold();
 
-		int messageThread = request.getModel().getInteger("id");
-		Messagethread mt = this.repository.findMTById(messageThread);
-		Collection<Messagethread> mts = this.repository.findManybyUser(request.getPrincipal().getAccountId());
-		if (!mts.contains(mt)) {
-			errors.state(request, mts.contains(mt), "title", "authenticated.message.error.must-be-yours");
-		}
 		boolean isAccepted = request.getModel().getString("accept") != "" && request.getModel().getString("accept") != null;
 		errors.state(request, isAccepted, "accept", "authenticated.message.error.must-accept");
 
@@ -125,8 +117,8 @@ public class AuthenticatedMessageCreateService implements AbstractCreateService<
 			hasBody = entity.getBody() != null;
 			if (hasBody) {
 
-				hasTagsSpam = Spamfilter.spamThreshold(entity.getBody(), spamWords, spamThreshold);
-				errors.state(request, !hasTagsSpam, "body", "authenticated.messagethread.error.spam-body");
+				hasBodySpam = Spamfilter.spamThreshold(entity.getBody(), spamWords, spamThreshold);
+				errors.state(request, !hasBodySpam, "body", "authenticated.messagethread.error.spam-body");
 			}
 
 		}
