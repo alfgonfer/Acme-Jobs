@@ -18,5 +18,5 @@ administrator.auditorrequest.form.label.button.return = Volver
 
 administrator.auditorrequest.error.must-have-description = La petición debe contener una descripción
 administrator.auditorrequest.error.must-not-have-spam-description = La descripción de la petición no debe de contener spam
-
+administrator.auditorrequest.error.pattern-status=Debe ser pending, accepted o rejected
 

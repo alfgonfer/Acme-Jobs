@@ -22,7 +22,7 @@ employer.application.form.label.message = Change status of application:
 employer.application.form.button.update = Update
 
 employer.application.form.label.button.return = Return
-
+employer.application.error.pattern-status=It must be pending, accepted or rejected
 
 employer.request.error.must-justificated = The rejected application must have a mandatory justification
 worker.application.error.had-applicated = You have already applicated to this job

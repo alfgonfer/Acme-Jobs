@@ -16,3 +16,5 @@ administrator.companyrecords.form.label.button.return = Return
 administrator.companyrecords.form.button.update = Update
 administrator.companyrecords.form.button.delete = Delete
 administrator.companyrecords.form.button.create = Create
+
+administrator.companyrecords.error.pattern-phone=It must follow the next structure +34 676305600 or +1234) 123456

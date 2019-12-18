@@ -62,7 +62,7 @@ public class ConsumerOffersCreateService implements AbstractCreateService<Consum
 		assert request != null;
 		assert entity != null;
 		assert errors != null;
-		boolean isDuplicated, isEuroLower, isEuroMajor, isRange, isAccepted, isFuture, hasDeadline, hasTitle, hasDescription, hasMajorRange, hasLowerRange, hasTicker;
+		boolean isDuplicated, isEuroLower, isEuroMajor, isRange, isAccepted, isFuture, hasDeadline, hasMajorRange, hasLowerRange, hasTicker;
 		Date dateNow, deadline;
 
 		dateNow = new Date(System.currentTimeMillis() - 1);
@@ -78,7 +78,10 @@ public class ConsumerOffersCreateService implements AbstractCreateService<Consum
 		}
 
 		hasTicker = entity.getTicker() != null;
-		errors.state(request, hasTicker, "ticker", "consumer.offers.error.tickerDuplicated", "");
+		errors.state(request, hasTicker, "ticker", "consumer.offers.error.tickerDuplicated");
+
+		boolean ErrorPattern = entity.getTicker().matches("^[O][a-zA-Z]{4}[-][0-9]{5}$");
+		errors.state(request, ErrorPattern, "ticker", "consumer.offers.error.pattern-ticker");
 
 		if (hasTicker) {
 
@@ -112,7 +115,7 @@ public class ConsumerOffersCreateService implements AbstractCreateService<Consum
 
 		isAccepted = request.getModel().getString("accept") != "" && request.getModel().getString("accept") != null;
 		errors.state(request, isAccepted, "accept", "consumer.offers.error.must-accept");
-
+		//It must follow the next structure OABCD-00001
 	}
 
 	@Override

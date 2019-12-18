@@ -803,7 +803,8 @@
 	<bean id="messagethread1" class="acme.entities.messagethreads.Messagethread">
 		<property name="title" value="Hilo de mensajes 1"/>
 		<property name="moment" value="2019/11/25 12:00"/>
-		<property name="usernames" value=""/>
+		<property name="usernames" value="employer1,employer2"/>
+
 	</bean>
 	
 	<bean id="participates01" class="acme.entities.participates.Participates">

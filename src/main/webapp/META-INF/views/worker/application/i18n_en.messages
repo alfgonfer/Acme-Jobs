@@ -18,8 +18,9 @@ worker.application.form.label.button.return = Return
 worker.application.form.label.button.create = Create
 
 worker.application.error.must-have-reference = Reference must not be null
-worker.application.error.must-be-unique = Reference must be unique.
+worker.application.error.must-be-unique = Reference must be unique
 worker.application.error.must-be-pending = Status must be pending
 worker.application.error.must-have-skills = Skills must not be null
 worker.application.error.must-have-qualifications = Qualifications must not be null
 worker.application.error.must-have-statement = Statement must not be null
+worker.application.error.pattern-status= It must be pending, accepted or rejected
