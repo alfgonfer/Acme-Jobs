@@ -231,6 +231,7 @@
         `moment` datetime(6),
         `title` varchar(255),
         `usernames` varchar(255),
+        `creator_id` integer,
         primary key (`id`)
     ) engine=InnoDB;
 
@@ -433,6 +434,11 @@
        add constraint `FKhlmmbswdtxwq1f6w6gmj14oci` 
        foreign key (`message_thread_id`) 
        references `messagethread` (`id`);
+
+    alter table `messagethread` 
+       add constraint `FKjrdkemfq5su0eieym0n8bdtgy` 
+       foreign key (`creator_id`) 
+       references `authenticated` (`id`);
 
     alter table `noncomercialbanner` 
        add constraint `FKiqlwh7t99w47gee8as9xvk5xt` 

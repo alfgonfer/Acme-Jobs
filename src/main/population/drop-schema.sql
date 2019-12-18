@@ -67,6 +67,10 @@
        drop 
        foreign key `FKhlmmbswdtxwq1f6w6gmj14oci`;
 
+    alter table `messagethread` 
+       drop 
+       foreign key `FKjrdkemfq5su0eieym0n8bdtgy`;
+
     alter table `noncomercialbanner` 
        drop 
        foreign key `FKiqlwh7t99w47gee8as9xvk5xt`;

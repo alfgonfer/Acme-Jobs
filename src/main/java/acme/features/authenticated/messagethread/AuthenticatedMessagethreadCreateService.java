@@ -54,7 +54,7 @@ public class AuthenticatedMessagethreadCreateService implements AbstractCreateSe
 		assert entity != null;
 		assert model != null;
 
-		request.unbind(entity, model, "title", "moment", "usernames");
+		request.unbind(entity, model, "title", "moment", "usernames", "creator");
 
 	}
 
@@ -69,6 +69,8 @@ public class AuthenticatedMessagethreadCreateService implements AbstractCreateSe
 
 		result.setMoment(moment);
 		result.setUsernames("");
+		Authenticated creator = this.repository.findUserByUserName(request.getPrincipal().getUsername()).getRole(Authenticated.class);
+		result.setCreator(creator);
 
 		return result;
 	}
@@ -116,7 +118,8 @@ public class AuthenticatedMessagethreadCreateService implements AbstractCreateSe
 		assert entity != null;
 
 		Date moment;
-		//Collection<Participates> users = new ArrayList<>();
+		Authenticated creator = this.repository.findUserByUserName(request.getPrincipal().getUsername()).getRole(Authenticated.class);
+		entity.setCreator(creator);
 
 		moment = new Date(System.currentTimeMillis() - 1);
 

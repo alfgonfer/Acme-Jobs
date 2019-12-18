@@ -9,6 +9,7 @@ authenticated.messagethread.form.label.usernames.create =
 authenticated.messagethread.form.label.message = Messages:
 authenticated.messagethread.form.label.button.return = Return
 authenticated.messagethread.form.button.message= List of messages
+authenticated.messagethread.form.button.users = List of users
 authenticated.messagethread.form.button.message.create= Create a message
 authenticated.messagethread.button.create = Create
 

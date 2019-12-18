@@ -1,6 +1,8 @@
 
 package acme.entities.participates;
 
+import java.beans.Transient;
+
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
@@ -25,4 +27,11 @@ public class Participates extends DomainEntity {
 	@NotNull
 	@ManyToOne
 	private Authenticated		authenticated;
+
+
+	@Transient
+	public String getUserName() {
+		return this.authenticated.getUserAccount().getUsername();
+	}
+
 }
