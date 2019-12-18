@@ -19,7 +19,7 @@ import acme.framework.services.AbstractCreateService;
 public class WorkerApplicationCreateService implements AbstractCreateService<Worker, Application> {
 
 	@Autowired
-	WorkerApplicationRepository repository;
+	private WorkerApplicationRepository repository;
 
 
 	@Override
@@ -89,29 +89,37 @@ public class WorkerApplicationCreateService implements AbstractCreateService<Wor
 
 		boolean hasReference, isDuplicated, hasStatus, hasSkills, hasStatement, hasQualifications;
 
-		hasReference = entity.getReference() != null;
-		errors.state(request, hasReference, "reference", "worker.application.error.must-have-reference");
-		if (hasReference) {
-			isDuplicated = this.repository.findOneByReference(entity.getReference()) != null;
-			errors.state(request, !isDuplicated, "reference", "worker.application.error.must-be-unique");
+		if (!errors.hasErrors("reference")) {
+			hasReference = entity.getReference() != null;
+			errors.state(request, hasReference, "reference", "worker.application.error.must-have-reference");
+			if (hasReference) {
+				isDuplicated = this.repository.findOneByReference(entity.getReference()) != null;
+				errors.state(request, !isDuplicated, "reference", "worker.application.error.must-be-unique");
+			}
+		}
+		if (!errors.hasErrors("status")) {
+			hasStatus = entity.getStatus() != null;
+			errors.state(request, hasStatus, "status", "worker.application.error.must-have-status");
+			if (hasStatus) {
+				boolean pending = entity.getStatus().equals("pending");
+				errors.state(request, pending, "status", "worker.application.error.must-be-pending");
+			}
 		}
 
-		hasStatus = entity.getStatus() != null;
-		errors.state(request, hasStatus, "status", "worker.application.error.must-have-status");
-		if (hasStatus) {
-			boolean pending = entity.getStatus().equals("pending");
-			errors.state(request, pending, "status", "worker.application.error.must-be-pending");
+		if (!errors.hasErrors("skills")) {
+			hasSkills = entity.getSkills() != null;
+			errors.state(request, hasSkills, "skills", "worker.application.error.must-have-skills");
 		}
 
-		hasSkills = entity.getSkills() != null;
-		errors.state(request, hasSkills, "skills", "worker.application.error.must-have-skills");
+		if (!errors.hasErrors("statement")) {
+			hasStatement = entity.getStatement() != null;
+			errors.state(request, hasStatement, "statement", "worker.application.error.must-have-statement");
+		}
 
-		hasStatement = entity.getStatement() != null;
-		errors.state(request, hasStatement, "statement", "worker.application.error.must-have-statement");
-
-		hasQualifications = entity.getQualifications() != null;
-		errors.state(request, hasQualifications, "qualifications", "worker.application.error.must-have-qualifications");
-
+		if (!errors.hasErrors("qualifications")) {
+			hasQualifications = entity.getQualifications() != null;
+			errors.state(request, hasQualifications, "qualifications", "worker.application.error.must-have-qualifications");
+		}
 	}
 
 	@Override

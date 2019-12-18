@@ -103,6 +103,7 @@ public class EmployerDutyCreateService implements AbstractCreateService<Employer
 
 		// Title validation -------------------------------------------------------------------------------
 
+		if(!errors.hasErrors("title")) {
 		hasTitle = entity.getTitle() != null;
 		errors.state(request, hasTitle, "title", "employer.duty.error.must-have-title");
 
@@ -110,9 +111,11 @@ public class EmployerDutyCreateService implements AbstractCreateService<Employer
 			hasSpamTitle = Spamfilter.spamThreshold(entity.getTitle(), spamWords, spamThreshold);
 			errors.state(request, !hasSpamTitle, "title", "employer.duty.error.must-not-have-title-spam");
 		}
+		}
 
 		// Description validation ------------------------------------------------------------------------
 
+		if(!errors.hasErrors("description")) {
 		hasDescription = entity.getDescription() != null;
 		errors.state(request, hasDescription, "description", "employer.duty.error.must-have-description");
 
@@ -120,9 +123,11 @@ public class EmployerDutyCreateService implements AbstractCreateService<Employer
 			hasSpamDescription = Spamfilter.spamThreshold(entity.getDescription(), spamWords, spamThreshold);
 			errors.state(request, !hasSpamDescription, "description", "employer.duty.error.must-not-be-spam");
 		}
+		}
 
 		// Percentage validation -------------------------------------------------------------------------
 
+		if(!errors.hasErrors("percentage")) {
 		hasPercentage = entity.getPercentage() != null;
 		errors.state(request, hasPercentage, "percentage", "employer.duty.error.must-not-have-percentage");
 		if (hasPercentage) {
@@ -151,6 +156,7 @@ public class EmployerDutyCreateService implements AbstractCreateService<Employer
 				errors.state(request, percentageSumLess100, "percentage", "employer.duty.error.must-be-less-or-equal-than-101");
 
 			}
+		}
 		}
 	}
 

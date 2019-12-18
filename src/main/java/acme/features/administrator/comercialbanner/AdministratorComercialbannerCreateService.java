@@ -15,7 +15,6 @@ import acme.framework.components.Errors;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
 import acme.framework.entities.Administrator;
-import acme.framework.entities.Principal;
 import acme.framework.services.AbstractCreateService;
 
 @Service
@@ -56,14 +55,9 @@ public class AdministratorComercialbannerCreateService implements AbstractCreate
 		assert request != null;
 
 		Sponsor sponsor;
-		Principal principal;
 		Comercialbanner result;
-		int principalId;
 
-		principal = request.getPrincipal();
-		principalId = principal.getAccountId();
-
-		sponsor = this.repository.findOneSponsorByUserAccountId(principalId);
+		sponsor = new Sponsor();
 
 		result = new Comercialbanner();
 		result.setFinalMode(false);
@@ -87,46 +81,59 @@ public class AdministratorComercialbannerCreateService implements AbstractCreate
 		now = new Date(System.currentTimeMillis() - 1);
 
 		// Slogan validation ---------------------------------------------------------------------------------
-		hasSlogan = entity.getSlogan() != null && !entity.getSlogan().isEmpty();
-		errors.state(request, hasSlogan, "slogan", "administrator.comercialbanner.error.must-have-slogan");
+		if (!errors.hasErrors("slogan")) {
+			hasSlogan = entity.getSlogan() != null && !entity.getSlogan().isEmpty();
+			errors.state(request, hasSlogan, "slogan", "administrator.comercialbanner.error.must-have-slogan");
 
-		if (hasSlogan) {
+			if (hasSlogan) {
 
-			configuration = this.ConfigurationRepository.findConfiguration();
-			spamWords = configuration.getSpamWords();
-			spamThreshold = configuration.getSpamThreshold();
+				configuration = this.ConfigurationRepository.findConfiguration();
+				spamWords = configuration.getSpamWords();
+				spamThreshold = configuration.getSpamThreshold();
 
-			hasSpamSlogan = Spamfilter.spamThreshold(entity.getSlogan(), spamWords, spamThreshold);
-			errors.state(request, !hasSpamSlogan, "slogan", "administrator.comercialbanner.error.must-have-not-spam-slogan");
+				hasSpamSlogan = Spamfilter.spamThreshold(entity.getSlogan(), spamWords, spamThreshold);
+				errors.state(request, !hasSpamSlogan, "slogan", "administrator.comercialbanner.error.must-have-not-spam-slogan");
+			}
 		}
 
 		// Expiration validation ------------------------------------------------------------------------------------
-		hasExpiration = entity.getExpiration() != null;
-		errors.state(request, hasExpiration, "expiration", "administrator.comercialbanner.error.must-have-expiration");
-		if (hasExpiration) {
-			isFuture = now.before(entity.getExpiration());
-			errors.state(request, isFuture, "expiration", "administrator.comercialbanner.error.expirated");
+
+		if (!errors.hasErrors("expiration")) {
+			hasExpiration = entity.getExpiration() != null;
+			errors.state(request, hasExpiration, "expiration", "administrator.comercialbanner.error.must-have-expiration");
+			if (hasExpiration) {
+				isFuture = now.before(entity.getExpiration());
+				errors.state(request, isFuture, "expiration", "administrator.comercialbanner.error.expirated");
+			}
 		}
 
 		// Number validation ----------------------------------------------------------------------------------------
 
-		hasNumber = entity.getCreditNumber() != null;
-		errors.state(request, hasNumber, "creditNumber", "administrator.comercialbanner.error.must-have-creditNumber");
+		if (!errors.hasErrors("creditNumber")) {
+			hasNumber = entity.getCreditNumber() != null;
+			errors.state(request, hasNumber, "creditNumber", "administrator.comercialbanner.error.must-have-creditNumber");
+		}
 
 		// Name validation ------------------------------------------------------------------------------------------
 
-		hasNameOwner = entity.getName() != null;
-		errors.state(request, hasNameOwner, "name", "administrator.comercialbanner.error.must-have-name");
+		if (!errors.hasErrors("name")) {
+			hasNameOwner = entity.getName() != null;
+			errors.state(request, hasNameOwner, "name", "administrator.comercialbanner.error.must-have-name");
+		}
 
 		// Surname validation ---------------------------------------------------------------------------------------
 
-		hasSurname = entity.getSurname() != null;
-		errors.state(request, hasSurname, "surname", "administrator.comercialbanner.error.must-have-surname");
+		if (!errors.hasErrors("surname")) {
+			hasSurname = entity.getSurname() != null;
+			errors.state(request, hasSurname, "surname", "administrator.comercialbanner.error.must-have-surname");
+		}
 
 		// Security code validation ----------------------------------------------------------------------------------
 
-		hasSecurityCode = entity.getSecurityCode() != null;
-		errors.state(request, hasSecurityCode, "securityCode", "administrator.comercialbanner.error.must-have-securityCode");
+		if (!errors.hasErrors("securityCode")) {
+			hasSecurityCode = entity.getSecurityCode() != null;
+			errors.state(request, hasSecurityCode, "securityCode", "administrator.comercialbanner.error.must-have-securityCode");
+		}
 
 	}
 

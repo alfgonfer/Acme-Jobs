@@ -87,17 +87,19 @@ public class SponsorNonComercialbannerCreateService implements AbstractCreateSer
 
 		boolean hasSlogan, hasSpamSlogan;
 
-		hasSlogan = entity.getSlogan() != null && !entity.getSlogan().isEmpty();
-		errors.state(request, hasSlogan, "slogan", "sponsor.noncomercialbanner.error.must-have-slogan");
+		if (!errors.hasErrors("slogan")) {
+			hasSlogan = entity.getSlogan() != null && !entity.getSlogan().isEmpty();
+			errors.state(request, hasSlogan, "slogan", "sponsor.noncomercialbanner.error.must-have-slogan");
 
-		if (hasSlogan) {
+			if (hasSlogan) {
 
-			configuration = this.ConfigurationRepository.findConfiguration();
-			spamWords = configuration.getSpamWords();
-			spamThreshold = configuration.getSpamThreshold();
+				configuration = this.ConfigurationRepository.findConfiguration();
+				spamWords = configuration.getSpamWords();
+				spamThreshold = configuration.getSpamThreshold();
 
-			hasSpamSlogan = Spamfilter.spamThreshold(entity.getSlogan(), spamWords, spamThreshold);
-			errors.state(request, !hasSpamSlogan, "slogan", "sponsor.noncomercialbanner.error.must-have-not-spam-slogan");
+				hasSpamSlogan = Spamfilter.spamThreshold(entity.getSlogan(), spamWords, spamThreshold);
+				errors.state(request, !hasSpamSlogan, "slogan", "sponsor.noncomercialbanner.error.must-have-not-spam-slogan");
+			}
 		}
 
 	}

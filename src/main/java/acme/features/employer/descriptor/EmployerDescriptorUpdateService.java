@@ -91,14 +91,16 @@ public class EmployerDescriptorUpdateService implements AbstractUpdateService<Em
 		hasDescription = entity.getDescription() != null;
 		errors.state(request, hasDescription, "description", "employer.descriptor.error.must-have-description");
 
-		if (hasDescription) {
+		if (!errors.hasErrors("description")) {
+			if (hasDescription) {
 
-			configuration = this.repository.findConfiguration();
-			spamWords = configuration.getSpamWords();
-			spamThreshold = configuration.getSpamThreshold();
+				configuration = this.repository.findConfiguration();
+				spamWords = configuration.getSpamWords();
+				spamThreshold = configuration.getSpamThreshold();
 
-			isNotSpam = Spamfilter.spamThreshold(entity.getDescription(), spamWords, spamThreshold);
-			errors.state(request, !isNotSpam, "description", "employer.descriptor.error.must-not-be-spam");
+				isNotSpam = Spamfilter.spamThreshold(entity.getDescription(), spamWords, spamThreshold);
+				errors.state(request, !isNotSpam, "description", "employer.descriptor.error.must-not-be-spam");
+			}
 		}
 
 	}
