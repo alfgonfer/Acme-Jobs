@@ -79,6 +79,9 @@ public class AdministratorAuditorrequestUpdateService implements AbstractUpdateS
 		assert entity != null;
 		assert errors != null;
 
+		boolean ErrorPattern = entity.getStatus().matches("^(pending)|(accepted)|(rejected)$");
+		errors.state(request, ErrorPattern, "status", "administrator.auditorrequest.error.pattern-status");
+
 	}
 
 	@Override

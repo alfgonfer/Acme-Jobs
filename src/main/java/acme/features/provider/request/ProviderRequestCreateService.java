@@ -88,6 +88,9 @@ public class ProviderRequestCreateService implements AbstractCreateService<Provi
 		hasTicker = entity.getTicker() != null;
 		errors.state(request, hasTicker, "ticker", "provider.request.error.tickerDuplicated", "");
 
+		boolean ErrorPattern = entity.getTicker().matches("^[O][a-zA-Z]{4}[-][0-9]{5}$");
+		errors.state(request, ErrorPattern, "ticker", "provider.request.error.pattern-ticker");
+
 		if (hasTicker) {
 
 			isDuplicated = this.repository.findOneByTicker(entity.getTicker()) != null;

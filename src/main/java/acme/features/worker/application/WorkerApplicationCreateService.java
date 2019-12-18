@@ -125,6 +125,10 @@ public class WorkerApplicationCreateService implements AbstractCreateService<Wor
 				}
 			}
 
+		boolean ErrorPattern = entity.getStatus().matches("^(pending)|(accepted)|(rejected)$");
+		errors.state(request, ErrorPattern, "status", "worker.application.error.pattern-status");
+
+
 			if (!errors.hasErrors("skills")) {
 				hasSkills = entity.getSkills() != null;
 				errors.state(request, hasSkills, "skills", "worker.application.error.must-have-skills");

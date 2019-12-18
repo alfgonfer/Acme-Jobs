@@ -34,4 +34,5 @@ sponsor.comercialbanner.error.must-have-creditNumber = La tarjeta de credito deb
 sponsor.comercialbanner.error.must-have-name = La tarjeta de credito debe de tener el nombre del dueño
 sponsor.comercialbanner.error.must-have-surname = La tarjeta de credito debe de tener los apellidos del dueño
 sponsor.comercialbanner.error.must-have-securityCode = La tarjeta de credito debe de tener el codigo de seguridad
-sponsor.comercialbanner.error.must-have-securityCode-pattern = El codigo de seguridad deben de ser 3 números
+sponsor.comercialbanner.error.pattern-securityCode= El codigo de seguridad deben de ser 3 números
+sponsor.comercialbanner.error.pattern-type = El tipo de la tarjeta de crédito debe ser Dinners Club, Visa, Master Card o American Express
