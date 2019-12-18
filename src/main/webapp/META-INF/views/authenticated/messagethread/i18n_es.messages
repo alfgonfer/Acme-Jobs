@@ -17,4 +17,5 @@ authenticated.messagethread.error.must-have-title = El hilo debe de tener un tí
 authenticated.messagethread.error.must-not-have-spam-title = El título del hilo no puede contener spam
 authenticated.messagethread.error.must-have-usernames = El hilo debe tener usuarios participantes
 authenticated.messagethread.error.not-found-user = No se puede encontrar algún usuario
+authenticated.messagethread.error.spam-title = El título del hilo de mensajes no puede contener spam
 

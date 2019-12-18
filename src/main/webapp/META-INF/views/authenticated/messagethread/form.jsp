@@ -9,7 +9,9 @@
 	<acme:form-moment code="authenticated.messagethread.form.label.moment" path="moment"/>
 	</jstl:if>
 	<acme:form-textbox code="authenticated.messagethread.form.label.usernames" path="usernames"/>
+	<jstl:if test="${command == 'create'}">
 	<h6><acme:message code="authenticated.messagethread.message.usernames"/></h6>
+	</jstl:if>
 	<jstl:if test="${command != 'create'}">
 	<jstl:set var="id" value="${id}"/>
 	<jstl:set var="mtid" value="${id}"/>
