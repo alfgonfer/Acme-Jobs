@@ -66,6 +66,7 @@
         `is_final_mode` bit,
         `moment` datetime(6),
         `title` varchar(255),
+        `auditor_id` integer not null,
         `job_id` integer not null,
         primary key (`id`)
     ) engine=InnoDB;
@@ -118,7 +119,8 @@
         `security_code` varchar(255),
         `surname` varchar(255),
         `type` varchar(255),
-        `sponsor_id` integer not null,
+        `administrator_id` integer,
+        `sponsor_id` integer,
         primary key (`id`)
     ) engine=InnoDB;
 
@@ -224,6 +226,7 @@
         `moment` datetime(6),
         `title` varchar(255),
         `usernames` varchar(255),
+        `creator_id` integer,
         primary key (`id`)
     ) engine=InnoDB;
 
@@ -235,7 +238,8 @@
         `url_picture` varchar(255),
         `url_target` varchar(255),
         `jingle` varchar(255),
-        `sponsor_id` integer not null,
+        `administrator_id` integer,
+        `sponsor_id` integer,
         primary key (`id`)
     ) engine=InnoDB;
 
@@ -251,6 +255,14 @@
         `moment` datetime(6),
         `ticker` varchar(255),
         `title` varchar(255),
+        primary key (`id`)
+    ) engine=InnoDB;
+
+    create table `participates` (
+       `id` integer not null,
+        `version` integer not null,
+        `authenticated_id` integer,
+        `messagethread_id` integer,
         primary key (`id`)
     ) engine=InnoDB;
 
@@ -297,7 +309,7 @@
     ) engine=InnoDB;
 
     create table `user_account_messagethread` (
-       `users_id` integer not null,
+       `user_account_id` integer not null,
         `messagethread_id` integer not null
     ) engine=InnoDB;
 
@@ -362,6 +374,11 @@
        references `user_account` (`id`);
 
     alter table `auditrecord` 
+       add constraint `FKditgyx355sc4ye86w7tj22cq6` 
+       foreign key (`auditor_id`) 
+       references `auditor` (`id`);
+
+    alter table `auditrecord` 
        add constraint `FKa5p4w0gnuwmtb07juvrg8ptn6` 
        foreign key (`job_id`) 
        references `job` (`id`);
@@ -370,6 +387,11 @@
        add constraint FK_h52w0f3wjoi68b63wv9vwon57 
        foreign key (`user_account_id`) 
        references `user_account` (`id`);
+
+    alter table `comercialbanner` 
+       add constraint `FKcvbsmt5226xsmf6kxc5p8leal` 
+       foreign key (`administrator_id`) 
+       references `administrator` (`id`);
 
     alter table `comercialbanner` 
        add constraint `FKii9iupedxt6hx534i7mm6wjhv` 
@@ -411,10 +433,30 @@
        foreign key (`message_thread_id`) 
        references `messagethread` (`id`);
 
+    alter table `messagethread` 
+       add constraint `FKjrdkemfq5su0eieym0n8bdtgy` 
+       foreign key (`creator_id`) 
+       references `authenticated` (`id`);
+
+    alter table `noncomercialbanner` 
+       add constraint `FKafyjtxoa8c41616xvnuaphdgp` 
+       foreign key (`administrator_id`) 
+       references `administrator` (`id`);
+
     alter table `noncomercialbanner` 
        add constraint `FKiqlwh7t99w47gee8as9xvk5xt` 
        foreign key (`sponsor_id`) 
        references `sponsor` (`id`);
+
+    alter table `participates` 
+       add constraint `FK2v2b6kxya4od7kymllfa9iv0v` 
+       foreign key (`authenticated_id`) 
+       references `authenticated` (`id`);
+
+    alter table `participates` 
+       add constraint `FKsyju38rbst3bgj3okjyo7ovly` 
+       foreign key (`messagethread_id`) 
+       references `messagethread` (`id`);
 
     alter table `provider` 
        add constraint FK_b1gwnjqm6ggy9yuiqm0o4rlmd 
@@ -432,8 +474,8 @@
        references `messagethread` (`id`);
 
     alter table `user_account_messagethread` 
-       add constraint `FKh8iu87gcefeem2dlwqgdo5vkg` 
-       foreign key (`users_id`) 
+       add constraint `FK5590jid94qdluwlnsbr2w4tbx` 
+       foreign key (`user_account_id`) 
        references `user_account` (`id`);
 
     alter table `worker` 

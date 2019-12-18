@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.entities.comercialbanner.Comercialbanner;
-import acme.entities.roles.Sponsor;
 import acme.framework.components.Errors;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
@@ -29,7 +28,7 @@ public class AdministratorComercialbannerUpdateService implements AbstractUpdate
 		Comercialbanner result;
 		Principal principal;
 		Integer idPrincipal;
-		Sponsor sponsor;
+		Administrator administrator;
 
 		id = request.getModel().getInteger("id");
 		result = this.repository.findOneById(id);
@@ -37,9 +36,9 @@ public class AdministratorComercialbannerUpdateService implements AbstractUpdate
 		principal = request.getPrincipal();
 		idPrincipal = principal.getAccountId();
 
-		sponsor = this.repository.findOneSponsorByUserAccountId(idPrincipal);
+		administrator = this.repository.findAdministratorByUserAccountId(idPrincipal);
 
-		res = result.isFinalMode() || sponsor.getId() == result.getSponsor().getId();
+		res = result.isFinalMode() || administrator.getId() == result.getAdministrator().getId();
 
 		return res;
 	}

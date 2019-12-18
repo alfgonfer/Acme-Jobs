@@ -1,6 +1,7 @@
 
 package acme.features.worker.application;
 
+import java.util.Collection;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,40 +88,61 @@ public class WorkerApplicationCreateService implements AbstractCreateService<Wor
 		assert entity != null;
 		assert errors != null;
 
-		boolean hasReference, isDuplicated, hasStatus, hasSkills, hasStatement, hasQualifications;
+		boolean hasReference, isDuplicated, hasStatus, hasSkills, hasStatement, hasQualifications, alreadyApplicated;
+		Integer id;
+		Principal principal;
+		Collection<Application> result;
+		principal = request.getPrincipal();
+		id = request.getModel().getInteger("jobId");
+		result = this.repository.findManyByJobId(id);
 
-		if (!errors.hasErrors("reference")) {
-			hasReference = entity.getReference() != null;
-			errors.state(request, hasReference, "reference", "worker.application.error.must-have-reference");
-			if (hasReference) {
-				isDuplicated = this.repository.findOneByReference(entity.getReference()) != null;
-				errors.state(request, !isDuplicated, "reference", "worker.application.error.must-be-unique");
+		alreadyApplicated = true;
+
+		for (Application a : result) {
+
+			if (a.getWorker().getId() == principal.getActiveRoleId()) {
+				alreadyApplicated = false;
+				break;
 			}
+
 		}
-		if (!errors.hasErrors("status")) {
-			hasStatus = entity.getStatus() != null;
-			errors.state(request, hasStatus, "status", "worker.application.error.must-have-status");
-			if (hasStatus) {
-				boolean pending = entity.getStatus().equals("pending");
-				errors.state(request, pending, "status", "worker.application.error.must-be-pending");
+		errors.state(request, alreadyApplicated, "reference", "worker.application.error.had-applicated");
+		if (alreadyApplicated) {
+			if (!errors.hasErrors("reference")) {
+				hasReference = entity.getReference() != null;
+				errors.state(request, hasReference, "reference", "worker.application.error.must-have-reference");
+				if (hasReference) {
+					isDuplicated = this.repository.findOneByReference(entity.getReference()) != null;
+					errors.state(request, !isDuplicated, "reference", "worker.application.error.must-be-unique");
+				}
 			}
-		}
+			if (!errors.hasErrors("status")) {
+				hasStatus = entity.getStatus() != null;
+				errors.state(request, hasStatus, "status", "worker.application.error.must-have-status");
+				if (hasStatus) {
+					boolean pending = entity.getStatus().equals("pending");
+					errors.state(request, pending, "status", "worker.application.error.must-be-pending");
+				}
+			}
+
 		boolean ErrorPattern = entity.getStatus().matches("^(pending)|(accepted)|(rejected)$");
 		errors.state(request, ErrorPattern, "status", "worker.application.error.pattern-status");
 
-		if (!errors.hasErrors("skills")) {
-			hasSkills = entity.getSkills() != null;
-			errors.state(request, hasSkills, "skills", "worker.application.error.must-have-skills");
-		}
 
-		if (!errors.hasErrors("statement")) {
-			hasStatement = entity.getStatement() != null;
-			errors.state(request, hasStatement, "statement", "worker.application.error.must-have-statement");
-		}
+			if (!errors.hasErrors("skills")) {
+				hasSkills = entity.getSkills() != null;
+				errors.state(request, hasSkills, "skills", "worker.application.error.must-have-skills");
+			}
 
-		if (!errors.hasErrors("qualifications")) {
-			hasQualifications = entity.getQualifications() != null;
-			errors.state(request, hasQualifications, "qualifications", "worker.application.error.must-have-qualifications");
+			if (!errors.hasErrors("statement")) {
+				hasStatement = entity.getStatement() != null;
+				errors.state(request, hasStatement, "statement", "worker.application.error.must-have-statement");
+			}
+
+			if (!errors.hasErrors("qualifications")) {
+				hasQualifications = entity.getQualifications() != null;
+				errors.state(request, hasQualifications, "qualifications", "worker.application.error.must-have-qualifications");
+			}
 		}
 	}
 

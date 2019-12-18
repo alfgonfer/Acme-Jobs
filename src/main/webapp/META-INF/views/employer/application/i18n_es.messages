@@ -25,3 +25,4 @@ employer.application.form.label.button.return = Return
 
 employer.application.error.pattern-status= Debe ser pending, accepted o rejected
 employer.request.error.must-justificated = Las solicitudes rechazadas deben de tener una justificación
+worker.application.error.had-applicated = Ya has aplicado a este trabajo

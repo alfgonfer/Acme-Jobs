@@ -25,11 +25,19 @@
 
     alter table `auditrecord` 
        drop 
+       foreign key `FKditgyx355sc4ye86w7tj22cq6`;
+
+    alter table `auditrecord` 
+       drop 
        foreign key `FKa5p4w0gnuwmtb07juvrg8ptn6`;
 
     alter table `authenticated` 
        drop 
        foreign key FK_h52w0f3wjoi68b63wv9vwon57;
+
+    alter table `comercialbanner` 
+       drop 
+       foreign key `FKcvbsmt5226xsmf6kxc5p8leal`;
 
     alter table `comercialbanner` 
        drop 
@@ -63,9 +71,25 @@
        drop 
        foreign key `FKhlmmbswdtxwq1f6w6gmj14oci`;
 
+    alter table `messagethread` 
+       drop 
+       foreign key `FKjrdkemfq5su0eieym0n8bdtgy`;
+
+    alter table `noncomercialbanner` 
+       drop 
+       foreign key `FKafyjtxoa8c41616xvnuaphdgp`;
+
     alter table `noncomercialbanner` 
        drop 
        foreign key `FKiqlwh7t99w47gee8as9xvk5xt`;
+
+    alter table `participates` 
+       drop 
+       foreign key `FK2v2b6kxya4od7kymllfa9iv0v`;
+
+    alter table `participates` 
+       drop 
+       foreign key `FKsyju38rbst3bgj3okjyo7ovly`;
 
     alter table `provider` 
        drop 
@@ -81,7 +105,7 @@
 
     alter table `user_account_messagethread` 
        drop 
-       foreign key `FKh8iu87gcefeem2dlwqgdo5vkg`;
+       foreign key `FK5590jid94qdluwlnsbr2w4tbx`;
 
     alter table `worker` 
        drop 
@@ -132,6 +156,8 @@
     drop table if exists `noncomercialbanner`;
 
     drop table if exists `offers`;
+
+    drop table if exists `participates`;
 
     drop table if exists `provider`;
 

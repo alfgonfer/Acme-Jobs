@@ -4,6 +4,8 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <acme:form>
+	<acme:form-textbox code="worker.auditrecord.form.label.jobTitle" path="jobTitle"/>
+	<acme:form-textbox code="worker.auditrecord.form.label.auditorUser" path="auditorUser"/>
 	<acme:form-textbox code="worker.auditrecord.form.label.title" path="title"/>
 	<acme:form-textbox code="worker.auditrecord.form.label.status" path="isFinalMode"/>
 	<acme:form-textbox code="worker.auditrecord.form.label.moment" path="moment"/>

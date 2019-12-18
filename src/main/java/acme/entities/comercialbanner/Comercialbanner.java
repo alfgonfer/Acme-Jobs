@@ -16,6 +16,7 @@ import org.hibernate.validator.constraints.CreditCardNumber;
 
 import acme.entities.banner.Banner;
 import acme.entities.roles.Sponsor;
+import acme.framework.entities.Administrator;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -53,8 +54,10 @@ public class Comercialbanner extends Banner {
 
 	//	Relationships -------------------------------------------------------------------------
 
-	@NotNull
 	@Valid
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = true)
 	private Sponsor				sponsor;
+	@Valid
+	@ManyToOne(optional = true)
+	private Administrator		administrator;
 }

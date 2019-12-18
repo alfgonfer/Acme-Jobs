@@ -1,4 +1,3 @@
-
 package acme.features.administrator.comercialbanner;
 
 import java.util.Date;
@@ -8,13 +7,13 @@ import org.springframework.stereotype.Service;
 
 import acme.entities.comercialbanner.Comercialbanner;
 import acme.entities.configuration.Configuration;
-import acme.entities.roles.Sponsor;
 import acme.features.utiles.ConfigurationRepository;
 import acme.features.utiles.Spamfilter;
 import acme.framework.components.Errors;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
 import acme.framework.entities.Administrator;
+import acme.framework.entities.Principal;
 import acme.framework.services.AbstractCreateService;
 
 @Service
@@ -54,14 +53,19 @@ public class AdministratorComercialbannerCreateService implements AbstractCreate
 	public Comercialbanner instantiate(final Request<Comercialbanner> request) {
 		assert request != null;
 
-		Sponsor sponsor;
+		Administrator administrator;
+		Principal principal;
 		Comercialbanner result;
+		Integer principalId;
 
-		sponsor = new Sponsor();
+		principal = request.getPrincipal();
+		principalId = principal.getAccountId();
+
+		administrator = this.repository.findAdministratorByUserAccountId(principalId);
 
 		result = new Comercialbanner();
 		result.setFinalMode(false);
-		result.setSponsor(sponsor);
+		result.setAdministrator(administrator);
 		return result;
 	}
 
@@ -134,7 +138,7 @@ public class AdministratorComercialbannerCreateService implements AbstractCreate
 			hasSecurityCode = entity.getSecurityCode() != null;
 			errors.state(request, hasSecurityCode, "securityCode", "administrator.comercialbanner.error.must-have-securityCode");
 		}
-		boolean hasSecurityCodeP = entity.getSecurityCode().matches("^[0-9]{3}$");
+    boolean hasSecurityCodeP = entity.getSecurityCode().matches("^[0-9]{3}$");
 		errors.state(request, hasSecurityCodeP, "securityCode", "administrator.comercialbanner.error.pattern-securityCode");
 		boolean ErrorPatterntype = entity.getType().matches("^(Dinners Club)|(Visa)|(Master Card)|(American Express)$");
 		errors.state(request, ErrorPatterntype, "type", "administrator.comercialbanner.error.pattern-type");
@@ -151,3 +155,4 @@ public class AdministratorComercialbannerCreateService implements AbstractCreate
 	}
 
 }
+
