@@ -14,13 +14,22 @@ import acme.framework.services.AbstractShowService;
 public class AuthenticatedAuditrecordShowService implements AbstractShowService<Authenticated, Auditrecord> {
 
 	@Autowired
-	AuthenticatedAuditrecordRepository repository;
+	private AuthenticatedAuditrecordRepository repository;
 
 
 	@Override
 	public boolean authorise(final Request<Auditrecord> request) {
 		assert request != null;
-		return true;
+
+		boolean res;
+		Integer id;
+		Auditrecord result;
+
+		id = request.getModel().getInteger("id");
+		result = this.repository.findOneAuditrecordById(id);
+
+		res = result.getIsFinalMode();
+		return res;
 	}
 
 	@Override
@@ -29,7 +38,7 @@ public class AuthenticatedAuditrecordShowService implements AbstractShowService<
 		assert entity != null;
 		assert model != null;
 
-		request.unbind(entity, model, "title", "isFinalMode", "moment", "body", "job");
+		request.unbind(entity, model, "title", "isFinalMode", "moment", "body", "job", "jobTitle", "auditorUser");
 	}
 
 	@Override

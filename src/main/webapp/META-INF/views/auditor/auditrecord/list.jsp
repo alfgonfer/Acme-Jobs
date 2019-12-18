@@ -16,11 +16,9 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <acme:list>
-	<acme:list-column code="auditor.auditrecord.list.label.status" path="isFinalMode" width="30%"/>		
-	<acme:list-column code="auditor.auditrecord.list.label.moment" path="moment" width="30%"/>	
-	<acme:list-column code="auditor.auditrecord.list.label.title" path="title" width="40%"/>	
+	<acme:list-column code="auditor.auditrecord.list.label.title" path="title" width="40%"/>
+	<acme:list-column code="auditor.auditrecord.list.label.auditor" path="auditorUser" width="40%"/>	
+	<acme:list-column code="auditor.auditrecord.list.label.status" path="isFinalMode" width="10%"/>		
+	<acme:list-column code="auditor.auditrecord.list.label.moment" path="moment" width="10%"/>	
+	
 </acme:list>
-<jstl:set var="idJob" value="${param.id}"/>
-
-<h4><acme:menu-suboption code="auditor.auditrecord.list.button.addAudit" action="/auditor/auditrecord/create?idJob=${idJob}"/></h4>
-

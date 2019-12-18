@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import acme.entities.comercialbanner.Comercialbanner;
 import acme.entities.configuration.Configuration;
-import acme.entities.roles.Sponsor;
 import acme.features.utiles.ConfigurationRepository;
 import acme.features.utiles.Spamfilter;
 import acme.framework.components.Errors;
@@ -54,14 +53,21 @@ public class AdministratorComercialbannerCreateService implements AbstractCreate
 	public Comercialbanner instantiate(final Request<Comercialbanner> request) {
 		assert request != null;
 
-		Sponsor sponsor;
+
+		Administrator administrator;
+		Principal principal;
 		Comercialbanner result;
 
-		sponsor = new Sponsor();
+
+		principal = request.getPrincipal();
+		principalId = principal.getAccountId();
+
+		administrator = this.repository.findAdministratorByUserAccountId(principalId);
+
 
 		result = new Comercialbanner();
 		result.setFinalMode(false);
-		result.setSponsor(sponsor);
+		result.setAdministrator(administrator);
 		return result;
 	}
 

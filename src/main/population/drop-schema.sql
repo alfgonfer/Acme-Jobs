@@ -25,11 +25,19 @@
 
     alter table `auditrecord` 
        drop 
+       foreign key `FKditgyx355sc4ye86w7tj22cq6`;
+
+    alter table `auditrecord` 
+       drop 
        foreign key `FKa5p4w0gnuwmtb07juvrg8ptn6`;
 
     alter table `authenticated` 
        drop 
        foreign key FK_h52w0f3wjoi68b63wv9vwon57;
+
+    alter table `comercialbanner` 
+       drop 
+       foreign key `FKcvbsmt5226xsmf6kxc5p8leal`;
 
     alter table `comercialbanner` 
        drop 
@@ -62,6 +70,10 @@
     alter table `message` 
        drop 
        foreign key `FKhlmmbswdtxwq1f6w6gmj14oci`;
+
+    alter table `noncomercialbanner` 
+       drop 
+       foreign key `FKafyjtxoa8c41616xvnuaphdgp`;
 
     alter table `noncomercialbanner` 
        drop 

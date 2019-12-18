@@ -66,6 +66,7 @@
         `is_final_mode` bit,
         `moment` datetime(6),
         `title` varchar(255),
+        `auditor_id` integer not null,
         `job_id` integer not null,
         primary key (`id`)
     ) engine=InnoDB;
@@ -118,7 +119,8 @@
         `security_code` varchar(255),
         `surname` varchar(255),
         `type` varchar(255),
-        `sponsor_id` integer not null,
+        `administrator_id` integer,
+        `sponsor_id` integer,
         primary key (`id`)
     ) engine=InnoDB;
 
@@ -235,7 +237,8 @@
         `url_picture` varchar(255),
         `url_target` varchar(255),
         `jingle` varchar(255),
-        `sponsor_id` integer not null,
+        `administrator_id` integer,
+        `sponsor_id` integer,
         primary key (`id`)
     ) engine=InnoDB;
 
@@ -362,6 +365,11 @@
        references `user_account` (`id`);
 
     alter table `auditrecord` 
+       add constraint `FKditgyx355sc4ye86w7tj22cq6` 
+       foreign key (`auditor_id`) 
+       references `auditor` (`id`);
+
+    alter table `auditrecord` 
        add constraint `FKa5p4w0gnuwmtb07juvrg8ptn6` 
        foreign key (`job_id`) 
        references `job` (`id`);
@@ -370,6 +378,11 @@
        add constraint FK_h52w0f3wjoi68b63wv9vwon57 
        foreign key (`user_account_id`) 
        references `user_account` (`id`);
+
+    alter table `comercialbanner` 
+       add constraint `FKcvbsmt5226xsmf6kxc5p8leal` 
+       foreign key (`administrator_id`) 
+       references `administrator` (`id`);
 
     alter table `comercialbanner` 
        add constraint `FKii9iupedxt6hx534i7mm6wjhv` 
@@ -410,6 +423,11 @@
        add constraint `FKhlmmbswdtxwq1f6w6gmj14oci` 
        foreign key (`message_thread_id`) 
        references `messagethread` (`id`);
+
+    alter table `noncomercialbanner` 
+       add constraint `FKafyjtxoa8c41616xvnuaphdgp` 
+       foreign key (`administrator_id`) 
+       references `administrator` (`id`);
 
     alter table `noncomercialbanner` 
        add constraint `FKiqlwh7t99w47gee8as9xvk5xt` 

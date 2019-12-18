@@ -14,7 +14,7 @@ import acme.framework.services.AbstractShowService;
 public class AuthenticatedJobShowService implements AbstractShowService<Authenticated, Job> {
 
 	@Autowired
-	AuthenticatedJobRepository repository;
+	private AuthenticatedJobRepository repository;
 
 
 	@Override

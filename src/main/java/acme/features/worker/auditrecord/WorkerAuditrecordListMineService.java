@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.entities.auditrecord.Auditrecord;
+import acme.entities.jobs.Job;
 import acme.entities.roles.Worker;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
@@ -16,13 +17,23 @@ import acme.framework.services.AbstractListService;
 public class WorkerAuditrecordListMineService implements AbstractListService<Worker, Auditrecord> {
 
 	@Autowired
-	WorkerAuditrecordRepository repository;
+	private WorkerAuditrecordRepository repository;
 
 
 	@Override
 	public boolean authorise(final Request<Auditrecord> request) {
 		assert request != null;
-		return true;
+
+		boolean res;
+		Integer id;
+		Job result;
+
+		id = request.getModel().getInteger("id");
+		result = this.repository.findOneJobById(id);
+
+		res = result.isFinalMode();
+
+		return res;
 	}
 
 	@Override
@@ -31,7 +42,7 @@ public class WorkerAuditrecordListMineService implements AbstractListService<Wor
 		assert entity != null;
 		assert model != null;
 
-		request.unbind(entity, model, "title", "isFinalMode", "moment", "body", "job");
+		request.unbind(entity, model, "title", "isFinalMode", "moment", "body", "job", "auditorUser");
 
 	}
 

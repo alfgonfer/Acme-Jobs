@@ -1,5 +1,5 @@
 
-package acme.features.authenticated.auditrecord;
+package acme.features.auditor.auditrecord;
 
 import java.util.Collection;
 
@@ -7,32 +7,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.entities.auditrecord.Auditrecord;
-import acme.entities.jobs.Job;
+import acme.entities.roles.Auditor;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
-import acme.framework.entities.Authenticated;
 import acme.framework.services.AbstractListService;
 
 @Service
-public class AuthenticatedAuditrecordListMineService implements AbstractListService<Authenticated, Auditrecord> {
+public class AuditorAuditrecordListService implements AbstractListService<Auditor, Auditrecord> {
 
 	@Autowired
-	AuthenticatedAuditrecordRepository repository;
+	AuditorAuditrecordRepository repository;
 
 
 	@Override
 	public boolean authorise(final Request<Auditrecord> request) {
 		assert request != null;
-
-		boolean res;
-		Integer id;
-		Job result;
-
-		id = request.getModel().getInteger("id");
-		result = this.repository.findOneJobById(id);
-
-		res = result.isFinalMode();
-		return res;
+		return true;
 	}
 
 	@Override
@@ -41,7 +31,7 @@ public class AuthenticatedAuditrecordListMineService implements AbstractListServ
 		assert entity != null;
 		assert model != null;
 
-		request.unbind(entity, model, "title", "isFinalMode", "moment", "body", "job", "auditorUser");
+		request.unbind(entity, model, "auditorUser", "title", "isFinalMode", "moment", "body", "job");
 
 	}
 

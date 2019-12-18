@@ -17,6 +17,6 @@
 
 <acme:list>
 	<acme:list-column code="worker.auditrecord.list.label.title" path="title" width="40%"/>	
-	<acme:list-column code="worker.auditrecord.list.label.status" path="isFinalMode" width="30%"/>		
-	<acme:list-column code="worker.auditrecord.list.label.moment" path="moment" width="30%"/>	
+	<acme:list-column code="worker.auditrecord.list.label.auditorUser" path="auditorUser" width="40%"/>			
+	<acme:list-column code="worker.auditrecord.list.label.moment" path="moment" width="20%"/>>	
 </acme:list>
