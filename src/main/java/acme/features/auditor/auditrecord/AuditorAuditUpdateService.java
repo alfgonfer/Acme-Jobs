@@ -34,16 +34,16 @@ public class AuditorAuditUpdateService implements AbstractUpdateService<Auditor,
 		assert request != null;
 
 		boolean result;
-		int AuditrecordId;
-		Auditrecord Auditrecord;
+		int auditrecordId;
+		Auditrecord auditrecord;
 		Auditor auditor;
 		Principal principal;
 
-		AuditrecordId = request.getModel().getInteger("id");
-		Auditrecord = this.repository.findOneAuditrecordById(AuditrecordId);
-		auditor = Auditrecord.getJob().getAuditor();
+		auditrecordId = request.getModel().getInteger("id");
+		auditrecord = this.repository.findOneAuditrecordById(auditrecordId);
+		auditor = auditrecord.getJob().getAuditor();
 		principal = request.getPrincipal();
-		result = !Auditrecord.getIsFinalMode() && auditor.getId() == principal.getActiveRoleId();
+		result = auditor.getId() == principal.getActiveRoleId() && !auditrecord.getIsFinalMode();
 		return result;
 	}
 
@@ -53,7 +53,7 @@ public class AuditorAuditUpdateService implements AbstractUpdateService<Auditor,
 		assert entity != null;
 		assert errors != null;
 
-		request.bind(entity, errors, "moment", "job");
+		request.bind(entity, errors, "auditorUser", "moment", "job");
 
 	}
 

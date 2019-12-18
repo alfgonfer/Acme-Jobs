@@ -71,22 +71,19 @@ public class AuditorAuditrecordCreateService implements AbstractCreateService<Au
 	public Auditrecord instantiate(final Request<Auditrecord> request) {
 		Auditrecord result;
 		Date moment;
-
 		Principal principal;
 		Integer idUserAccount;
 		Auditor auditor;
 
-		/*
-		 * principal = request.getPrincipal();
-		 * idUserAccount = principal.getActiveRoleId();
-		 *
-		 * auditor = this.repository.findAuditorById(idUserAccount);
-		 */
+		principal = request.getPrincipal();
+		idUserAccount = principal.getActiveRoleId();
+
+		auditor = this.repository.findAuditorById(idUserAccount);
 		result = new Auditrecord();
 
 		moment = new Date(System.currentTimeMillis() - 1);
 		result.setMoment(moment);
-		//result.setAuditor(auditor);
+		result.setAuditor(auditor);
 
 		int job = request.getModel().getInteger("idJob");
 		result.setJob(this.repository.findJobByRef(job));
@@ -134,19 +131,17 @@ public class AuditorAuditrecordCreateService implements AbstractCreateService<Au
 		Integer idUserAccount;
 		Auditor auditor;
 
-		/*
-		 * principal = request.getPrincipal();
-		 * idUserAccount = principal.getActiveRoleId();
-		 *
-		 * auditor = this.repository.findAuditorById(idUserAccount);
-		 */
+		principal = request.getPrincipal();
+		idUserAccount = principal.getActiveRoleId();
+
+		auditor = this.repository.findAuditorById(idUserAccount);
 
 		moment = new Date(System.currentTimeMillis() - 1);
 		entity.setMoment(moment);
 
 		int job = request.getModel().getInteger("idJob");
 		entity.setJob(this.repository.findJobByRef(job));
-		//entity.setAuditor(auditor);
+		entity.setAuditor(auditor);
 
 		this.repository.save(entity);
 

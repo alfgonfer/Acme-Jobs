@@ -1,8 +1,9 @@
 auditor.auditrecord.list.label.status = Is Final Mode
 auditor.auditrecord.list.label.moment = Moment
 auditor.auditrecord.list.label.title = Title
+auditor.auditrecord.form.label.auditor = Auditor
 
-
+auditor.auditrecord.form.label.auditor = Auditor:
 auditor.auditrecord.form.label.title = Title:
 auditor.auditrecord.form.label.status = Is Final Mode:
 auditor.auditrecord.form.label.moment = Moment:

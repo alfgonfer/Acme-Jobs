@@ -15,7 +15,7 @@ import acme.framework.services.AbstractShowService;
 public class AuditorJobShowService implements AbstractShowService<Auditor, Job> {
 
 	@Autowired
-	AuditorJobRepository repository;
+	private AuditorJobRepository repository;
 
 
 	@Override

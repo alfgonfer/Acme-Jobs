@@ -50,6 +50,11 @@ public class Auditrecord extends DomainEntity {
 	public String getJobId() {
 		return this.job.getTitle();
 	}
+
+	@Transient
+	public String getAuditorUser() {
+		return this.auditor.getUserAccount().getUsername();
+	}
 	//	Relationships -------------------------------------------------------------------------
 
 
