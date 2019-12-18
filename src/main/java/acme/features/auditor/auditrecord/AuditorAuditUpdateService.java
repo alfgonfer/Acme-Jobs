@@ -5,7 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.entities.auditrecord.Auditrecord;
+import acme.entities.configuration.Configuration;
 import acme.entities.roles.Auditor;
+import acme.features.utiles.ConfigurationRepository;
+import acme.features.utiles.Spamfilter;
 import acme.framework.components.Errors;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
@@ -18,7 +21,10 @@ public class AuditorAuditUpdateService implements AbstractUpdateService<Auditor,
 	// Internal State --------------------------------------------------------------------------------------
 
 	@Autowired
-	private AuditorAuditrecordRepository repository;
+	private AuditorAuditrecordRepository	repository;
+
+	@Autowired
+	private ConfigurationRepository			configurationRepository;
 
 	// AbstractUpdateService<Auditor, Auditrecord> interface -----------------------------------------------
 
@@ -37,7 +43,7 @@ public class AuditorAuditUpdateService implements AbstractUpdateService<Auditor,
 		Auditrecord = this.repository.findOneAuditrecordById(AuditrecordId);
 		auditor = Auditrecord.getJob().getAuditor();
 		principal = request.getPrincipal();
-		result = Auditrecord.getJob().isFinalMode() || !Auditrecord.getJob().isFinalMode() && auditor.getId() == principal.getActiveRoleId();
+		result = !Auditrecord.getIsFinalMode() && auditor.getId() == principal.getActiveRoleId();
 		return result;
 	}
 
@@ -79,9 +85,24 @@ public class AuditorAuditUpdateService implements AbstractUpdateService<Auditor,
 		assert request != null;
 		assert entity != null;
 		assert errors != null;
-		boolean p = request.getModel().getBoolean("isFinalMode");
-		if (!p) {
-			errors.state(request, !p, "isFinalMode", "auditor.auditrecord.error.must-accept");
+		Configuration configuration;
+		String spamWords;
+		Double spamThreshold;
+		boolean hasSpamTitle, hasSpamBody;
+
+		configuration = this.configurationRepository.findConfiguration();
+		spamWords = configuration.getSpamWords();
+		spamThreshold = configuration.getSpamThreshold();
+
+		if (!errors.hasErrors("title") && entity.getTitle() != null) {
+
+			hasSpamTitle = Spamfilter.spamThreshold(entity.getTitle(), spamWords, spamThreshold);
+			errors.state(request, !hasSpamTitle, "title", "auditor.auditrecord.error.spam-title");
+		}
+
+		if (!errors.hasErrors("body") && entity.getBody() != null) {
+			hasSpamBody = Spamfilter.spamThreshold(entity.getBody(), spamWords, spamThreshold);
+			errors.state(request, !hasSpamBody, "body", "auditor.auditrecord.error.spam-body");
 
 		}
 

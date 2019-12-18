@@ -66,6 +66,7 @@
         `is_final_mode` bit,
         `moment` datetime(6),
         `title` varchar(255),
+        `auditor_id` integer not null,
         `job_id` integer not null,
         primary key (`id`)
     ) engine=InnoDB;
@@ -360,6 +361,11 @@
        add constraint `FK2nu5ndvri71kk1avp7v79loqo` 
        foreign key (`user_id`) 
        references `user_account` (`id`);
+
+    alter table `auditrecord` 
+       add constraint `FKditgyx355sc4ye86w7tj22cq6` 
+       foreign key (`auditor_id`) 
+       references `auditor` (`id`);
 
     alter table `auditrecord` 
        add constraint `FKa5p4w0gnuwmtb07juvrg8ptn6` 

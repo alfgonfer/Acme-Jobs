@@ -14,6 +14,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import acme.entities.jobs.Job;
+import acme.entities.roles.Auditor;
 import acme.framework.entities.DomainEntity;
 import lombok.Getter;
 import lombok.Setter;
@@ -55,6 +56,11 @@ public class Auditrecord extends DomainEntity {
 	@NotNull
 	@Valid
 	@ManyToOne(optional = false)
-	private Job job;
+	private Job		job;
+
+	@NotNull
+	@Valid
+	@ManyToOne(optional = false)
+	private Auditor	auditor;
 
 }

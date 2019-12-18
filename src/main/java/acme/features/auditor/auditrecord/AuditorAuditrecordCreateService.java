@@ -7,10 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.entities.auditrecord.Auditrecord;
+import acme.entities.configuration.Configuration;
+import acme.entities.jobs.Job;
 import acme.entities.roles.Auditor;
+import acme.features.utiles.ConfigurationRepository;
+import acme.features.utiles.Spamfilter;
 import acme.framework.components.Errors;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
+import acme.framework.entities.Principal;
 import acme.framework.services.AbstractCreateService;
 
 @Service
@@ -19,7 +24,10 @@ public class AuditorAuditrecordCreateService implements AbstractCreateService<Au
 	//Internal state --------------------------------------------------------------------------------------------------
 
 	@Autowired
-	AuditorAuditrecordRepository repository;
+	private AuditorAuditrecordRepository	repository;
+
+	@Autowired
+	private ConfigurationRepository			configurationRepository;
 
 
 	// AbstractCreateService<Auditor, Auditrecord> -------------------------------------------------------------
@@ -27,8 +35,16 @@ public class AuditorAuditrecordCreateService implements AbstractCreateService<Au
 	@Override
 	public boolean authorise(final Request<Auditrecord> request) {
 		assert request != null;
-		boolean b = request.getPrincipal().hasRole(Auditor.class);
-		return b;
+		boolean res;
+		Integer id;
+		Job result;
+
+		id = request.getModel().getInteger("idJob");
+		result = this.repository.findJobByRef(id);
+
+		res = result.isFinalMode();
+
+		return res;
 	}
 
 	@Override
@@ -54,13 +70,23 @@ public class AuditorAuditrecordCreateService implements AbstractCreateService<Au
 	@Override
 	public Auditrecord instantiate(final Request<Auditrecord> request) {
 		Auditrecord result;
-
-		result = new Auditrecord();
-
 		Date moment;
+
+		Principal principal;
+		Integer idUserAccount;
+		Auditor auditor;
+
+		/*
+		 * principal = request.getPrincipal();
+		 * idUserAccount = principal.getActiveRoleId();
+		 *
+		 * auditor = this.repository.findAuditorById(idUserAccount);
+		 */
+		result = new Auditrecord();
 
 		moment = new Date(System.currentTimeMillis() - 1);
 		result.setMoment(moment);
+		//result.setAuditor(auditor);
 
 		int job = request.getModel().getInteger("idJob");
 		result.setJob(this.repository.findJobByRef(job));
@@ -74,28 +100,53 @@ public class AuditorAuditrecordCreateService implements AbstractCreateService<Au
 		assert entity != null;
 		assert errors != null;
 
+		Configuration configuration;
+		String spamWords;
+		Double spamThreshold;
+		boolean hasSpamTitle, hasSpamBody;
+
+		configuration = this.configurationRepository.findConfiguration();
+		spamWords = configuration.getSpamWords();
+		spamThreshold = configuration.getSpamThreshold();
 		int job = request.getModel().getInteger("idJob");
 
 		boolean isJob = this.repository.findJobByRef(job) != null;
 		errors.state(request, isJob, "job", "auditor.auditrecord.error.must-exists");
+
+		if (!errors.hasErrors("title") && entity.getTitle() != null) {
+
+			hasSpamTitle = Spamfilter.spamThreshold(entity.getTitle(), spamWords, spamThreshold);
+			errors.state(request, !hasSpamTitle, "title", "auditor.auditrecord.error.spam-title");
+		}
+
+		if (!errors.hasErrors("body") && entity.getBody() != null) {
+			hasSpamBody = Spamfilter.spamThreshold(entity.getBody(), spamWords, spamThreshold);
+			errors.state(request, !hasSpamBody, "body", "auditor.auditrecord.error.spam-body");
+
+		}
 
 	}
 
 	@Override
 	public void create(final Request<Auditrecord> request, final Auditrecord entity) {
 		Date moment;
+		Principal principal;
+		Integer idUserAccount;
+		Auditor auditor;
+
+		/*
+		 * principal = request.getPrincipal();
+		 * idUserAccount = principal.getActiveRoleId();
+		 *
+		 * auditor = this.repository.findAuditorById(idUserAccount);
+		 */
 
 		moment = new Date(System.currentTimeMillis() - 1);
 		entity.setMoment(moment);
 
 		int job = request.getModel().getInteger("idJob");
 		entity.setJob(this.repository.findJobByRef(job));
-		boolean p = request.getModel().getBoolean("status");
-		if (p) {
-			entity.setIsFinalMode(true);
-		} else {
-			entity.setIsFinalMode(false);
-		}
+		//entity.setAuditor(auditor);
 
 		this.repository.save(entity);
 

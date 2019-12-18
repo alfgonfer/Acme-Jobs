@@ -17,8 +17,12 @@ auditor.auditrecord.error.must-exists= The job must exists.
 
 auditor.auditrecord.form.button.update= Update
 
-auditor.auditrecord.form.label.finalMode.true= true
-auditor.auditrecord.form.label.finalMode= Is final mode:
+auditor.auditrecord.form.label.finalMode.true= published
+auditor.auditrecord.form.label.finalMode.false = draft
+auditor.auditrecord.form.label.finalMode= status:
 
 auditor.auditrecord.list.button.addAudit= Create an audit record
+
+auditor.auditrecord.error.spam-title = The title can not contain spam
+auditor.auditrecord.error.spam-body = The body can not contain spam
 

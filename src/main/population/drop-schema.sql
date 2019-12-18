@@ -25,6 +25,10 @@
 
     alter table `auditrecord` 
        drop 
+       foreign key `FKditgyx355sc4ye86w7tj22cq6`;
+
+    alter table `auditrecord` 
+       drop 
        foreign key `FKa5p4w0gnuwmtb07juvrg8ptn6`;
 
     alter table `authenticated` 
