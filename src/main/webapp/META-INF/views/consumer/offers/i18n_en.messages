@@ -17,11 +17,12 @@ consumer.offers.form.checkbox.agree = I understand it
 consumer.offers.form.label.button.return = Return
 consumer.offers.form.button.create = Create
 
-consumer.offers.error.must-be-future= The date must be later than the actual date.
-consumer.offers.error.must-have-deadline = The deadline musn't be empty.
+consumer.offers.error.must-be-future= The date must be later than the actual date
+consumer.offers.error.must-have-deadline = The deadline musn't be empty
 consumer.offers.error.notRange = The highest amount must be bigger than the lower amount
 consumer.offers.error.tickerDuplicated = The ticker musn't match with any offer created before
 consumer.offers.error.must-accept = You must accept the condition, which says that you can't delete or update the offer
-consumer.offers.error.must-have-ticker = The offer must have a ticker.
-consumer.offers.error.not-range = The parameter musn't be empty.
-consumer.offers.error.must-be-euro = The currency must be Euros (€).
+consumer.offers.error.must-have-ticker = The offer must have a ticker
+consumer.offers.error.not-range = The parameter musn't be empty
+consumer.offers.error.must-be-euro = The currency must be Euros (€)
+consumer.offers.error.pattern-ticker= It must follow the next structure OABCD-00001

@@ -17,3 +17,5 @@ authenticated.provider.form.label.sector = Sector:
 authenticated.provider.form.button.create = Register
 authenticated.provider.form.button.update = Update
 authenticated.provider.form.button.return = Return
+
+provider.request.error.pattern-ticker= It must follow the next structure OABCD-00001

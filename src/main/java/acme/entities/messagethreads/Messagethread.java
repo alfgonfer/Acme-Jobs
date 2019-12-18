@@ -1,9 +1,9 @@
+
 package acme.entities.messagethreads;
 
 import java.util.Collection;
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
@@ -47,4 +47,3 @@ public class Messagethread extends DomainEntity {
 	 */
 	//select ua, mt from UserAccount ua join ua.messagethread mt group by mt;
 }
-

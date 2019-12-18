@@ -55,6 +55,8 @@ public class AdministratorCompanyRecordsCreateService implements AbstractCreateS
 		assert request != null;
 		assert entity != null;
 		assert errors != null;
+		boolean ErrorPattern = entity.getPhone().matches("^([+][0-9]{1,3}[\\\\s])?([(][0-9]{1,4}[)][\\\\s])?[0-9]{6,10}$");
+		errors.state(request, ErrorPattern, "phone", "administrator.companyrecords.error.pattern-phone");
 
 	}
 

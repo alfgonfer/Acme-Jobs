@@ -142,6 +142,9 @@ public class AuthenticatedAuditorRequestCreateService implements AbstractCreateS
 			}
 		}
 
+		boolean ErrorPattern = entity.getStatus().matches("^(pending)|(accepted)|(rejected)$");
+		errors.state(request, ErrorPattern, "status", "authenticated.auditorrequest.error.pattern-status");
+
 	}
 
 	@Override

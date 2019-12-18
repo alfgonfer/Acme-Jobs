@@ -44,11 +44,11 @@ public class Comercialbanner extends Banner {
 	private Date				expiration;
 
 	@NotBlank
-	@Pattern(regexp = "^[0-9]{3}$", message = "sponsor.comercialbanner.error.must-have-securityCode-pattern")
+	@Pattern(regexp = "^[0-9]{3}$", message = "Error")
 	private String				securityCode;
 
 	@NotBlank
-	@Pattern(regexp = "^(Dinners Club)|(Visa)|(Master Card)|(American Express)$")
+	@Pattern(regexp = "^(Dinners Club)|(Visa)|(Master Card)|(American Express)$", message = "Error")
 	private String				type;
 
 	//	Relationships -------------------------------------------------------------------------

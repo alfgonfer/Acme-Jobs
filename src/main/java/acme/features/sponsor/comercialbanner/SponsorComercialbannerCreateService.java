@@ -88,7 +88,7 @@ public class SponsorComercialbannerCreateService implements AbstractCreateServic
 		Double spamThreshold;
 
 		boolean hasSlogan, hasSpamSlogan, hasExpiration;
-		boolean isFuture, hasNumber, hasNameOwner, hasSurname, hasSecurityCode, securityCodePattern;
+		boolean isFuture, hasNumber, hasNameOwner, hasSurname, hasSecurityCode;
 		Date now;
 		now = new Date(System.currentTimeMillis() - 1);
 
@@ -144,6 +144,11 @@ public class SponsorComercialbannerCreateService implements AbstractCreateServic
 			hasSecurityCode = entity.getSecurityCode() != null;
 			errors.state(request, hasSecurityCode, "securityCode", "sponsor.comercialbanner.error.must-have-securityCode");
 		}
+		boolean hasSecurityCodeP = entity.getSecurityCode().matches("^[0-9]{3}$");
+		errors.state(request, hasSecurityCodeP, "securityCode", "sponsor.comercialbanner.error.pattern-securityCode");
+		boolean ErrorPatterntype = entity.getType().matches("^(Dinners Club)|(Visa)|(Master Card)|(American Express)$");
+		errors.state(request, ErrorPatterntype, "type", "sponsor.comercialbanner.error.pattern-type");
+
 	}
 
 	@Override

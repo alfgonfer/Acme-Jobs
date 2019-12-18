@@ -134,6 +134,10 @@ public class AdministratorComercialbannerCreateService implements AbstractCreate
 			hasSecurityCode = entity.getSecurityCode() != null;
 			errors.state(request, hasSecurityCode, "securityCode", "administrator.comercialbanner.error.must-have-securityCode");
 		}
+		boolean hasSecurityCodeP = entity.getSecurityCode().matches("^[0-9]{3}$");
+		errors.state(request, hasSecurityCodeP, "securityCode", "administrator.comercialbanner.error.pattern-securityCode");
+		boolean ErrorPatterntype = entity.getType().matches("^(Dinners Club)|(Visa)|(Master Card)|(American Express)$");
+		errors.state(request, ErrorPatterntype, "type", "administrator.comercialbanner.error.pattern-type");
 
 	}
 

@@ -39,7 +39,7 @@ public class Auditorrequest extends DomainEntity {
 	private String				description;
 
 	@NotNull
-	@Pattern(regexp = "^(pending)|(accepted)|(rejected)$", message = "It must be pending, accepted or rejected.")
+	@Pattern(regexp = "^(pending)|(accepted)|(rejected)$", message = "Error")
 	private String				status;
 
 	@Temporal(TemporalType.TIMESTAMP)
