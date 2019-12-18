@@ -1,6 +1,8 @@
 
 package acme.features.authenticated.messagethread;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,8 +10,6 @@ import acme.entities.messagethreads.Messagethread;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
 import acme.framework.entities.Authenticated;
-import acme.framework.entities.Principal;
-import acme.framework.entities.UserAccount;
 import acme.framework.services.AbstractShowService;
 
 @Service
@@ -22,24 +22,7 @@ public class AuthenticatedMessagethreadShowService implements AbstractShowServic
 	@Override
 	public boolean authorise(final Request<Messagethread> request) {
 		assert request != null;
-
-		boolean result = false;
-		int messagethreadId;
-		Messagethread messagethread;
-		UserAccount user;
-		Principal principal;
-
-		messagethreadId = request.getModel().getInteger("id");
-		messagethread = this.repository.findOneMessagethreadById(messagethreadId);
-		for (UserAccount ua : messagethread.getUsers()) {
-			user = ua;
-			principal = request.getPrincipal();
-			if (user.getId() == principal.getAccountId()) {
-				result = true;
-			}
-
-		}
-		return result;
+		return true;
 	}
 
 	@Override
@@ -48,7 +31,7 @@ public class AuthenticatedMessagethreadShowService implements AbstractShowServic
 		assert entity != null;
 		assert model != null;
 
-		request.unbind(entity, model, "title", "moment", "usernames");
+		request.unbind(entity, model, "title", "moment", "usernames", "creator");
 	}
 
 	@Override
@@ -63,20 +46,21 @@ public class AuthenticatedMessagethreadShowService implements AbstractShowServic
 
 		id = request.getModel().getInteger("id");
 		result = this.repository.findOneMessagethreadById(id);
+		Collection<Authenticated> usuarios = this.repository.findUsersFromMTId(id);
 
-		for (UserAccount us : result.getUsers()) {
+		for (Authenticated us : usuarios) {
 			if (i == 0) {
-				if (result.getUsers().size() == 1) {
-					users = us.getUsername();
+				if (usuarios.size() == 1) {
+					users = us.getUserAccount().getUsername();
 				} else {
-					users = us.getUsername() + ", ";
+					users = us.getUserAccount().getUsername() + ", ";
 				}
 			} else {
-				if (i == result.getUsers().size() - 1) {
-					users = users + us.getUsername();
+				if (i == usuarios.size() - 1) {
+					users = users + us.getUserAccount().getUsername();
 
 				} else {
-					users = users + us.getUsername() + ", ";
+					users = users + us.getUserAccount().getUsername() + ", ";
 				}
 			}
 			i++;

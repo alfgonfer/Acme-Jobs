@@ -804,13 +804,18 @@
 		<property name="title" value="Hilo de mensajes 1"/>
 		<property name="moment" value="2019/11/25 12:00"/>
 		<property name="usernames" value=""/>
-		<property name="users">
-			<list>
-				<ref bean="employer2UserAccount"/>
-				<ref bean="worker1UserAccount"/>
-			</list>
-		</property>
 	</bean>
+	
+	<bean id="participates01" class="acme.entities.participates.Participates">
+		<property name="messagethread" ref="messagethread1"/>
+		<property name="authenticated" ref="employer1Authenticated"/>
+	</bean>
+	
+	<bean id="participates02" class="acme.entities.participates.Participates">
+		<property name="messagethread" ref="messagethread1"/>
+		<property name="authenticated" ref="employer2Authenticated"/>
+	</bean>
+	
 	
 	<bean id="message1" class="acme.entities.messages.Message">
 		<property name="title" value="Mensaje 1"/>
