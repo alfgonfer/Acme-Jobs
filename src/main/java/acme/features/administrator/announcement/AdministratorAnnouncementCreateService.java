@@ -55,6 +55,11 @@ public class AdministratorAnnouncementCreateService implements AbstractCreateSer
 		Announcement result;
 
 		result = new Announcement();
+
+		Date moment;
+
+		moment = new Date(System.currentTimeMillis() - 1);
+		result.setMoment(moment);
 		return result;
 	}
 

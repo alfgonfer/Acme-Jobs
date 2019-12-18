@@ -1,6 +1,8 @@
 
 package acme.features.authenticated.message;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +22,15 @@ public class AuthenticatedMessageShowService implements AbstractShowService<Auth
 	@Override
 	public boolean authorise(final Request<Message> request) {
 		assert request != null;
-
-		return true;
+		boolean result = false;
+		Message m = this.repository.findOneMessageById(request.getModel().getInteger("id"));
+		Collection<Authenticated> users = this.repository.findUsersFromMTId(m.getMessageThread().getId());
+		for (Authenticated au : users) {
+			if (au.getId() == request.getPrincipal().getActiveRoleId()) {
+				result = true;
+			}
+		}
+		return result;
 	}
 
 	@Override

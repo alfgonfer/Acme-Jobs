@@ -50,7 +50,7 @@ public class Offers extends DomainEntity {
 
 	@NotBlank
 	@Column(unique = true)
-	@Pattern(regexp = "^[O][a-zA-Z]{4}[-][0-9]{5}$", message = "It must follow the next structure OABCD-00001")
+	@Pattern(regexp = "^[O][a-zA-Z]{4}[-][0-9]{5}$", message = "Error")
 	private String				ticker;
 
 }

@@ -29,7 +29,7 @@
 	<acme:form-textbox code="administrator.auditorrequest.form.label.status" path="status" readonly="true"/>
 	</jstl:if>
 	
-	<jstl:if test="${status != 'accepted'}">
+	<jstl:if test="${status == 'pending'}">
 	<acme:form-submit test ="${command == 'show'}" code="administrator.auditorrequest.form.label.button.update" action="/administrator/auditorrequest/update?id=${id}"/>
 	<acme:form-submit test ="${command == 'update'}" code="administrator.auditorrequest.form.label.button.update" action="/administrator/auditorrequest/update?id=${id}"/>
 	</jstl:if>

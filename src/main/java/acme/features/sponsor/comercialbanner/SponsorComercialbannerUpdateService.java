@@ -96,7 +96,7 @@ public class SponsorComercialbannerUpdateService implements AbstractUpdateServic
 		Double spamThreshold;
 
 		boolean hasSlogan, hasSpamSlogan, hasExpiration;
-		boolean isFuture, hasNumber, hasNameOwner, hasSurname, hasSecurityCode, securityCodePattern;
+		boolean isFuture, hasNumber, hasNameOwner, hasSurname, hasSecurityCode;
 		Date now;
 		now = new Date(System.currentTimeMillis() - 1);
 
@@ -121,38 +121,43 @@ public class SponsorComercialbannerUpdateService implements AbstractUpdateServic
 
 		if (!errors.hasErrors("expiration")) {
 			hasExpiration = entity.getExpiration() != null;
-			errors.state(request, hasExpiration, "expiration", "authenticated.sponsor.error.must-have-expiration");
+			errors.state(request, hasExpiration, "expiration", "sponsor.comercialbanner.error.must-have-expiration");
 			if (hasExpiration) {
 				isFuture = now.before(entity.getExpiration());
-				errors.state(request, isFuture, "expiration", "authenticated.sponsor.error.expirated");
+				errors.state(request, isFuture, "expiration", "sponsor.comercialbanner.error.expirated");
 			}
 
 			// Number validation ----------------------------------------------------------------------------------------
 
 			if (!errors.hasErrors("creditNumber")) {
 				hasNumber = entity.getCreditNumber() != null;
-				errors.state(request, hasNumber, "creditNumber", "authenticated.sponsor.error.must-have-creditNumber");
+				errors.state(request, hasNumber, "creditNumber", "sponsor.comercialbanner.error.must-have-creditNumber");
 			}
 			// Name validation ------------------------------------------------------------------------------------------
 
 			if (!errors.hasErrors("name")) {
 				hasNameOwner = entity.getName() != null;
-				errors.state(request, hasNameOwner, "name", "authenticated.sponsor.error.must-have-name");
+				errors.state(request, hasNameOwner, "name", "sponsor.comercialbanner.error.must-have-name");
 			}
 
 			// Surname validation ---------------------------------------------------------------------------------------
 
 			if (!errors.hasErrors("surname")) {
 				hasSurname = entity.getSurname() != null;
-				errors.state(request, hasSurname, "surname", "authenticated.sponsor.error.must-have-surname");
+				errors.state(request, hasSurname, "surname", "sponsor.comercialbanner.error.must-have-surname");
 			}
 
 			// Security code validation ----------------------------------------------------------------------------------
 
 			if (!errors.hasErrors("securityCode")) {
 				hasSecurityCode = entity.getSecurityCode() != null;
-				errors.state(request, hasSecurityCode, "securityCode", "authenticated.sponsor.error.must-have-securityCode");
+				errors.state(request, hasSecurityCode, "securityCode", "sponsor.comercialbanner.error.must-have-securityCode");
 			}
+			boolean hasSecurityCodeP = entity.getSecurityCode().matches("^[0-9]{3}$");
+			errors.state(request, hasSecurityCodeP, "securityCode", "sponsor.comercialbanner.error.pattern-securityCode");
+			boolean ErrorPatterntype = entity.getType().matches("^(Dinners Club)|(Visa)|(Master Card)|(American Express)$");
+			errors.state(request, ErrorPatterntype, "type", "sponsor.comercialbanner.error.pattern-type");
+
 		}
 	}
 

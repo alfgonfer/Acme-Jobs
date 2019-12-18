@@ -78,6 +78,9 @@ public class EmployerApplicationUpdateService implements AbstractUpdateService<E
 				errors.state(request, isJustificated, "status", "employer.request.error.must-justificated");
 			}
 		}
+		boolean ErrorPattern = entity.getStatus().matches("^(pending)|(accepted)|(rejected)$");
+		errors.state(request, ErrorPattern, "status", "employer.application.error.pattern-status");
+
 	}
 
 	@Override
