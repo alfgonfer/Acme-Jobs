@@ -715,7 +715,7 @@
 	
 	<bean id="application2" class="acme.entities.application.Application">
 		<property name="reference" value="EMPB-JOBA:AAAA"/>
-		<property name="moment" value="2017/12/11 23:59"/>
+		<property name="moment" value="2019/12/16 23:59"/>
 		<property name="status" value="rejected"/>
 		<property name="statement" value="A statement"/>
 		<property name="skills" value="good marks in the career"/>
@@ -726,7 +726,7 @@
 	
 	<bean id="application3" class="acme.entities.application.Application">
 		<property name="reference" value="EMPA-JOBB:AAAB"/>
-		<property name="moment" value="2019/07/11 12:12"/>
+		<property name="moment" value="2019/12/17 12:12"/>
 		<property name="status" value="accepted"/>
 		<property name="statement" value="A statement"/>
 		<property name="skills" value="very good in neural networks"/>
@@ -737,7 +737,7 @@
 	
 	<bean id="application4" class="acme.entities.application.Application">
 		<property name="reference" value="EMPB-JOBB:AAAB"/>
-		<property name="moment" value="2019/06/11 13:59"/>
+		<property name="moment" value="2019/12/15 13:59"/>
 		<property name="status" value="rejected"/>
 		<property name="statement" value="A statement"/>
 		<property name="skills" value="very good in neural networks"/>
