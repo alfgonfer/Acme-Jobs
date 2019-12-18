@@ -1,6 +1,7 @@
 
 package acme.features.authenticated.message;
 
+import java.util.Collection;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,6 @@ public class AuthenticatedMessageCreateService implements AbstractCreateService<
 
 	@Autowired
 	private ConfigurationRepository			configurationRepository;
-
 
 
 	// AbstractCreateService<Authenticated, Message> -------------------------------------------------------------
