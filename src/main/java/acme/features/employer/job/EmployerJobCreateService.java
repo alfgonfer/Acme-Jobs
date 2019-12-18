@@ -93,37 +93,43 @@ public class EmployerJobCreateService implements AbstractCreateService<Employer,
 		now.add(Calendar.DAY_OF_YEAR, 7);
 
 		// Validation title ----------------------------------------------------------------------------------------------------------
-		hasTitle = entity.getTitle() != null;
-		errors.state(request, hasTitle, "title", "employer.job.error.must-have-title");
+		if (!errors.hasErrors("title")) {
+			hasTitle = entity.getTitle() != null;
+			errors.state(request, hasTitle, "title", "employer.job.error.must-have-title");
 
-		if (hasTitle) {
-			hasSpamTitle = Spamfilter.spamThreshold(entity.getTitle(), spamWords, spamThreshold);
-			errors.state(request, !hasSpamTitle, "title", "employer.job.error.must-not-have-spam-title");
+			if (hasTitle) {
+				hasSpamTitle = Spamfilter.spamThreshold(entity.getTitle(), spamWords, spamThreshold);
+				errors.state(request, !hasSpamTitle, "title", "employer.job.error.must-not-have-spam-title");
+			}
 		}
 
 		// Validation salary ----------------------------------------------------------------------------------------------------------
 
-		hasSalary = entity.getSalary() != null;
-		errors.state(request, hasSalary, "salary", "employer.job.error.must-have-salary");
+		if (!errors.hasErrors("salary")) {
+			hasSalary = entity.getSalary() != null;
+			errors.state(request, hasSalary, "salary", "employer.job.error.must-have-salary");
 
-		if (hasSalary) {
-			Money euro = new Money();
-			euro.setCurrency("€");
+			if (hasSalary) {
+				Money euro = new Money();
+				euro.setCurrency("€");
 
-			isEuro = entity.getSalary().getCurrency().equals(euro.getCurrency());
-			errors.state(request, isEuro, "salary", "employer.job.error.must-have-salary");
+				isEuro = entity.getSalary().getCurrency().equals(euro.getCurrency());
+				errors.state(request, isEuro, "salary", "employer.job.error.must-have-salary");
 
+			}
 		}
 
 		// Validation deadline ----------------------------------------------------------------------------------------------------------
 
-		hasDeadline = entity.getDeadline() != null;
-		errors.state(request, hasDeadline, "deadline", "employer.job.error.must-have-deadline");
+		if (!errors.hasErrors("deadline")) {
+			hasDeadline = entity.getDeadline() != null;
+			errors.state(request, hasDeadline, "deadline", "employer.job.error.must-have-deadline");
 
-		if (hasDeadline) {
-			isFuture = entity.getDeadline().after(now.getTime());
-			errors.state(request, isFuture, "deadline", "employer.job.error.must-be-future");
+			if (hasDeadline) {
+				isFuture = entity.getDeadline().after(now.getTime());
+				errors.state(request, isFuture, "deadline", "employer.job.error.must-be-future");
 
+			}
 		}
 
 		// Validation descriptor --------------------------------------------------------------------------------------------------------
@@ -136,13 +142,15 @@ public class EmployerJobCreateService implements AbstractCreateService<Employer,
 		}
 
 		// Validation reference ----------------------------------------------------------------------------------------------------------
-		hasReference = entity.getReference() != null;
-		errors.state(request, hasReference, "reference", "employer.job.error.must-have-reference");
+		if (!errors.hasErrors("title")) {
+			hasReference = entity.getReference() != null;
+			errors.state(request, hasReference, "reference", "employer.job.error.must-have-reference");
 
-		if (hasReference) {
+			if (hasReference) {
 
-			isDuplicated = this.repository.findOneJobByReference(entity.getReference()) == null;
-			errors.state(request, isDuplicated, "reference", "employer.job.error.must-be-not-duplicated-reference");
+				isDuplicated = this.repository.findOneJobByReference(entity.getReference()) == null;
+				errors.state(request, isDuplicated, "reference", "employer.job.error.must-be-not-duplicated-reference");
+			}
 		}
 
 	}

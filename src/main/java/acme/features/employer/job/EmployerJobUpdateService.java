@@ -107,48 +107,58 @@ public class EmployerJobUpdateService implements AbstractUpdateService<Employer,
 		Collection<Duty> duties;
 
 		// Validation title ----------------------------------------------------------------------------------------------------------
-		hasTitle = entity.getTitle() != null;
-		errors.state(request, hasTitle, "title", "employer.job.error.must-have-title");
 
-		if (hasTitle) {
-			hasSpamTitle = Spamfilter.spamThreshold(entity.getTitle(), spamWords, spamThreshold);
-			errors.state(request, !hasSpamTitle, "title", "employer.job.error.must-not-have-spam");
+		if (!errors.hasErrors("title")) {
+			hasTitle = entity.getTitle() != null;
+			errors.state(request, hasTitle, "title", "employer.job.error.must-have-title");
+
+			if (hasTitle) {
+				hasSpamTitle = Spamfilter.spamThreshold(entity.getTitle(), spamWords, spamThreshold);
+				errors.state(request, !hasSpamTitle, "title", "employer.job.error.must-not-have-spam");
+			}
 		}
 
 		// Validation salary ----------------------------------------------------------------------------------------------------------
 
-		hasSalary = entity.getSalary() != null;
-		errors.state(request, hasSalary, "salary", "employer.job.error.must-have-salary");
+		if (!errors.hasErrors("salary")) {
+			hasSalary = entity.getSalary() != null;
+			errors.state(request, hasSalary, "salary", "employer.job.error.must-have-salary");
 
-		if (hasSalary) {
-			Money euro = new Money();
-			euro.setCurrency("€");
+			if (hasSalary) {
+				Money euro = new Money();
+				euro.setCurrency("€");
 
-			isEuro = entity.getSalary().getCurrency().equals(euro.getCurrency());
-			errors.state(request, isEuro, "salary", "employer.job.error.must-have-salary");
+				isEuro = entity.getSalary().getCurrency().equals(euro.getCurrency());
+				errors.state(request, isEuro, "salary", "employer.job.error.must-have-salary");
 
+			}
 		}
 
 		// Validation deadline ----------------------------------------------------------------------------------------------------------
 
-		hasDeadline = entity.getDeadline() != null;
-		errors.state(request, hasDeadline, "deadline", "employer.job.error.must-have-deadline");
+		if (!errors.hasErrors("deadline")) {
+			hasDeadline = entity.getDeadline() != null;
+			errors.state(request, hasDeadline, "deadline", "employer.job.error.must-have-deadline");
 
-		if (hasDeadline) {
-			isFuture = entity.getDeadline().after(now.getTime());
-			errors.state(request, isFuture, "deadline", "employer.job.error.must-be-future");
+			if (hasDeadline) {
+				isFuture = entity.getDeadline().after(now.getTime());
+				errors.state(request, isFuture, "deadline", "employer.job.error.must-be-future");
 
+			}
 		}
 
 		//Validation duties 100% --------------------------------------------------------------------------------------------------------
-		if (entity.isFinalMode()) {
-			duties = this.repository.findDutiesByJobId(entity.getId());
-			Double sum = 0.0;
-			for (Duty d : duties) {
-				sum += d.getPercentage();
+
+		if (!errors.hasErrors("finalMode")) {
+			if (entity.isFinalMode()) {
+				duties = this.repository.findDutiesByJobId(entity.getId());
+				Double sum = 0.0;
+				for (Duty d : duties) {
+					sum += d.getPercentage();
+				}
+				is100 = sum == 100.0;
+				errors.state(request, is100, "finalMode", "employer.job.error.must-100");
 			}
-			is100 = sum == 100.0;
-			errors.state(request, is100, "finalMode", "employer.job.error.must-100");
 		}
 
 	}
