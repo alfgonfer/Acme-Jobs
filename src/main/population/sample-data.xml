@@ -304,15 +304,6 @@
 		<property name="userAccount" ref="sponsor2UserAccount" />
 	</bean>
 	
-	<!--CreditCard  -->
-	<bean id="Creditcard01" class="acme.entities.creditcard.Creditcard">
-		<property name="creditNumber" value="4716826134105316"/>
-		<property name="name" value="Sponsor"/>
-		<property name="surname" value="Example"/>
-		<property name="expiration" value="2022/07/10 00:00"/>
-		<property name="securityCode" value="281"/>
-		<property name="sponsor" ref="sponsor1Sponsor"/>
-	</bean>
 	
 	<!--Non Comercial Banner  -->
 	<bean id="nonComercialBanner01" class="acme.entities.noncomercialbanner.Noncomercialbanner">
@@ -339,8 +330,13 @@
 		<property name="slogan" value="buy our's product!"/>
 		<property name="urlTarget" value="http://www.almaromerita.es/"/>
 		<property name="finalMode" value="true"/>
-		<property name="creditCard" value="4716826134105316"/>
 		<property name="sponsor" ref="sponsor1Sponsor"/>
+		<property name="creditNumber" value="4539346795312635"/>
+		<property name="name" value="sponsor1"/>
+		<property name="surname" value="sponsor1"/>
+		<property name="expiration" value="2024/12/12 12:12"/>
+		<property name="securityCode" value="954"/>
+		<property name="type" value="Visa"/>
 	</bean>
 	
 	<bean id="comercialBanner02" class="acme.entities.comercialbanner.Comercialbanner">
@@ -348,8 +344,13 @@
 		<property name="slogan" value="best sweets of the world!"/>
 		<property name="finalMode" value="true"/>
 		<property name="urlTarget" value="http://dulcesgarpe.com/tienda/"/>
-		<property name="creditCard" value="5525482640963406"/>
 		<property name="sponsor" ref="sponsor1Sponsor"/>
+		<property name="creditNumber" value="4539346795312635"/>
+		<property name="name" value="sponsor1"/>
+		<property name="surname" value="sponsor1"/>
+		<property name="expiration" value="2024/12/12 12:12"/>
+		<property name="securityCode" value="836"/>
+		<property name="type" value="Visa"/>
 	</bean>
 	
 	

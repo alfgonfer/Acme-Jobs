@@ -4,11 +4,11 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <acme:form>
-	<acme:form-textbox code="auditor.auditrecord.form.label.title" path="title" readonly="true"/>
+	<acme:form-textbox code="auditor.auditrecord.form.label.title" path="title" />
 	<jstl:if test="${command != 'create'}">
 	<acme:form-moment code="auditor.auditrecord.form.label.moment" path="moment" readonly="true" />
 		</jstl:if>
-	<acme:form-textarea code="auditor.auditrecord.form.label.body" path="body" readonly="true"/>
+	<acme:form-textarea code="auditor.auditrecord.form.label.body" path="body" />
 	<jstl:if test="${command == 'create'}">
 		<acme:form-checkbox code="auditor.auditrecord.form.checkbox.status" path="status"/>
 	</jstl:if>

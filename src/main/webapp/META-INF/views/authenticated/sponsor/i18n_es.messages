@@ -1,20 +1,7 @@
 authenticated.sponsor.form.label.orgName = Nombre de la organización:
-authenticated.sponsor.form.message = Información sobre tu tarjeta de credito asociada
-authenticated.sponsor.form.label.creditNumber = Número de la tarjeta de credito:
-authenticated.sponsor.form.label.name = Nombre del dueño de la tarjeta de credito:
-authenticated.sponsor.form.label.surname = Apellidos:
-authenticated.sponsor.form.label.expiration = Fecha de caducidad de la tarjeta de credito:
-authenticated.sponsor.form.label.securityCode = Codigo de seguridad:
+
 
 authenticated.sponsor.form.label.button.create = Crear
 authenticated.sponsor.form.label.button.update = Actualizar
 authenticated.sponsor.form.label.button.return = Volver
 
-authenticated.sponsor.form.creditCard = Ver la información de tu tarjeta de credito
-authenticated.sponsor.error.must-have-expiration = La tarjeta de credito debe de tener una fecha de caducidad
-authenticated.sponsor.error.expirated = La tarjeta de credito esta caducada
-authenticated.sponsor.error.must-have-creditNumber = La tarjeta de credito debe de tener un número
-authenticated.sponsor.error.must-have-name = La tarjeta de credito debe de tener el nombre del dueño
-authenticated.sponsor.error.must-have-surname = La tarjeta de credito debe de tener los apellidos del dueño
-authenticated.sponsor.error.must-have-securityCode = La tarjeta de credito debe de tener el codigo de seguridad
-authenticated.sponsor.error.must-have-securityCode-pattern = El codigo de seguridad deben de ser 3 números

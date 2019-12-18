@@ -1,12 +1,13 @@
 
 package acme.features.sponsor.comercialbanner;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.entities.comercialbanner.Comercialbanner;
 import acme.entities.configuration.Configuration;
-import acme.entities.creditcard.Creditcard;
 import acme.entities.roles.Sponsor;
 import acme.features.utiles.ConfigurationRepository;
 import acme.features.utiles.Spamfilter;
@@ -52,7 +53,7 @@ public class SponsorComercialbannerCreateService implements AbstractCreateServic
 		assert entity != null;
 		assert model != null;
 
-		request.unbind(entity, model, "urlPicture", "slogan", "urlTarget", "finalMode");
+		request.unbind(entity, model, "urlPicture", "slogan", "urlTarget", "finalMode", "creditNumber", "name", "surname", "expiration", "securityCode", "type");
 
 	}
 
@@ -61,7 +62,6 @@ public class SponsorComercialbannerCreateService implements AbstractCreateServic
 		assert request != null;
 
 		Sponsor sponsor;
-		Creditcard creditCard;
 		Principal principal;
 		Comercialbanner result;
 		int principalId;
@@ -71,9 +71,7 @@ public class SponsorComercialbannerCreateService implements AbstractCreateServic
 
 		sponsor = this.repository.findOneSponsorByUserAccountId(principalId);
 
-		creditCard = this.repository.findOneCreditCardBySponsorId(sponsor.getId());
 		result = new Comercialbanner();
-		result.setCreditCard(creditCard.getCreditNumber());
 		result.setFinalMode(false);
 		result.setSponsor(sponsor);
 		return result;
@@ -89,8 +87,12 @@ public class SponsorComercialbannerCreateService implements AbstractCreateServic
 		String spamWords;
 		Double spamThreshold;
 
-		boolean hasSlogan, hasSpamSlogan;
+		boolean hasSlogan, hasSpamSlogan, hasExpiration;
+		boolean isFuture, hasNumber, hasNameOwner, hasSurname, hasSecurityCode, securityCodePattern;
+		Date now;
+		now = new Date(System.currentTimeMillis() - 1);
 
+		// Slogan validation ---------------------------------------------------------------------------------
 		hasSlogan = entity.getSlogan() != null && !entity.getSlogan().isEmpty();
 		errors.state(request, hasSlogan, "slogan", "sponsor.comercialbanner.error.must-have-slogan");
 
@@ -103,6 +105,34 @@ public class SponsorComercialbannerCreateService implements AbstractCreateServic
 			hasSpamSlogan = Spamfilter.spamThreshold(entity.getSlogan(), spamWords, spamThreshold);
 			errors.state(request, !hasSpamSlogan, "slogan", "sponsor.comercialbanner.error.must-have-not-spam-slogan");
 		}
+
+		// Expiration validation ------------------------------------------------------------------------------------
+		hasExpiration = entity.getExpiration() != null;
+		errors.state(request, hasExpiration, "expiration", "sponsor.comercialbanner.error.must-have-expiration");
+		if (hasExpiration) {
+			isFuture = now.before(entity.getExpiration());
+			errors.state(request, isFuture, "expiration", "sponsor.comercialbanner.error.expirated");
+		}
+
+		// Number validation ----------------------------------------------------------------------------------------
+
+		hasNumber = entity.getCreditNumber() != null;
+		errors.state(request, hasNumber, "creditNumber", "sponsor.comercialbanner.error.must-have-creditNumber");
+
+		// Name validation ------------------------------------------------------------------------------------------
+
+		hasNameOwner = entity.getName() != null;
+		errors.state(request, hasNameOwner, "name", "sponsor.comercialbanner.error.must-have-name");
+
+		// Surname validation ---------------------------------------------------------------------------------------
+
+		hasSurname = entity.getSurname() != null;
+		errors.state(request, hasSurname, "surname", "sponsor.comercialbanner.error.must-have-surname");
+
+		// Security code validation ----------------------------------------------------------------------------------
+
+		hasSecurityCode = entity.getSecurityCode() != null;
+		errors.state(request, hasSecurityCode, "securityCode", "sponsor.comercialbanner.error.must-have-securityCode");
 
 	}
 
