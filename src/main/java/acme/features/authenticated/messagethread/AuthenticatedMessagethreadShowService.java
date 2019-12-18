@@ -22,7 +22,14 @@ public class AuthenticatedMessagethreadShowService implements AbstractShowServic
 	@Override
 	public boolean authorise(final Request<Messagethread> request) {
 		assert request != null;
-		return true;
+		boolean result = false;
+		Collection<Authenticated> users = this.repository.findUsersFromMTId(request.getModel().getInteger("id"));
+		for (Authenticated au : users) {
+			if (au.getId() == request.getPrincipal().getActiveRoleId()) {
+				result = true;
+			}
+		}
+		return result;
 	}
 
 	@Override
