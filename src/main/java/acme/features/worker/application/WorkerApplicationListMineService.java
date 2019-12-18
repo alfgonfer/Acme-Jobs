@@ -19,7 +19,7 @@ public class WorkerApplicationListMineService implements AbstractListService<Wor
 	//	 Internal  state	-------------------------------------------------------------------------
 
 	@Autowired
-	WorkerApplicationRepository repository;
+	private WorkerApplicationRepository repository;
 
 
 	//	AbstractListService<Worker, Application> interface ------------------------------------------

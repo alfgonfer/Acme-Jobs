@@ -101,47 +101,59 @@ public class SponsorComercialbannerUpdateService implements AbstractUpdateServic
 		now = new Date(System.currentTimeMillis() - 1);
 
 		// Slogan validation ---------------------------------------------------------------------------------
-		hasSlogan = entity.getSlogan() != null && !entity.getSlogan().isEmpty();
-		errors.state(request, hasSlogan, "slogan", "sponsor.comercialbanner.error.must-have-slogan");
 
-		if (hasSlogan) {
+		if (!errors.hasErrors("slogan")) {
+			hasSlogan = entity.getSlogan() != null && !entity.getSlogan().isEmpty();
+			errors.state(request, hasSlogan, "slogan", "sponsor.comercialbanner.error.must-have-slogan");
 
-			configuration = this.ConfigurationRepository.findConfiguration();
-			spamWords = configuration.getSpamWords();
-			spamThreshold = configuration.getSpamThreshold();
+			if (hasSlogan) {
 
-			hasSpamSlogan = Spamfilter.spamThreshold(entity.getSlogan(), spamWords, spamThreshold);
-			errors.state(request, !hasSpamSlogan, "slogan", "sponsor.comercialbanner.error.must-have-not-spam-slogan");
+				configuration = this.ConfigurationRepository.findConfiguration();
+				spamWords = configuration.getSpamWords();
+				spamThreshold = configuration.getSpamThreshold();
+
+				hasSpamSlogan = Spamfilter.spamThreshold(entity.getSlogan(), spamWords, spamThreshold);
+				errors.state(request, !hasSpamSlogan, "slogan", "sponsor.comercialbanner.error.must-have-not-spam-slogan");
+			}
 		}
 
 		// Expiration validation ------------------------------------------------------------------------------------
-		hasExpiration = entity.getExpiration() != null;
-		errors.state(request, hasExpiration, "expiration", "authenticated.sponsor.error.must-have-expiration");
-		if (hasExpiration) {
-			isFuture = now.before(entity.getExpiration());
-			errors.state(request, isFuture, "expiration", "authenticated.sponsor.error.expirated");
+
+		if (!errors.hasErrors("expiration")) {
+			hasExpiration = entity.getExpiration() != null;
+			errors.state(request, hasExpiration, "expiration", "authenticated.sponsor.error.must-have-expiration");
+			if (hasExpiration) {
+				isFuture = now.before(entity.getExpiration());
+				errors.state(request, isFuture, "expiration", "authenticated.sponsor.error.expirated");
+			}
+
+			// Number validation ----------------------------------------------------------------------------------------
+
+			if (!errors.hasErrors("creditNumber")) {
+				hasNumber = entity.getCreditNumber() != null;
+				errors.state(request, hasNumber, "creditNumber", "authenticated.sponsor.error.must-have-creditNumber");
+			}
+			// Name validation ------------------------------------------------------------------------------------------
+
+			if (!errors.hasErrors("name")) {
+				hasNameOwner = entity.getName() != null;
+				errors.state(request, hasNameOwner, "name", "authenticated.sponsor.error.must-have-name");
+			}
+
+			// Surname validation ---------------------------------------------------------------------------------------
+
+			if (!errors.hasErrors("surname")) {
+				hasSurname = entity.getSurname() != null;
+				errors.state(request, hasSurname, "surname", "authenticated.sponsor.error.must-have-surname");
+			}
+
+			// Security code validation ----------------------------------------------------------------------------------
+
+			if (!errors.hasErrors("securityCode")) {
+				hasSecurityCode = entity.getSecurityCode() != null;
+				errors.state(request, hasSecurityCode, "securityCode", "authenticated.sponsor.error.must-have-securityCode");
+			}
 		}
-
-		// Number validation ----------------------------------------------------------------------------------------
-
-		hasNumber = entity.getCreditNumber() != null;
-		errors.state(request, hasNumber, "creditNumber", "authenticated.sponsor.error.must-have-creditNumber");
-
-		// Name validation ------------------------------------------------------------------------------------------
-
-		hasNameOwner = entity.getName() != null;
-		errors.state(request, hasNameOwner, "name", "authenticated.sponsor.error.must-have-name");
-
-		// Surname validation ---------------------------------------------------------------------------------------
-
-		hasSurname = entity.getSurname() != null;
-		errors.state(request, hasSurname, "surname", "authenticated.sponsor.error.must-have-surname");
-
-		// Security code validation ----------------------------------------------------------------------------------
-
-		hasSecurityCode = entity.getSecurityCode() != null;
-		errors.state(request, hasSecurityCode, "securityCode", "authenticated.sponsor.error.must-have-securityCode");
-
 	}
 
 	@Override

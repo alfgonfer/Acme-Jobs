@@ -17,7 +17,7 @@ public class WorkerApplicationShowService implements AbstractShowService<Worker,
 	//	 Internal  state	-------------------------------------------------------------------------
 
 	@Autowired
-	WorkerApplicationRepository repository;
+	private WorkerApplicationRepository repository;
 
 
 	//	AbstractListService<Worker, Application> interface ------------------------------------------
